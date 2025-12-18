@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -553,10 +554,10 @@ Entregue ${E.toLowerCase()} completo, profissional e pronto para produção. O p
                 {generatedPrompt}
             </pre>
             <div className="flex justify-center pt-4">
-              <Link href="https://lovable.dev/invite/9JZ3191" target="_blank" passHref>
+              <Link href="/creator" passHref>
                 <GradientButton variant="variant">
                   <Sparkles className="w-4 h-4" />
-                  <span className="ml-2">ENTRAR NA COMUNIDADE</span>
+                  <span className="ml-2">Criar site!</span>
                 </GradientButton>
               </Link>
             </div>
@@ -645,5 +646,3 @@ Entregue ${E.toLowerCase()} completo, profissional e pronto para produção. O p
     </main>
   );
 }
-
-    
