@@ -378,6 +378,17 @@ Entregue ${E.toLowerCase()} completo, profissional e pronto para produção. O p
               </div>
             </div>
             <div className="space-y-2">
+                <Label className="text-white/80">Plataforma de Desenvolvimento</Label>
+                <Select name="plataforma" value={formData.plataforma} onValueChange={(value) => handleSelectChange('plataforma', value)}>
+                  <SelectTrigger className="bg-white/5 border-white/10 text-white"><SelectValue /></SelectTrigger>
+                  <SelectContent className="bg-zinc-900 text-white border-zinc-800">
+                    <SelectItem value="Web (Desktop e Mobile)">Web (Desktop e Mobile)</SelectItem>
+                    <SelectItem value="Apenas Mobile">Apenas Mobile</SelectItem>
+                    <SelectItem value="Apenas Desktop">Apenas Desktop</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            <div className="space-y-2">
               <Label htmlFor="description" className="text-white/80">Descrição Geral do Projeto</Label>
               <Textarea id="description" name="description" value={formData.description} onChange={handleChange} placeholder="Descreva em poucas palavras o que o projeto faz e qual problema ele resolve." className="bg-white/5 border-white/10 text-white min-h-[120px]" />
             </div>
