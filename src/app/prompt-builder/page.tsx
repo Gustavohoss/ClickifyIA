@@ -59,6 +59,18 @@ const colorPalettes = [
     colors: { primary: '#6D28D9', secondary: '#1F2937', background: '#0A0A0A', text: '#F9FAFB' }
   },
   { 
+    name: 'Stripe (Moderno)', 
+    colors: { primary: '#635BFF', secondary: '#F6F8FA', background: '#FFFFFF', text: '#0A2540' }
+  },
+  { 
+    name: 'Linear (Elegante)', 
+    colors: { primary: '#5E6AD2', secondary: '#1A1C23', background: '#0B0C10', text: '#FFFFFF' }
+  },
+  { 
+    name: 'Vercel (Clean)', 
+    colors: { primary: '#0070F3', secondary: '#EAEAEA', background: '#FFFFFF', text: '#000000' }
+  },
+  { 
     name: 'Floresta Sombria', 
     colors: { primary: '#22C55E', secondary: '#1A2E26', background: '#0C1410', text: '#E2F9E9' }
   },
@@ -75,6 +87,7 @@ const colorPalettes = [
     colors: { primary: '#EC4899', secondary: '#391A2C', background: '#120A0F', text: '#FCE7F3' }
   }
 ];
+
 
 export default function PromptBuilderPage() {
   const [currentStep, setCurrentStep] = useState(0);
