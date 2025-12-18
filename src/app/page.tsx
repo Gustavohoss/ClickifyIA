@@ -140,7 +140,7 @@ export default function Home() {
               {item.site && (
                 <div className="flex items-start text-sm text-muted-foreground">
                   <Globe className="mr-3 h-4 w-4 shrink-0 mt-1" />
-                   <a href={`http://${item.site}`} target="_blank" rel="noopener noreferrer" className="hover:underline text-blue-400">{item.site}</a>
+                   <a href={`http://${item.site}`} target="_blank" rel="noopener noreferrer" className="hover:underline">{item.site}</a>
                 </div>
               )}
               {item.telefone && (
