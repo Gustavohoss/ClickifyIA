@@ -85,6 +85,66 @@ const colorPalettes = [
   {
     name: 'Neon Noturno',
     colors: { primary: '#EC4899', secondary: '#391A2C', background: '#120A0F', text: '#FCE7F3' }
+  },
+  {
+    name: 'Amazon',
+    colors: { primary: '#FF9900', secondary: '#232F3E', background: '#FFFFFF', text: '#0F1111' }
+  },
+  {
+    name: 'Mercado Livre',
+    colors: { primary: '#FFE600', secondary: '#3483FA', background: '#EBEBEB', text: '#333333' }
+  },
+  {
+    name: 'Shopee',
+    colors: { primary: '#EE4D2D', secondary: '#F5F5F5', background: '#FFFFFF', text: '#000000' }
+  },
+  {
+    name: 'AliExpress',
+    colors: { primary: '#AE0000', secondary: '#FF4747', background: '#FFFFFF', text: '#000000' }
+  },
+  {
+    name: 'Nike (Minimalista)',
+    colors: { primary: '#111111', secondary: '#F5F5F5', background: '#FFFFFF', text: '#111111' }
+  },
+  {
+    name: 'Shein (Fashion)',
+    colors: { primary: '#000000', secondary: '#F0F0F0', background: '#FFFFFF', text: '#000000' }
+  },
+  {
+    name: 'Zara (Luxo Acessível)',
+    colors: { primary: '#111111', secondary: '#EAEAEA', background: '#FFFFFF', text: '#111111' }
+  },
+  {
+    name: 'Adidas',
+    colors: { primary: '#000000', secondary: '#F0F2F5', background: '#FFFFFF', text: '#000000' }
+  },
+  {
+    name: 'Magalu (Varejo)',
+    colors: { primary: '#0086FF', secondary: '#F2F3F4', background: '#FFFFFF', text: '#333333' }
+  },
+  {
+    name: 'Kabum (Gamer)',
+    colors: { primary: '#FF6600', secondary: '#003366', background: '#0A1E2E', text: '#FFFFFF' }
+  },
+  {
+    name: 'Americanas',
+    colors: { primary: '#E60014', secondary: '#F2F2F2', background: '#FFFFFF', text: '#333333' }
+  },
+  {
+    name: 'Best Buy (Eletrônicos)',
+    colors: { primary: '#0046BE', secondary: '#FFDE00', background: '#FFFFFF', text: '#000000' }
+  },
+  {
+    name: 'Sephora (Luxo)',
+    colors: { primary: '#000000', secondary: '#F5F5F5', background: '#FFFFFF', text: '#000000' }
+  },
+  {
+    name: 'Tiffany & Co.',
+    colors: { primary: '#0ABAB5', secondary: '#F5F5F5', background: '#FFFFFF', text: '#333333' }
+  },
+  {
+    name: 'Apple (Clean)',
+    colors: { primary: '#007AFF', secondary: '#F5F5F7', background: '#FFFFFF', text: '#1D1D1F' }
   }
 ];
 
@@ -534,3 +594,5 @@ Entregue ${E.toLowerCase()} completo, profissional e pronto para produção. O p
     </main>
   );
 }
+
+    
