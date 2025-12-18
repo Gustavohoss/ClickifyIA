@@ -25,6 +25,7 @@ import {
   Code,
 } from 'lucide-react';
 import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 const steps = [
   { id: '01', name: 'Informações Básicas', icon: FileText },
@@ -39,10 +40,10 @@ type FormData = {
   tipo: string;
   idioma: string;
   plataforma: string;
+  isInstitutional: string;
   description: string;
   targetAudience: string;
   funcionalidades: string;
-  isInstitutional: boolean;
   visualStyle: string;
   primaryColor: string;
   secondaryColor: string;
@@ -156,10 +157,10 @@ export default function PromptBuilderPage() {
     tipo: 'Site Institucional',
     idioma: 'Português (Brasil)',
     plataforma: 'Web (Desktop e Mobile)',
+    isInstitutional: 'institucional',
     description: '',
     targetAudience: '',
     funcionalidades: '',
-    isInstitutional: true,
     visualStyle: 'Moderno e Profissional',
     primaryColor: colorPalettes[0].colors.primary,
     secondaryColor: colorPalettes[0].colors.secondary,
@@ -214,7 +215,7 @@ export default function PromptBuilderPage() {
     const D = p.idioma;
     const F = p.plataforma;
     const L = p.funcionalidades;
-    const m = p.isInstitutional;
+    const m = p.isInstitutional === 'institucional';
     const $ = p.visualStyle;
     const I = p.tipografia;
 
@@ -387,7 +388,25 @@ Entregue ${E.toLowerCase()} completo, profissional e pronto para produção. O p
                     <SelectItem value="Apenas Desktop">Apenas Desktop</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
+            </div>
+            <div className="space-y-3">
+              <Label className="text-white/80">Qual o foco principal do projeto?</Label>
+              <RadioGroup
+                name="isInstitutional"
+                value={formData.isInstitutional}
+                onValueChange={(value) => handleSelectChange('isInstitutional', value)}
+                className="flex space-x-4"
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="institucional" id="institucional" className="text-purple-400 border-zinc-600" />
+                  <Label htmlFor="institucional" className="text-white/80">Institucional/Divulgação</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="aplicacao" id="aplicacao" className="text-purple-400 border-zinc-600" />
+                  <Label htmlFor="aplicacao" className="text-white/80">Aplicação/Sistema</Label>
+                </div>
+              </RadioGroup>
+            </div>
             <div className="space-y-2">
               <Label htmlFor="description" className="text-white/80">Descrição Geral do Projeto</Label>
               <Textarea id="description" name="description" value={formData.description} onChange={handleChange} placeholder="Descreva em poucas palavras o que o projeto faz e qual problema ele resolve." className="bg-white/5 border-white/10 text-white min-h-[120px]" />
