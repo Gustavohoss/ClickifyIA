@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as cheerio from 'cheerio';
 
+// Removido o campo 'imagem'
 type Resultado = {
   nome: string;
   endereco: string | null;
@@ -22,16 +23,17 @@ export async function GET(request: NextRequest) {
   }
 
   const searchQuery = `${busca} em ${cidade}`;
-  // hl=pt-BR força o Google a retornar termos em português
   const url = `https://www.google.com/search?q=${encodeURIComponent(
     searchQuery
-  )}&tbm=lcl&hl=pt-BR`;
+  )}&tbm=lcl&hl=pt-BR&gl=br`;
 
   try {
     const response = await fetch(url, {
       headers: {
         'User-Agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
       },
     });
 
@@ -48,6 +50,7 @@ export async function GET(request: NextRequest) {
       const nome = $(el).find('div[role="heading"]').text().trim();
       if (!nome) return;
 
+      // Removido imagem: null
       const resultado: Resultado = {
         nome,
         endereco: null,
@@ -57,6 +60,8 @@ export async function GET(request: NextRequest) {
       };
 
       const fullText = $(el).text();
+
+      // A LÓGICA DE IMAGEM FOI REMOVIDA DAQUI
 
       // --- 1. TELEFONE ---
       const phoneRegex = /\(?\d{2}\)?\s?\d{4,5}-?\d{4}/;
@@ -83,15 +88,13 @@ export async function GET(request: NextRequest) {
         }
       });
 
-      // --- 3. EXTRAÇÃO DO SITE ---
+      // --- 3. SITE ---
       $(el).find('a').each((_, linkEl) => {
         const href = $(linkEl).attr('href');
-        
         if (!href) return;
 
         let potentialLink: string | null = null;
 
-        // Extrai o link real de dentro do redirecionador do Google
         if (href.includes('/url?q=')) {
             const urlParams = new URLSearchParams(href.split('?')[1]);
             potentialLink = urlParams.get('q');
@@ -100,16 +103,12 @@ export async function GET(request: NextRequest) {
         }
 
         if (potentialLink) {
-            const ignoreList = ['google.com', 'google.com.br', 'gstatic.com', 'youtube.com'];
+            const ignoreList = ['google.com', 'google.com.br', 'gstatic.com', 'youtube.com', 'waze.com', 'maps.google'];
             const isGoogle = ignoreList.some(domain => potentialLink?.includes(domain));
 
             if (!isGoogle) {
-                // AQUI ESTAVA O PROBLEMA:
-                // Antes fazíamos "hostname.replace...", o que cortava o link.
-                // Agora salvamos o link COMPLETO:
                 resultado.site = potentialLink;
-                
-                return false; // Para de procurar ao encontrar o primeiro site válido
+                return false; 
             }
         }
       });
