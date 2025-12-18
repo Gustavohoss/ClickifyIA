@@ -24,10 +24,12 @@ import {
   Settings,
   Code,
   Sparkles,
+  Send,
 } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import Link from 'next/link';
+import { GradientButton } from '@/components/ui/gradient-button';
 
 const steps = [
   { id: '01', name: 'Informações Básicas', icon: FileText },
@@ -552,14 +554,10 @@ Entregue ${E.toLowerCase()} completo, profissional e pronto para produção. O p
             </pre>
             <div className="flex justify-center pt-4">
               <Link href="https://lovable.dev/invite/9JZ3191" target="_blank" passHref>
-                <motion.button
-                  className="group relative inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl border border-white/[0.1] shadow-2xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(192,132,252,0.5)]"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Sparkles className="mr-2 h-5 w-5 opacity-80 group-hover:opacity-100 transition-opacity" />
-                  <span>Entrar na Comunidade</span>
-                </motion.button>
+                <GradientButton variant="variant">
+                  <Sparkles className="w-4 h-4" />
+                  <span className="ml-2">ENTRAR NA COMUNIDADE</span>
+                </GradientButton>
               </Link>
             </div>
           </motion.div>
@@ -647,3 +645,5 @@ Entregue ${E.toLowerCase()} completo, profissional e pronto para produção. O p
     </main>
   );
 }
+
+    
