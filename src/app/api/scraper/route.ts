@@ -57,16 +57,13 @@ export async function GET(request: NextRequest) {
 
       const detailsContainer = $(el).find('div.rllt__details');
 
-      // Extrair informações com base nos links e texto
+      // Tenta encontrar o endereço, horário, site e telefone
       detailsContainer.find('div').each((_, detailEl) => {
         const text = $(detailEl).text().trim();
-        const link = $(detailEl).find('a').attr('href');
-        
-        // Endereço (geralmente não é um link, mas o primeiro item)
-        if (!resultado.endereco && !link) {
-           if (!text.includes('Aberto') && !text.includes('Fechado') && !text.includes('...')) {
-                resultado.endereco = text;
-           }
+
+        // Endereço (geralmente não é um link, mas o primeiro item sem info de horário)
+        if (!resultado.endereco && !text.includes('Aberto') && !text.includes('Fechado') && !text.match(/\d/)) {
+            resultado.endereco = text;
         }
         
         // Horário
@@ -82,8 +79,12 @@ export async function GET(request: NextRequest) {
             const urlParams = new URLSearchParams(siteHref);
             const realUrl = urlParams.get('q');
             if(realUrl) {
-                resultado.site = new URL(realUrl).hostname;
-                return false;
+                try {
+                    resultado.site = new URL(realUrl).hostname.replace('www.', '');
+                    return false; // para de procurar depois de encontrar o primeiro
+                } catch (e) {
+                    // ignora urls invalidas
+                }
             }
           }
       });
@@ -93,9 +94,14 @@ export async function GET(request: NextRequest) {
         const phoneText = $(phoneEl).text().trim();
         if (phoneText) {
           resultado.telefone = phoneText;
-          return false;
+          return false; // para de procurar
         }
       });
+
+      // Se o endereço ainda for o nome, limpa ele
+      if (resultado.endereco === resultado.nome) {
+        resultado.endereco = null;
+      }
       
       resultados.push(resultado);
     });
