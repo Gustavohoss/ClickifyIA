@@ -64,7 +64,7 @@ export async function GET(request: NextRequest) {
       }
     });
 
-    // Fallback
+    // Fallback para outra estrutura de resultados
     if (resultados.length === 0) {
       $('div.VkpGBb').each((i, el) => {
         if (resultados.length >= 10) return false;
@@ -87,6 +87,10 @@ export async function GET(request: NextRequest) {
           });
         }
       });
+    }
+
+    if (resultados.length === 0) {
+        setError('Nenhum resultado encontrado para sua busca.');
     }
 
     return NextResponse.json(resultados);
