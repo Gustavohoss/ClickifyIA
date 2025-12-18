@@ -23,9 +23,11 @@ import {
   Target,
   Settings,
   Code,
+  Sparkles,
 } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import Link from 'next/link';
 
 const steps = [
   { id: '01', name: 'Informações Básicas', icon: FileText },
@@ -527,7 +529,7 @@ Entregue ${E.toLowerCase()} completo, profissional e pronto para produção. O p
       default:
         return (
            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} className="space-y-6">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-start">
                 <h3 className="text-xl font-bold text-white">Seu Prompt Gerado</h3>
                 <div className="flex items-center gap-2">
                     <Button
@@ -545,9 +547,21 @@ Entregue ${E.toLowerCase()} completo, profissional e pronto para produção. O p
                     </Button>
                 </div>
             </div>
-            <pre className="w-full bg-white/5 p-4 rounded-lg text-white/90 text-xs overflow-x-auto whitespace-pre-wrap font-mono h-[500px]">
+            <pre className="w-full bg-white/5 p-4 rounded-lg text-white/90 text-xs overflow-x-auto whitespace-pre-wrap font-mono h-[440px]">
                 {generatedPrompt}
             </pre>
+            <div className="flex justify-center pt-4">
+              <Link href="https://lovable.dev/invite/9JZ3191" target="_blank" passHref>
+                <motion.button
+                  className="group relative inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl border border-white/[0.1] shadow-2xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(192,132,252,0.5)]"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Sparkles className="mr-2 h-5 w-5 opacity-80 group-hover:opacity-100 transition-opacity" />
+                  <span>Entrar na Comunidade</span>
+                </motion.button>
+              </Link>
+            </div>
           </motion.div>
         );
     }
