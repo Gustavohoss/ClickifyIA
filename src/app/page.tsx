@@ -65,7 +65,7 @@ export default function Home() {
     <main className="p-4 md:p-10 max-w-4xl mx-auto">
       <Card className="mb-8 bg-card shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center text-primary-foreground">
+          <CardTitle className="text-2xl font-bold text-center text-card-foreground">
             Scraper de Mapas
           </CardTitle>
         </CardHeader>
@@ -122,7 +122,7 @@ export default function Home() {
         {resultados.map((item, index) => (
           <Card key={index} className="bg-card shadow-md">
             <CardHeader>
-              <CardTitle className="text-lg text-primary-foreground">{item.nome}</CardTitle>
+              <CardTitle className="text-lg text-card-foreground">{item.nome}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               {item.endereco && (
