@@ -107,18 +107,6 @@ const colorPalettes = [
     colors: { primary: '#111111', secondary: '#F5F5F5', background: '#FFFFFF', text: '#111111' }
   },
   {
-    name: 'Shein (Fashion)',
-    colors: { primary: '#000000', secondary: '#F0F0F0', background: '#FFFFFF', text: '#000000' }
-  },
-  {
-    name: 'Zara (Luxo Acessível)',
-    colors: { primary: '#111111', secondary: '#EAEAEA', background: '#FFFFFF', text: '#111111' }
-  },
-  {
-    name: 'Adidas',
-    colors: { primary: '#000000', secondary: '#F0F2F5', background: '#FFFFFF', text: '#000000' }
-  },
-  {
     name: 'Magalu (Varejo)',
     colors: { primary: '#0086FF', secondary: '#F2F3F4', background: '#FFFFFF', text: '#333333' }
   },
