@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Mail,
   Lock,
@@ -31,6 +31,7 @@ const GoogleIcon = () => (
   );
 
 export default function LoginPage() {
+  const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -38,7 +39,7 @@ export default function LoginPage() {
   const { auth, firestore } = useFirebase();
   const router = useRouter();
 
-  const handleAuth = async (isSignUp: boolean) => {
+  const handleAuth = async () => {
     setLoading(true);
     setError(null);
 
@@ -103,6 +104,7 @@ export default function LoginPage() {
     switch (code) {
       case 'auth/user-not-found':
       case 'auth/wrong-password':
+      case 'auth/invalid-credential':
         return 'E-mail ou senha inválidos.';
       case 'auth/invalid-email':
         return 'O formato do e-mail é inválido.';
@@ -117,6 +119,13 @@ export default function LoginPage() {
     }
   };
 
+  const toggleForm = () => {
+    setIsSignUp(!isSignUp);
+    setError(null);
+    setEmail('');
+    setPassword('');
+  }
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-black text-white relative overflow-hidden">
         <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -130,14 +139,24 @@ export default function LoginPage() {
         transition={{ duration: 0.5, ease: 'easeOut' }}
         className="w-full max-w-md p-8 space-y-8 bg-white/[0.02] backdrop-blur-2xl rounded-2xl border border-white/[0.05] shadow-2xl relative z-10"
       >
-        <div className="text-center">
-          <h1 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">
-            Acesse sua Conta
-          </h1>
-          <p className="mt-2 text-white/50">
-            Entre para começar a criar.
-          </p>
-        </div>
+        <AnimatePresence mode="wait">
+            <motion.div
+                key={isSignUp ? 'signup' : 'login'}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+            >
+                <div className="text-center">
+                    <h1 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">
+                        {isSignUp ? 'Crie sua Conta' : 'Acesse sua Conta'}
+                    </h1>
+                    <p className="mt-2 text-white/50">
+                        {isSignUp ? 'Comece sua jornada conosco.' : 'Entre para começar a criar.'}
+                    </p>
+                </div>
+            </motion.div>
+        </AnimatePresence>
 
         {error && (
           <Alert variant="destructive" className="bg-red-900/20 border-red-800 text-red-300">
@@ -172,22 +191,20 @@ export default function LoginPage() {
 
         <div className="space-y-4">
           <Button
-            onClick={() => handleAuth(false)}
+            onClick={handleAuth}
             disabled={loading}
             className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold"
           >
-            {loading ? 'Entrando...' : 'Entrar'}
-            <LogIn className="ml-2 h-4 w-4" />
+            {loading ? (isSignUp ? 'Criando...' : 'Entrando...') : (isSignUp ? 'Criar Conta' : 'Entrar')}
+            {isSignUp ? <UserPlus className="ml-2 h-4 w-4" /> : <LogIn className="ml-2 h-4 w-4" />}
           </Button>
-          <Button
-            onClick={() => handleAuth(true)}
-            disabled={loading}
-            variant="outline"
-            className="w-full border-purple-800 text-purple-300 hover:bg-purple-900/40 hover:text-purple-200"
-          >
-            {loading ? 'Criando...' : 'Criar Conta'}
-            <UserPlus className="ml-2 h-4 w-4" />
-          </Button>
+
+            <p className="text-center text-sm text-white/40">
+                {isSignUp ? 'Já tem uma conta?' : 'Não tem uma conta?'}
+                <button onClick={toggleForm} className="font-semibold text-purple-400 hover:text-purple-300 ml-1">
+                    {isSignUp ? 'Faça login' : 'Crie uma'}
+                </button>
+            </p>
         </div>
 
         <div className="relative">
