@@ -73,6 +73,18 @@ const getInitials = (name: string) => {
     return name.substring(0, 2).toUpperCase();
 };
 
+const formatPhoneNumberForWhatsApp = (phone: string | null): string => {
+    if (!phone) return '';
+    // Remove all non-digit characters
+    let cleaned = phone.replace(/\D/g, '');
+    // Ensure it starts with 55 (Brazil's country code)
+    if (cleaned.length === 10 || cleaned.length === 11) {
+        // Assume it's a Brazilian number without country code, add 55
+        cleaned = '55' + cleaned;
+    }
+    return `https://wa.me/${cleaned}`;
+};
+
 function LeadsContent() {
     const { user } = useUser();
     const { firestore } = useFirebase();
@@ -317,7 +329,7 @@ function LeadsContent() {
                                     </TableCell>
                                     <TableCell>
                                         <div className="flex items-center gap-2">
-                                            <a href={`tel:${lead.telefone}`} className={!lead.telefone ? 'pointer-events-none' : ''}>
+                                            <a href={formatPhoneNumberForWhatsApp(lead.telefone)} target="_blank" rel="noopener noreferrer" className={!lead.telefone ? 'pointer-events-none' : ''}>
                                                 <Phone size={16} className={lead.telefone ? 'text-green-400 hover:text-green-300' : 'text-zinc-600'}/>
                                             </a>
                                             <a href={lead.site || '#'} target="_blank" rel="noopener noreferrer" className={!lead.site ? 'pointer-events-none' : ''}>
