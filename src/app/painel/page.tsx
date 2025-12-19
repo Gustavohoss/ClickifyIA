@@ -82,7 +82,7 @@ function PainelContent() {
   return (
     <>
       <Header />
-      <main className="p-4 md:p-10 min-h-screen bg-black text-white relative overflow-hidden flex items-center justify-center">
+      <main className="p-4 md:p-10 pt-24 md:pt-32 min-h-screen bg-black text-white relative overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse delay-700" />
