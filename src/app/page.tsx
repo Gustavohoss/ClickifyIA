@@ -12,7 +12,7 @@ export default function LandingPage() {
   return (
     <div className="bg-black text-white">
       <Header />
-      <main className="p-4 md:p-10 min-h-screen relative overflow-hidden flex items-center justify-center">
+      <main className="p-4 md:p-10 pt-28 min-h-screen relative overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse delay-700" />
