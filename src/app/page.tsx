@@ -4,19 +4,7 @@ import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Footer } from '@/components/ui/footer-section';
-
-function Header() {
-  return (
-    <header className="absolute top-0 left-0 right-0 z-20 p-4 md:p-6">
-      <div className="w-full max-w-7xl mx-auto flex justify-between items-center">
-        <h1 className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">
-          CLICKIFY
-        </h1>
-      </div>
-    </header>
-  );
-}
-
+import { Header } from '@/components/landing/header';
 
 export default function LandingPage() {
   return (
