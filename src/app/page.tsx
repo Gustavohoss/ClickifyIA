@@ -36,59 +36,61 @@ export default function LandingPage() {
   return (
     <div className="bg-black text-white">
       <Header />
-      <main className="p-4 md:p-25 pt-40 min-h-screen relative overflow-hidden flex flex-col">
-        <BGPattern variant="grid" mask="fade-edges" />
-        <div className="w-full max-w-4xl mx-auto relative z-10 text-center flex-grow flex flex-col justify-center">
-          <motion.div
-            className="relative z-10 space-y-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-          >
-            <motion.h1 
-              className="text-5xl md:text-7xl font-bold tracking-tight pb-2"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
+      <main className="pt-40 relative overflow-hidden">
+        <section className="relative flex flex-col items-center justify-center text-center min-h-[calc(100vh-10rem)] p-4 md:p-8">
+            <BGPattern variant="grid" mask="fade-edges" />
+            <div className="w-full max-w-4xl mx-auto relative z-10">
+            <motion.div
+                className="relative z-10 space-y-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
             >
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">A forma mais rápida</span>
-              <br />
-              <span className="text-purple-400">de criar seu SaaS</span>
-            </motion.h1>
-            <motion.p
-              className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              Conheça a CLICKIFY e crie negócios digitais completos com IA em minutos.
-            </motion.p>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-col items-center gap-12"
-            >
-              <Link href="/login" passHref>
-                <GradientButton variant="variant" asChild>
-                  <motion.div
-                    className="group"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <span>Assinar agora</span>
-                  </motion.div>
-                </GradientButton>
-              </Link>
-              <div className="w-full shadow-[0_0_20px_rgba(192,132,252,0.15)] rounded-2xl">
-                <Safari_01 />
-              </div>
+                <motion.h1 
+                className="text-5xl md:text-7xl font-bold tracking-tight pb-2"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                >
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">A forma mais rápida</span>
+                <br />
+                <span className="text-purple-400">de criar seu SaaS</span>
+                </motion.h1>
+                <motion.p
+                className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                >
+                Conheça a CLICKIFY e crie negócios digitais completos com IA em minutos.
+                </motion.p>
+                
+                <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="flex flex-col items-center gap-12"
+                >
+                <Link href="/login" passHref>
+                    <GradientButton variant="variant" asChild>
+                    <motion.div
+                        className="group"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        <span>Assinar agora</span>
+                    </motion.div>
+                    </GradientButton>
+                </Link>
+                 <div className="w-full shadow-[0_0_20px_rgba(192,132,252,0.15)] rounded-2xl">
+                    <Safari_01 />
+                 </div>
+                </motion.div>
             </motion.div>
-          </motion.div>
-        </div>
+            </div>
+        </section>
         
-        <section className="w-full max-w-5xl mx-auto py-20 md:py-32 relative z-10">
+        <section className="w-full max-w-5xl mx-auto py-20 md:py-32 relative z-10 mt-16">
             <div className="absolute inset-0 z-0 h-full w-full bg-[radial-gradient(#2d2d2d_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
             <div className="relative z-10 text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
