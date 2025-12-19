@@ -45,7 +45,7 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              <Link href="/painel" passHref>
+              <Link href="/login" passHref>
                 <motion.button
                   className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-white/[0.05] rounded-xl border border-white/[0.1] shadow-2xl transition-all duration-300 hover:bg-white/[0.1]"
                   whileHover={{ scale: 1.05 }}

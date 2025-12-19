@@ -1,10 +1,21 @@
 'use client';
 
-import { ArrowRight, FileText } from 'lucide-react';
+import { ArrowRight, FileText, LogOut } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import AuthGuard from '@/components/auth-guard';
+import { useFirebase } from '@/firebase';
+import { useRouter } from 'next/navigation';
 
-export default function PainelPage() {
+function PainelContent() {
+  const { auth } = useFirebase();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await auth.signOut();
+    router.push('/login');
+  };
+
   return (
     <main className="p-4 md:p-10 min-h-screen bg-black text-white relative overflow-hidden flex items-center justify-center">
       <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -20,26 +31,38 @@ export default function PainelPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
         >
-          <div className="text-center space-y-3">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-block"
+          <div className="flex justify-between items-center">
+            <div className="text-left space-y-3">
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                  className="inline-block"
+                >
+                  <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60 pb-2">
+                    Bem-vindo ao seu Painel
+                  </h1>
+                </motion.div>
+                <motion.p
+                  className="text-lg text-white/50 max-w-2xl"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  Escolha uma das ferramentas abaixo para começar.
+                </motion.p>
+            </div>
+            <motion.button
+                onClick={handleSignOut}
+                className="group relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-white/[0.05] rounded-xl border border-white/[0.1] shadow-lg transition-all duration-300 hover:bg-white/[0.1]"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
             >
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60 pb-2">
-                Bem-vindo ao seu Painel
-              </h1>
-            </motion.div>
-            <motion.p
-              className="text-lg text-white/50 max-w-2xl mx-auto"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              Escolha uma das ferramentas abaixo para começar.
-            </motion.p>
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Sair</span>
+            </motion.button>
           </div>
+
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8">
             <Link href="/scraper" passHref>
@@ -89,4 +112,12 @@ export default function PainelPage() {
       </div>
     </main>
   );
+}
+
+export default function PainelPage() {
+    return (
+        <AuthGuard>
+            <PainelContent />
+        </AuthGuard>
+    );
 }
