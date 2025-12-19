@@ -1,4 +1,3 @@
-
 'use client';
 
 import { ArrowRight } from 'lucide-react';
@@ -6,9 +5,23 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Footer } from '@/components/ui/footer-section';
 
+function Header() {
+  return (
+    <header className="absolute top-0 left-0 right-0 z-20 p-4 md:p-6">
+      <div className="w-full max-w-7xl mx-auto flex justify-between items-center">
+        <h1 className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">
+          CLICKIFY
+        </h1>
+      </div>
+    </header>
+  );
+}
+
+
 export default function LandingPage() {
   return (
     <div className="bg-black text-white">
+      <Header />
       <main className="p-4 md:p-10 min-h-screen relative overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse" />
