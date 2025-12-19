@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Footer } from '@/components/ui/footer-section';
 import { Header } from '@/components/landing/header';
+import { GradientButton } from '@/components/ui/gradient-button';
 
 export default function LandingPage() {
   return (
@@ -49,14 +50,16 @@ export default function LandingPage() {
               transition={{ delay: 0.4 }}
             >
               <Link href="/login" passHref>
-                <motion.button
-                  className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-white/[0.05] rounded-xl border border-white/[0.1] shadow-2xl transition-all duration-300 hover:bg-white/[0.1]"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span>Acessar Painel</span>
-                  <ArrowRight className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
-                </motion.button>
+                <GradientButton variant="variant" asChild>
+                  <motion.div
+                    className="group"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <span>Acessar Painel</span>
+                    <ArrowRight className="ml-2 h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
+                  </motion.div>
+                </GradientButton>
               </Link>
             </motion.div>
           </motion.div>
