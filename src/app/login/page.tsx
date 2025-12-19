@@ -41,6 +41,13 @@ export default function LoginPage() {
   const handleAuth = async (isSignUp: boolean) => {
     setLoading(true);
     setError(null);
+
+    if (!email || !password) {
+        setError('Por favor, preencha o e-mail e a senha.');
+        setLoading(false);
+        return;
+    }
+
     try {
       let userCredential;
       if (isSignUp) {
