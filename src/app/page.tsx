@@ -25,12 +25,14 @@ export default function LandingPage() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
             <motion.h1 
-              className="text-5xl md:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60 pb-2"
+              className="text-5xl md:text-7xl font-bold tracking-tight pb-2"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              A forma mais rápida<br />de criar seu SaaS
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">A forma mais rápida</span>
+              <br />
+              <span className="text-purple-400">de criar seu SaaS</span>
             </motion.h1>
             <motion.p
               className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto"
