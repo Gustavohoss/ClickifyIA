@@ -13,41 +13,7 @@ export function Logo({ className }: LogoProps) {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M12 2L2 7V17L12 22L22 17V7L12 2Z"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M2 7L12 12"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M12 22V12"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M22 7L12 12"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M17 4.5L7 9.5"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <path d="M21 16.5C21 16.5 17.5 14 12 14C6.5 14 3 16.5 3 16.5M21 16.5C21 19.5 17 22 12 22C7 22 3 19.5 3 16.5M21 16.5V7.5C21 7.5 17.5 5 12 5C6.5 5 3 7.5 3 7.5V16.5M12 5V14M12 5C12 2 17 2 17 2M12 5C12 2 7 2 7 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
       <span className="text-xl font-bold tracking-tight text-white">
         CLICKIFY
