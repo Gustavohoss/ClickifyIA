@@ -33,11 +33,11 @@ const steps = [
 
 export default function LandingPage() {
   return (
-    <div className="bg-black text-white">
+    <div className="bg-black text-white relative">
+      <BGPattern variant="grid" fill="hsl(var(--border))" />
       <Header />
       <main className="pt-40 relative overflow-hidden">
         <section className="relative flex flex-col items-center justify-center text-center min-h-[calc(100vh-10rem)] p-4 md:p-8">
-            <BGPattern variant="grid" fill="hsl(var(--border))" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
             <div className="w-full max-w-4xl mx-auto relative z-10">
             <motion.div
