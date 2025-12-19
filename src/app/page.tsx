@@ -1,6 +1,5 @@
 'use client';
 
-import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Footer } from '@/components/ui/footer-section';
@@ -12,7 +11,7 @@ export default function LandingPage() {
   return (
     <div className="bg-black text-white">
       <Header />
-      <main className="p-4 md:p-10 pt-40 min-h-screen relative overflow-hidden flex justify-center">
+      <main className="p-4 md:p-25 pt-40 min-h-screen relative overflow-hidden flex justify-center">
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse delay-700" />
@@ -62,7 +61,9 @@ export default function LandingPage() {
                   </motion.div>
                 </GradientButton>
               </Link>
-              <Safari_01 />
+              <div className="shadow-[0_0_30px_5px_rgba(192,132,252,0.15)] rounded-2xl">
+                <Safari_01 />
+              </div>
             </motion.div>
           </motion.div>
         </div>
