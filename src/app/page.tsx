@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
+import { GradientButton } from '@/components/ui/gradient-button';
 import { BGPattern } from '@/components/ui/bg-pattern';
 import { Header } from '@/components/landing/header';
 import Safari_01 from '@/components/ui/safari-01';
@@ -10,7 +10,8 @@ export default function BlankPage() {
     <div className="text-white relative min-h-screen">
       <Header />
       <BGPattern variant="grid" fill="hsl(var(--border))" />
-      <div className="container mx-auto max-w-5xl text-center flex flex-col items-center justify-center pt-32 pb-16">
+      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+      <div className="container mx-auto max-w-5xl text-center flex flex-col items-center justify-center pt-32 pb-16 relative z-10">
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white/90 to-white/40 leading-tight">
           A forma mais rápida de
           <br />
@@ -24,15 +25,12 @@ export default function BlankPage() {
           minutos.
         </p>
         <div className="mt-8 flex gap-4">
-          <Button
-            size="lg"
-            className="bg-purple-600 hover:bg-purple-700 text-white font-semibold"
-          >
+          <GradientButton>
             Assinar agora
-          </Button>
+          </GradientButton>
         </div>
         <div className="mt-20 w-full">
-            <Safari_01 className="w-full max-w-4xl mx-auto"/>
+          <Safari_01 className="w-full max-w-4xl mx-auto" />
         </div>
       </div>
       <div className="h-[100vh]"></div>
