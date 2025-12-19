@@ -166,7 +166,7 @@ export default function LoginPage() {
         <div className="space-y-4">
           <Button
             onClick={() => handleAuth(false)}
-            disabled={loading || !email || !password}
+            disabled={loading}
             className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold"
           >
             {loading ? 'Entrando...' : 'Entrar'}
@@ -174,7 +174,7 @@ export default function LoginPage() {
           </Button>
           <Button
             onClick={() => handleAuth(true)}
-            disabled={loading || !email || !password}
+            disabled={loading}
             variant="outline"
             className="w-full border-purple-800 text-purple-300 hover:bg-purple-900/40 hover:text-purple-200"
           >
