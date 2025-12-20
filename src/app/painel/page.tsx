@@ -182,7 +182,7 @@ function PainelContent() {
                   <Briefcase className="absolute -right-8 -bottom-8 h-32 w-32 text-white/5 group-hover:text-green-500/10 transition-colors duration-500"/>
                 </motion.div>
               </Link>
-               <Link href="#" passHref>
+               <Link href="/contrato" passHref>
                 <motion.div
                   className="group relative backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-zinc-800 shadow-2xl p-8 cursor-pointer overflow-hidden hover:border-blue-500/50 transition-colors duration-300"
                   whileHover={{ y: -5 }}
