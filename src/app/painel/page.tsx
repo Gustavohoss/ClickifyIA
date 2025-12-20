@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowRight, FileText, LogOut, Briefcase, Search, Sparkles } from 'lucide-react';
+import { ArrowRight, FileText, LogOut, Briefcase, Search, Sparkles, Building2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import AuthGuard from '@/components/auth-guard';
@@ -180,6 +180,48 @@ function PainelContent() {
                     <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                   </div>
                   <Briefcase className="absolute -right-8 -bottom-8 h-32 w-32 text-white/5 group-hover:text-green-500/10 transition-colors duration-500"/>
+                </motion.div>
+              </Link>
+               <Link href="#" passHref>
+                <motion.div
+                  className="group relative backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-zinc-800 shadow-2xl p-8 cursor-pointer overflow-hidden hover:border-blue-500/50 transition-colors duration-300"
+                  whileHover={{ y: -5 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  <div className="relative z-10">
+                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 group-hover:text-blue-300 transition-colors">
+                      Gerar Contrato
+                    </h2>
+                    <p className="text-white/40 mt-2">
+                      Crie contratos profissionais para seus clientes em minutos.
+                    </p>
+                  </div>
+                  <div className="mt-6 flex items-center text-sm font-medium text-white/70 group-hover:text-white transition-colors">
+                    Acessar Ferramenta
+                    <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                  </div>
+                  <FileText className="absolute -right-8 -bottom-8 h-32 w-32 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500"/>
+                </motion.div>
+              </Link>
+               <Link href="#" passHref>
+                <motion.div
+                  className="group relative backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-zinc-800 shadow-2xl p-8 cursor-pointer overflow-hidden hover:border-yellow-500/50 transition-colors duration-300"
+                  whileHover={{ y: -5 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  <div className="relative z-10">
+                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 group-hover:text-yellow-300 transition-colors">
+                      Abordagem de Empresas
+                    </h2>
+                    <p className="text-white/40 mt-2">
+                      Modelos de mensagens e scripts para prospecção.
+                    </p>
+                  </div>
+                  <div className="mt-6 flex items-center text-sm font-medium text-white/70 group-hover:text-white transition-colors">
+                    Acessar Ferramenta
+                    <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                  </div>
+                  <Building2 className="absolute -right-8 -bottom-8 h-32 w-32 text-white/5 group-hover:text-yellow-500/10 transition-colors duration-500"/>
                 </motion.div>
               </Link>
             </div>
