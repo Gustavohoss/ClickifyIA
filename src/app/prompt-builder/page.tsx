@@ -27,6 +27,8 @@ import {
   Sparkles,
   Send,
   ArrowLeft,
+  PencilRuler,
+  Package,
 } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -157,7 +159,7 @@ const fontOptions = [
     'Playfair Display, serif',
   ];
 
-export default function PromptBuilderPage() {
+function PromptBuilder() {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<FormData>({
     siteName: '',
@@ -569,6 +571,167 @@ Entregue ${E.toLowerCase()} completo, profissional e pronto para produção. O p
   };
 
   return (
+    <>
+      <div className="text-center mb-12 space-y-2">
+          <h1 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">
+              Construtor de Prompts
+          </h1>
+          <p className="text-lg text-white/50 max-w-2xl mx-auto">
+              Siga as etapas para criar um briefing de projeto detalhado.
+          </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-12">
+          <nav className="hidden md:block">
+              <ol className="space-y-4">
+              {steps.map((step, index) => (
+                  <li key={step.name} className="relative">
+                  <div className="flex items-center space-x-3">
+                      <div
+                      className={cn(`h-10 w-10 rounded-full flex items-center justify-center transition-colors`,
+                          currentStep > index && 'text-white gradient-step-icon-completed',
+                          currentStep === index && 'text-white gradient-step-icon shadow-[0_0_15px_rgba(192,132,252,0.5)]',
+                          currentStep < index && 'bg-zinc-800 text-zinc-400 border border-zinc-700'
+                      )}
+                      >
+                      {currentStep > index ? <Check className="w-5 h-5" /> : <step.icon className="w-5 h-5" />}
+                      </div>
+                      <span className={`font-medium transition-colors ${currentStep >= index ? 'text-white' : 'text-zinc-500'}`}>{step.name}</span>
+                  </div>
+                   {index < steps.length - 1 && (
+                      <div className={`absolute left-5 top-11 h-full w-px bg-zinc-800 transition-all ${currentStep > index ? 'bg-purple-500' : ''}`} style={{height: 'calc(100% - 1rem)'}}/>
+                  )}
+                  </li>
+              ))}
+              </ol>
+          </nav>
+
+          <div className="backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-white/[0.05] shadow-2xl p-8 min-h-[500px]">
+              <AnimatePresence mode="wait">
+                  <motion.div key={currentStep}>
+                      {renderStep()}
+                  </motion.div>
+              </AnimatePresence>
+          </div>
+      </div>
+
+      {currentStep < steps.length - 1 && (
+          <div className="mt-8 flex justify-between">
+              <Button
+                  onClick={prevStep}
+                  disabled={currentStep === 0}
+                  variant="ghost"
+                  className="text-white/70 hover:text-white hover:bg-white/10"
+              >
+                  <ChevronLeft className="w-4 h-4 mr-2" />
+                  Voltar
+              </Button>
+
+              {currentStep < steps.length - 2 ? (
+                  <Button onClick={nextStep} className="bg-purple-600 hover:bg-purple-700 text-white">
+                      Próximo
+                      <ChevronRight className="w-4 h-4 ml-2" />
+                  </Button>
+              ) : (
+                <GradientButton onClick={generatePrompt} className="gradient-button-green">
+                    <Code className="w-4 h-4" />
+                    <span className="ml-2">Gerar Prompt</span>
+                </GradientButton>
+              )}
+          </div>
+      )}
+    </>
+  )
+}
+
+function ReadyMadeSaaS() {
+  return (
+    <div className="text-center">
+      <h2 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60 pb-2">
+        Modelos Prontos
+      </h2>
+      <p className="text-lg text-white/50 max-w-2xl mx-auto">
+        Esta seção está em construção. Em breve, você encontrará modelos de SaaS prontos para usar!
+      </p>
+    </div>
+  )
+}
+
+
+export default function PromptBuilderPage() {
+    const [selection, setSelection] = useState<'initial' | 'custom' | 'template'>('initial');
+
+    const handleBackToSelection = () => {
+      setSelection('initial');
+    }
+
+    const renderContent = () => {
+        switch (selection) {
+            case 'custom':
+                return <PromptBuilder />;
+            case 'template':
+                return <ReadyMadeSaaS />;
+            case 'initial':
+            default:
+                return (
+                    <div className="text-center">
+                        <div className="text-center mb-12 space-y-2">
+                            <h1 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">
+                                Como você quer começar?
+                            </h1>
+                            <p className="text-lg text-white/50 max-w-2xl mx-auto">
+                                Crie um projeto do zero com nosso assistente ou escolha um modelo pronto para acelerar o desenvolvimento.
+                            </p>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                            <motion.div
+                                className="group relative backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-zinc-800 shadow-2xl p-8 cursor-pointer overflow-hidden hover:border-purple-500/50 transition-colors duration-300"
+                                whileHover={{ y: -5 }}
+                                transition={{ type: 'spring', stiffness: 300 }}
+                                onClick={() => setSelection('custom')}
+                            >
+                                <div className="relative z-10 text-left">
+                                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 group-hover:text-purple-300 transition-colors">
+                                    Criar do Zero
+                                    </h2>
+                                    <p className="text-white/40 mt-2">
+                                    Use nosso assistente passo a passo para gerar um briefing detalhado e criar seu SaaS personalizado.
+                                    </p>
+                                </div>
+                                <div className="mt-6 flex items-center text-sm font-medium text-white/70 group-hover:text-white transition-colors">
+                                    Começar
+                                    <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                                </div>
+                                <PencilRuler className="absolute -right-8 -bottom-8 h-32 w-32 text-white/5 group-hover:text-purple-500/10 transition-colors duration-500"/>
+                            </motion.div>
+                            <motion.div
+                                className="group relative backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-zinc-800 shadow-2xl p-8 cursor-pointer overflow-hidden hover:border-teal-500/50 transition-colors duration-300"
+                                whileHover={{ y: -5 }}
+                                transition={{ type: 'spring', stiffness: 300 }}
+                                onClick={() => setSelection('template')}
+                            >
+                                <div className="relative z-10 text-left">
+                                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 group-hover:text-teal-300 transition-colors">
+                                    Pegar um Pronto
+                                    </h2>
+                                    <p className="text-white/40 mt-2">
+                                    Escolha um modelo de SaaS pré-construído e acelere o lançamento do seu projeto.
+                                    </p>
+                                </div>
+                                <div className="mt-6 flex items-center text-sm font-medium text-white/70 group-hover:text-white transition-colors">
+                                    Ver Modelos
+                                    <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                                </div>
+                                <Package className="absolute -right-8 -bottom-8 h-32 w-32 text-white/5 group-hover:text-teal-500/10 transition-colors duration-500"/>
+                            </motion.div>
+                        </div>
+                    </div>
+                );
+        }
+    }
+
+
+  return (
     <main className="p-4 md:p-10 min-h-screen bg-black text-white relative overflow-hidden">
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse" />
@@ -588,77 +751,32 @@ Entregue ${E.toLowerCase()} completo, profissional e pronto para produção. O p
           </Link>
         </div>
         
-        <div className="text-center my-12 pt-8 space-y-2">
-            <h1 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">
-                Construtor de Prompts
-            </h1>
-            <p className="text-lg text-white/50 max-w-2xl mx-auto">
-                Siga as etapas para criar um briefing de projeto detalhado.
-            </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-12">
-            <nav className="hidden md:block">
-                <ol className="space-y-4">
-                {steps.map((step, index) => (
-                    <li key={step.name} className="relative">
-                    <div className="flex items-center space-x-3">
-                        <div
-                        className={cn(`h-10 w-10 rounded-full flex items-center justify-center transition-colors`,
-                            currentStep > index && 'text-white gradient-step-icon-completed',
-                            currentStep === index && 'text-white gradient-step-icon shadow-[0_0_15px_rgba(192,132,252,0.5)]',
-                            currentStep < index && 'bg-zinc-800 text-zinc-400 border border-zinc-700'
-                        )}
-                        >
-                        {currentStep > index ? <Check className="w-5 h-5" /> : <step.icon className="w-5 h-5" />}
-                        </div>
-                        <span className={`font-medium transition-colors ${currentStep >= index ? 'text-white' : 'text-zinc-500'}`}>{step.name}</span>
-                    </div>
-                     {index < steps.length - 1 && (
-                        <div className={`absolute left-5 top-11 h-full w-px bg-zinc-800 transition-all ${currentStep > index ? 'bg-purple-500' : ''}`} style={{height: 'calc(100% - 1rem)'}}/>
-                    )}
-                    </li>
-                ))}
-                </ol>
-            </nav>
-
-            <div className="backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-white/[0.05] shadow-2xl p-8 min-h-[500px]">
-                <AnimatePresence mode="wait">
-                    <motion.div key={currentStep}>
-                        {renderStep()}
-                    </motion.div>
-                </AnimatePresence>
-            </div>
-        </div>
-
-        {currentStep < steps.length - 1 && (
-            <div className="mt-8 flex justify-between">
-                <Button
-                    onClick={prevStep}
-                    disabled={currentStep === 0}
-                    variant="ghost"
-                    className="text-white/70 hover:text-white hover:bg-white/10"
+        <div className="pt-24">
+            <AnimatePresence mode="wait">
+                <motion.div 
+                    key={selection}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
                 >
-                    <ChevronLeft className="w-4 h-4 mr-2" />
-                    Voltar
-                </Button>
-
-                {currentStep < steps.length - 2 ? (
-                    <Button onClick={nextStep} className="bg-purple-600 hover:bg-purple-700 text-white">
-                        Próximo
-                        <ChevronRight className="w-4 h-4 ml-2" />
-                    </Button>
-                ) : (
-                  <GradientButton onClick={generatePrompt} className="gradient-button-green">
-                      <Code className="w-4 h-4" />
-                      <span className="ml-2">Gerar Prompt</span>
-                  </GradientButton>
-                )}
-            </div>
-        )}
+                    {selection !== 'initial' && (
+                        <div className="mb-8">
+                            <Button
+                                onClick={handleBackToSelection}
+                                variant="ghost"
+                                className="text-white/70 hover:text-white hover:bg-white/10"
+                            >
+                                <ArrowLeft className="w-4 h-4 mr-2" />
+                                Voltar para a seleção
+                            </Button>
+                        </div>
+                    )}
+                    {renderContent()}
+                </motion.div>
+            </AnimatePresence>
+        </div>
       </div>
     </main>
   );
 }
-
-    
