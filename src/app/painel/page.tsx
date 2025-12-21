@@ -237,7 +237,7 @@ function PainelContent() {
                         Cria SAAS
                         </h2>
                         <p className="text-white/40 mt-2">
-                        Crie um SAAS completo com IA.
+                        Crie a base do seu SAAS ou pegue um ja pronto!
                         </p>
                     </div>
                     <div className="mt-6 flex items-center text-sm font-medium text-white/70 group-hover:text-white transition-colors">
