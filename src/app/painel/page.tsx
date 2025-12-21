@@ -234,10 +234,10 @@ function PainelContent() {
                     >
                     <div className="relative z-10">
                         <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 group-hover:text-indigo-300 transition-colors">
-                        Construtor de Prompts
+                        Cria SAAS
                         </h2>
                         <p className="text-white/40 mt-2">
-                        Crie um briefing de projeto detalhado respondendo a algumas perguntas.
+                        Crie um SAAS completo com IA.
                         </p>
                     </div>
                     <div className="mt-6 flex items-center text-sm font-medium text-white/70 group-hover:text-white transition-colors">
