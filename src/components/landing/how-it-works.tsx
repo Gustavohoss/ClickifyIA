@@ -52,8 +52,7 @@ const HowItWorks = () => {
                 </div>
 
                 <div className="relative max-w-3xl mx-auto">
-                    {/* Vertical line */}
-                    <div className="absolute left-1/2 top-5 bottom-5 w-0.5 bg-gradient-to-b from-transparent via-purple-500 to-transparent -translate-x-1/2 hidden md:block"></div>
+                    
 
                     <div className="space-y-16 md:space-y-0 md:grid md:gap-y-24">
                         {steps.map((step, index) => (
