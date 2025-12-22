@@ -31,7 +31,7 @@ export function Header({ isLinkDisabled = false }: HeaderProps) {
       className={cn(
         "fixed top-0 z-50 w-full transition-all duration-300",
         isScrolled
-          ? "border-b border-white/10 bg-black/80 backdrop-blur-lg"
+          ? "border-b border-border/50 bg-background/80 backdrop-blur-lg"
           : "bg-transparent"
       )}
     >
