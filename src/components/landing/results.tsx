@@ -1,73 +1,61 @@
-
 'use client';
 
-import { BarChart, Bot, Brush, DollarSign, Hexagon, Sparkles, TrendingUp, Users, Zap } from 'lucide-react';
+import { TrendingUp, Users } from 'lucide-react';
 import React from 'react';
-import { Logo } from './logo';
+import { BGPattern } from '@/components/ui/bg-pattern';
+import { ResultsLogo } from './results-logo';
 
-const metrics = [
-    {
-      value: '+3.961',
-      label: 'SaaS desenvolvido pela CLICKIFY IA',
-      icon: TrendingUp,
-    },
-    {
-      value: '+R$932K',
-      label: 'Faturados mensalmente por usuários',
-      icon: Users,
-    },
-  ];
+const MetricCard = ({ icon, value, label }: { icon: React.ReactNode, value: string, label: string }) => (
+    <div className="relative overflow-hidden rounded-xl border border-white/10 bg-black/30 p-6 shadow-2xl shadow-primary/10 backdrop-blur-sm transition-all duration-300 hover:border-primary/30 hover:shadow-primary/20">
+         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <div className="relative">
+            <div className="mb-4 text-primary">
+                {icon}
+            </div>
+            <p className="text-4xl font-bold text-white mb-2">{value}</p>
+            <p className="text-sm text-neutral-400">{label}</p>
+        </div>
+    </div>
+);
+
 
 export default function Results() {
   return (
-    <section className="relative bg-background py-20 sm:py-28">
-      <div className="absolute inset-0 -z-10 h-full w-full bg-[radial-gradient(theme(colors.primary/0.1)_1px,transparent_1px)] [background-size:24px_24px]" />
-      <div className="absolute inset-0 -z-20 bg-background" />
+    <section className="relative bg-background py-24 sm:py-32">
+        <BGPattern variant="grid" fill="hsl(var(--primary) / 0.05)" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-background" />
 
-      <div className="container mx-auto px-4">
-        <div className="mx-auto mb-16 max-w-2xl text-center">
-          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Nossos{' '}
-            <span className="bg-gradient-to-br from-primary to-purple-400 bg-clip-text text-transparent">
-              Resultados
-            </span>
-          </h2>
-          <p className="mt-4 text-lg text-neutral-400">
-            Veja alguns de nossos números
-          </p>
-        </div>
+        <div className="container mx-auto px-4 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div className="flex justify-center lg:justify-start">
+                    <ResultsLogo />
+                </div>
 
-        <div className="mx-auto max-w-5xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-            {/* Logo Column */}
-            <div className="flex justify-center items-center">
-                <div className="relative">
-                    <Hexagon className="h-48 w-48 text-primary/30" strokeWidth={1} />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                        <Logo />
+                <div>
+                    <div className="mb-12 text-center lg:text-left">
+                        <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+                           Nossos <span className="bg-gradient-to-br from-primary to-purple-400 bg-clip-text text-transparent">Resultados</span>
+                        </h2>
+                        <p className="mt-4 text-lg text-neutral-400">
+                            Veja alguns de nossos números.
+                        </p>
                     </div>
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,theme(colors.primary/0.3),transparent_60%)]" />
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <MetricCard 
+                            icon={<TrendingUp className="w-8 h-8" />}
+                            value="+3.961"
+                            label="SaaS desenvolvidos pela CLICKIFY IA"
+                        />
+                        <MetricCard 
+                            icon={<Users className="w-8 h-8" />}
+                            value="+R$932K"
+                            label="Faturados mensalmente por usuários"
+                        />
+                    </div>
                 </div>
             </div>
-
-            {/* Metrics Columns */}
-            {metrics.map((metric, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden rounded-2xl border border-primary/20 bg-background/50 p-8 shadow-2xl shadow-primary/10 transition-all duration-300 hover:border-primary/40 hover:shadow-primary/20"
-              >
-                <div className="relative text-center">
-                    <div className="flex justify-center mb-4">
-                        <metric.icon className="h-8 w-8 text-primary" />
-                    </div>
-                    <p className="text-4xl font-bold text-white">{metric.value}</p>
-                    <p className="mt-2 text-sm text-neutral-400">{metric.label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
-      </div>
     </section>
   );
 }
