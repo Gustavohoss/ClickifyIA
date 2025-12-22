@@ -1,4 +1,3 @@
-
 'use client';
 
 import FallingNotifications from './falling-notifications';
@@ -13,7 +12,7 @@ const SocialProof = () => {
         <div className="mt-8 flex justify-center">
           <div className="relative h-[700px] w-[300px]">
             <img
-              src="https://s3.typebot.io/public/workspaces/cm8gbxl5b000ba3ncy4y16grd/typebots/cmi0sldz2000djl043bd6dtvj/blocks/mmudllxka9yrr0ypf1lpqfdh?v=1763540792561"
+              src="https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/bshr2y6v3sd34qgax45ugqon?v=1766387247350"
               alt="Fundo de tela do celular"
               width={300}
               height={700}
