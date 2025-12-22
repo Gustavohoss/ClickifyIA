@@ -15,6 +15,7 @@ import { buttonVariants } from "@/components/ui/button-glow";
 import { Footer } from "@/components/ui/footer-section";
 import HowItWorks from "@/components/landing/how-it-works";
 import WhyChooseUs from "@/components/landing/why-choose-us";
+import Results from "@/components/landing/results";
 
 const partners = [
   PlaceHolderImages.find(p => p.id === 'kiwify-logo'),
@@ -121,6 +122,7 @@ export default function Home() {
       <SocialProof />
       <HowItWorks />
       <WhyChooseUs />
+      <Results />
 
       <section className="relative py-20 pb-32 text-center overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
