@@ -35,6 +35,7 @@ const HowItWorks = () => {
         <section className="relative py-24">
             <BGPattern variant="grid" fill="hsl(var(--primary) / 0.05)" />
             <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+            <div className="absolute inset-x-0 top-1/4 h-64 bg-primary/10 blur-3xl" />
             
             <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-20">
@@ -45,14 +46,14 @@ const HowItWorks = () => {
 
                 <div className="relative max-w-3xl mx-auto">
                     {/* Vertical line */}
-                    <div className="absolute left-1/2 top-5 bottom-5 w-0.5 bg-purple-500/20 -translate-x-1/2 hidden md:block"></div>
+                    <div className="absolute left-1/2 top-5 bottom-5 w-0.5 bg-gradient-to-b from-transparent via-purple-500 to-transparent -translate-x-1/2 hidden md:block"></div>
 
                     <div className="space-y-16 md:space-y-24">
                         {steps.map((step, index) => (
                             <div key={index} className="relative flex items-center md:items-start flex-col md:flex-row">
                                 {/* Card */}
                                 <div className={`w-full md:w-5/12 ${step.align === 'left' ? 'md:pr-8' : 'md:pl-8'} ${step.align === 'right' ? 'md:ml-auto' : ''}`}>
-                                    <div className="bg-zinc-900/50 backdrop-blur-sm border border-purple-500/30 rounded-lg p-6 shadow-lg shadow-purple-500/10 text-left">
+                                    <div className="bg-zinc-900/50 backdrop-blur-sm border border-purple-500/30 rounded-lg p-6 [filter:drop-shadow(0_0_8px_hsl(var(--primary)/0.2))] text-left">
                                         <h3 className="font-bold text-purple-400 text-xl mb-2">{step.title}</h3>
                                         <p className="text-neutral-300">{step.description}</p>
                                     </div>
