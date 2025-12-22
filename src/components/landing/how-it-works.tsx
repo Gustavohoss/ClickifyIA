@@ -2,6 +2,8 @@
 'use client';
 
 import { BGPattern } from "@/components/ui/bg-pattern";
+import { GradientCard } from "@/components/ui/gradient-card";
+import { Briefcase, Code, Pencil, UploadCloud } from "lucide-react";
 
 const steps = [
     {
@@ -9,32 +11,36 @@ const steps = [
       title: "Responda as Perguntas",
       description: "Explique seu projeto, público e propósito. Nossa IA compreenderá e planejará a estrutura ideal.",
       align: "left",
+      icon: <Pencil className="w-6 h-6 text-white" />
     },
     {
       number: 2,
       title: "Visualize e Personalize",
       description: "Personalize cores, fontes e design de forma simples para refletir a identidade da sua marca.",
       align: "right",
+      icon: <Briefcase className="w-6 h-6 text-white" />
     },
     {
       number: 3,
       title: "Gere com 1 clique",
       description: "Em instantes, seu sistema completo será gerado — interface, servidor e painel de controle inclusos.",
       align: "left",
+      icon: <Code className="w-6 h-6 text-white" />
     },
     {
       number: 4,
       title: "Publique e Lucre",
       description: "Publique online, conecte seu domínio e comece a lucrar com seu novo produto digital.",
       align: "right",
+      icon: <UploadCloud className="w-6 h-6 text-white" />
     },
   ];
 
 const HowItWorks = () => {
     return (
-        <section className="relative py-24">
+        <section className="relative py-24 bg-black">
             <BGPattern variant="grid" fill="hsl(var(--primary) / 0.05)" />
-            <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" />
             <div className="absolute inset-x-0 top-1/4 h-64 bg-primary/10 blur-3xl" />
             
             <div className="container mx-auto px-4 relative z-10">
@@ -58,10 +64,11 @@ const HowItWorks = () => {
                                      <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold shadow-[0_0_12px_theme(colors.purple.500/0.7)] ring-1 ring-purple-500/50 md:hidden absolute -top-4 left-4 z-10">
                                         {step.number}
                                     </div>
-                                    <div className="bg-zinc-900/50 backdrop-blur-sm border border-purple-500/30 rounded-lg p-6 [filter:drop-shadow(0_0_8px_hsl(var(--primary)/0.2))]">
-                                        <h3 className="font-bold text-purple-400 text-xl mb-2">{step.title}</h3>
-                                        <p className="text-neutral-300">{step.description}</p>
-                                    </div>
+                                    <GradientCard 
+                                        title={step.title}
+                                        description={step.description}
+                                        icon={step.icon}
+                                    />
                                 </div>
                                 
                                 {/* Number Circle and Connector for Desktop */}
