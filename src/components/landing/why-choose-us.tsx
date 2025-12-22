@@ -1,7 +1,7 @@
 
 'use client';
 
-import { BarChart, Bot, Brush, Sparkles, Zap } from 'lucide-react';
+import { BarChart, Bot, Brush, Sparkles, Zap, Settings } from 'lucide-react';
 import React, { Suspense } from 'react';
 import { SplineScene } from '@/components/ui/spline';
 import { Spotlight } from '@/components/ui/spotlight';
@@ -20,7 +20,24 @@ const features = [
     ),
     spotlightFill: '#a855f7',
   },
-  // Cards removidos temporariamente
+  {
+    title: 'Atualizações com 1 clique',
+    description: 'Modifique e evolua seus projetos existentes sem complicação',
+    content: (
+        <div className="w-full h-full bg-black relative flex items-center justify-center p-4">
+            <div className="w-full max-w-xs space-y-4">
+                <div className="rounded-lg border border-purple-500/30 bg-purple-900/10 p-3 shadow-inner shadow-purple-900/50">
+                    <div className="flex items-center gap-2">
+                        <Settings className="h-4 w-4 text-purple-400 animate-spin" style={{ animationDuration: '3s' }} />
+                        <p className="text-xs font-medium text-white">Atualizando: criador de quiz interativo</p>
+                    </div>
+                    <p className="mt-1 text-xs text-purple-400/50">Criado em 30/04/2025, 18:34</p>
+                </div>
+            </div>
+        </div>
+    ),
+    spotlightFill: '#a855f7',
+  },
 ];
 
 export default function WhyChooseUs() {
