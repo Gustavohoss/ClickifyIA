@@ -49,7 +49,7 @@ const features = [
                 <Sparkles className="h-4 w-4 text-purple-400"/>
                 <p className="text-sm font-medium text-white">Qual estilo visual deseja aplicar?</p>
             </div>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="flex justify-center gap-2">
                 <Button variant="ghost" className="h-9 text-xs bg-black/20 hover:bg-black/40 text-neutral-300">Futurista</Button>
                 <Button variant="outline" className="h-9 text-xs border-purple-400 bg-purple-500/10 text-white shadow-[0_0_10px_theme(colors.purple.400)]">Minimalista</Button>
                 <Button variant="ghost" className="h-9 text-xs bg-black/20 hover:bg-black/40 text-neutral-300">Dark Mode</Button>
@@ -80,7 +80,7 @@ export default function WhyChooseUs() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature) => (
             <div
               key={feature.title}
