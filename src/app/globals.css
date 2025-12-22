@@ -10,19 +10,19 @@
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
+    --primary: 262 80% 58%;
+    --primary-foreground: 262 85% 96%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 262 80% 58%;
+    --accent-foreground: 262 85% 96%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --ring: 262 80% 58%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -45,19 +45,19 @@
     --card-foreground: 0 0% 98%;
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
+    --primary: 262 80% 58%;
+    --primary-foreground: 262 85% 96%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 262 80% 58%;
+    --accent-foreground: 262 85% 96%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+    --ring: 262 80% 58%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -335,7 +335,7 @@
 
     .gradient-step-icon {
         @apply relative;
-        background: radial-gradient(120% 120% at 100% 0%, #3b82f6 0%, #1e40af 40%, #1e3a8a 75%, #172554 100%);
+        background: radial-gradient(120% 120% at 100% 0%, #a855f7 0%, #6d28d9 40%, #4c1d95 75%, #2e1065 100%);
     }
 
     .gradient-step-icon::before {
@@ -344,7 +344,7 @@
         inset: 0;
         border-radius: inherit;
         padding: 2px;
-        background: linear-gradient(200deg, hsla(217, 91%, 60%, 0.6), hsla(221, 83%, 53%, 0.2));
+        background: linear-gradient(200deg, hsla(262, 80%, 58%, 0.6), hsla(262, 80%, 50%, 0.2));
         mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         mask-composite: exclude;
         pointer-events: none;
@@ -352,8 +352,6 @@
 
     .gradient-step-icon-completed {
         @apply relative;
-        background: radial-gradient(120% 120% at 100% 0%, #1e40af 0%, #172554 100%);
+        background: radial-gradient(120% 120% at 100% 0%, #581c87 0%, #2e1065 100%);
     }
 }
-
-    

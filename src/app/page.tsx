@@ -4,6 +4,7 @@ import { GradientButton } from '@/components/ui/gradient-button';
 import { BGPattern } from '@/components/ui/bg-pattern';
 import { Header } from '@/components/landing/header';
 import Safari_01 from '@/components/ui/safari-01';
+import Link from 'next/link';
 
 export default function BlankPage() {
   return (
@@ -20,7 +21,7 @@ export default function BlankPage() {
           A forma mais rápida de
           <br />
           criar seu{' '}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-violet-500">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-violet-500">
             SaaS
           </span>
         </h1>
@@ -29,9 +30,11 @@ export default function BlankPage() {
           minutos.
         </p>
         <div className="mt-8 flex gap-4">
-          <GradientButton variant="variant">
-            Assinar agora
-          </GradientButton>
+          <Link href="/login">
+            <GradientButton variant="variant">
+              Assinar agora
+            </GradientButton>
+          </Link>
         </div>
         <div className="mt-20 w-full">
           <Safari_01 className="w-full max-w-4xl mx-auto" />

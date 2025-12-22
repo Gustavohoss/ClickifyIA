@@ -228,7 +228,7 @@ PRAZOS: O presente contrato tem vigência de ${data.prazo}, iniciando em ${data.
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
             <div className="flex justify-between items-start">
                 <h3 className="text-xl font-bold text-white">Contrato Gerado</h3>
-                 <Button variant="ghost" size="sm" className="text-blue-400 hover:text-blue-300 hover:bg-white/10">
+                 <Button variant="ghost" size="sm" className="text-purple-400 hover:text-purple-300 hover:bg-white/10">
                     <Clipboard className="w-4 h-4 mr-2" />
                     Copiar
                 </Button>
@@ -246,8 +246,8 @@ PRAZOS: O presente contrato tem vigência de ${data.prazo}, iniciando em ${data.
   return (
     <main className="p-4 md:p-10 min-h-screen bg-black text-white relative overflow-hidden">
         <div className="absolute inset-0 w-full h-full overflow-hidden">
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse" />
-            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-sky-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse delay-700" />
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse" />
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-violet-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse delay-700" />
         </div>
          <div className="w-full max-w-4xl mx-auto relative z-10">
              <div className="absolute top-0 left-0">
@@ -279,7 +279,7 @@ PRAZOS: O presente contrato tem vigência de ${data.prazo}, iniciando em ${data.
                             className={cn(
                                 `h-10 w-10 rounded-full flex items-center justify-center transition-colors`,
                                 currentStep > index && 'text-white gradient-step-icon-completed',
-                                currentStep === index && 'text-white gradient-step-icon shadow-[0_0_15px_rgba(59,130,246,0.5)]',
+                                currentStep === index && 'text-white gradient-step-icon shadow-[0_0_15px_rgba(168,85,247,0.5)]',
                                 currentStep < index && 'bg-zinc-800 border border-zinc-700 text-zinc-400'
                             )}
                             >
@@ -288,7 +288,7 @@ PRAZOS: O presente contrato tem vigência de ${data.prazo}, iniciando em ${data.
                             <span className={`font-medium transition-colors ${currentStep >= index ? 'text-white' : 'text-zinc-500'}`}>{step.name}</span>
                         </div>
                         {index < steps.length - 1 && (
-                            <div className={`absolute left-5 top-11 h-full w-px bg-zinc-800 transition-all ${currentStep > index ? 'bg-blue-500' : ''}`} style={{height: 'calc(100% - 1rem)'}}/>
+                            <div className={`absolute left-5 top-11 h-full w-px bg-zinc-800 transition-all ${currentStep > index ? 'bg-purple-500' : ''}`} style={{height: 'calc(100% - 1rem)'}}/>
                         )}
                         </li>
                     ))}
@@ -317,7 +317,7 @@ PRAZOS: O presente contrato tem vigência de ${data.prazo}, iniciando em ${data.
                 </Button>
 
                 {currentStep < steps.length - 2 ? (
-                    <Button onClick={nextStep} className="bg-blue-600 hover:bg-blue-700 text-white">
+                    <Button onClick={nextStep} className="bg-primary hover:bg-primary/90 text-primary-foreground">
                         Próximo
                         <ChevronRight className="w-4 h-4 ml-2" />
                     </Button>
@@ -327,7 +327,7 @@ PRAZOS: O presente contrato tem vigência de ${data.prazo}, iniciando em ${data.
                         Gerar Contrato
                     </GradientButton>
                 ) : (
-                    <Button onClick={() => { /* Lógica para Enviar ou Salvar */ }} className="bg-blue-600 hover:bg-blue-700 text-white">
+                    <Button onClick={() => { /* Lógica para Enviar ou Salvar */ }} className="bg-primary hover:bg-primary/90 text-primary-foreground">
                         <Sparkles className="w-4 h-4 mr-2" />
                         Enviar ou Salvar Contrato
                     </Button>
@@ -337,5 +337,3 @@ PRAZOS: O presente contrato tem vigência de ${data.prazo}, iniciando em ${data.
     </main>
   );
 }
-
-    
