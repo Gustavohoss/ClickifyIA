@@ -33,39 +33,43 @@ const steps = [
 const HowItWorks = () => {
     return (
         <section className="relative py-24">
-            <BGPattern variant="grid" fill="hsl(var(--primary) / 0.1)" />
+            <BGPattern variant="grid" fill="hsl(var(--primary) / 0.15)" />
             <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
             
             <div className="container mx-auto px-4 relative z-10">
-                <div className="text-center max-w-3xl mx-auto mb-16">
+                <div className="text-center max-w-3xl mx-auto mb-20">
                     <h2 className="text-4xl md:text-5xl text-white font-body">
-                        Com a <span className="text-primary">CLICKIFY</span>, desenvolver um SaaS é fácil, ágil e eficiente:
+                        Com a <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">CLICKIFY</span>, desenvolver um SaaS é fácil, ágil e eficiente:
                     </h2>
                 </div>
 
                 <div className="relative max-w-3xl mx-auto">
                     {/* Vertical line */}
-                    <div className="absolute left-1/2 top-5 bottom-5 w-0.5 bg-border -translate-x-1/2 hidden md:block"></div>
+                    <div className="absolute left-1/2 top-5 bottom-5 w-0.5 bg-purple-500/30 -translate-x-1/2 hidden md:block"></div>
 
-                    <div className="space-y-16">
+                    <div className="space-y-16 md:space-y-24">
                         {steps.map((step, index) => (
-                            <div key={index} className="relative">
+                            <div key={index} className="relative flex items-center md:items-start flex-col md:flex-row">
                                 {/* Card */}
-                                <div className={`flex flex-col md:flex-row items-center ${step.align === 'right' ? 'md:flex-row-reverse' : ''}`}>
-                                    <div className="w-full md:w-5/12">
-                                        <div className="bg-background/50 backdrop-blur-sm border border-primary/20 rounded-xl p-6 shadow-lg">
-                                            <h3 className="font-bold text-primary text-xl mb-2">{step.title}</h3>
-                                            <p className="text-neutral-300">{step.description}</p>
-                                        </div>
+                                <div className={`w-full md:w-5/12 ${step.align === 'left' ? 'md:pr-8' : 'md:pl-8'} ${step.align === 'right' ? 'md:ml-auto' : ''}`}>
+                                    <div className="bg-background/50 backdrop-blur-sm border border-purple-500/20 rounded-xl p-6 shadow-lg shadow-purple-500/10">
+                                        <h3 className="font-bold text-purple-400 text-xl mb-2">{step.title}</h3>
+                                        <p className="text-neutral-300">{step.description}</p>
                                     </div>
                                 </div>
-                                {/* Number Circle and Horizontal Line */}
-                                <div className={`absolute top-1/2 -translate-y-1/2 flex items-center w-auto ${step.align === 'left' ? 'right-0 md:right-auto md:left-1/2 md:-translate-x-full md:-mr-4' : 'left-0 md:left-auto md:right-1/2 md:translate-x-full md:-ml-4'}`}>
-                                   {step.align === 'left' && <div className="w-10 h-px bg-border hidden md:block"></div> }
-                                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold shadow-md shadow-primary/30">
+                                
+                                {/* Number Circle and Horizontal Line for Desktop */}
+                                <div className={`absolute top-1/2 -translate-y-1/2 hidden md:flex items-center w-auto ${step.align === 'left' ? 'right-1/2 translate-x-full' : 'left-1/2 -translate-x-full'}`}>
+                                   {step.align === 'right' && <div className="w-8 h-px bg-purple-500/30"></div> }
+                                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold shadow-[0_0_12px_theme(colors.purple.500/0.7)] ring-2 ring-purple-500/50">
                                         {step.number}
                                     </div>
-                                    {step.align === 'right' && <div className="w-10 h-px bg-border hidden md:block"></div> }
+                                    {step.align === 'left' && <div className="w-8 h-px bg-purple-500/30"></div> }
+                                </div>
+
+                                 {/* Number Circle for Mobile */}
+                                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold shadow-[0_0_12px_theme(colors.purple.500/0.7)] ring-2 ring-purple-500/50 md:hidden absolute -top-4">
+                                    {step.number}
                                 </div>
                             </div>
                         ))}
