@@ -37,8 +37,8 @@ const HowItWorks = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
             
             <div className="container mx-auto px-4 relative z-10">
-                <div className="text-center md:text-left max-w-3xl mx-auto md:mx-0 mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-white font-body">
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <h2 className="text-4xl md:text-5xl text-white font-body">
                         Com a <span className="text-primary">CLICKIFY</span>, desenvolver um SaaS é fácil, ágil e eficiente:
                     </h2>
                 </div>
