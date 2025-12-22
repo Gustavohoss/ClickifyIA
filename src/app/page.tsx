@@ -1,3 +1,4 @@
+
 'use client';
 
 import { Button } from "@/components/ui/button-glow"; 
@@ -91,7 +92,7 @@ export default function Home() {
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">criar seu SaaS</span>
           </h1>
           <p className="mt-6 text-lg text-neutral-300 max-w-2xl mx-auto">
-            A Clickify te dá tudo: funil pronto, área de membros, afiliados e ferramentas completas para vender online.
+            Conheça a CLICKIFY e crie negócios digitais completos com IA em minutos.
           </p>
         </div>
         
