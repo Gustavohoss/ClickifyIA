@@ -4,14 +4,15 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Spotlight } from "./spotlight";
+import Image from "next/image";
 
 interface GradientCardProps {
     title: string;
     description: string;
-    icon: React.ReactNode;
+    imageUrl: string;
 }
 
-export const GradientCard: React.FC<GradientCardProps> = ({ title, description, icon }) => {
+export const GradientCard: React.FC<GradientCardProps> = ({ title, description, imageUrl }) => {
    return (
     <div className={cn(
         "group relative p-6 rounded-2xl overflow-hidden h-full",
@@ -20,10 +21,9 @@ export const GradientCard: React.FC<GradientCardProps> = ({ title, description, 
         "hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/20"
     )}>
         <Spotlight
-            className="-top-40 -left-20 md:left-0 md:-top-10"
+            className="-top-20 -left-20 md:left-0 md:-top-10"
             fill={'#a855f7'}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <motion.div
             className="relative text-center h-full z-10 flex flex-col"
             initial={{ y: 10, opacity: 0 }}
@@ -32,9 +32,13 @@ export const GradientCard: React.FC<GradientCardProps> = ({ title, description, 
             viewport={{ once: true }}
         >
           <div className="mb-4 flex h-48 w-full items-center justify-center rounded-lg border border-primary/20 bg-black">
-            <div className="w-12 h-12 rounded-lg flex items-center justify-center bg-purple-500/10 border border-purple-500/20">
-                {icon}
-            </div>
+            <Image
+                src={imageUrl}
+                alt={title}
+                width={150}
+                height={150}
+                className="object-contain"
+            />
           </div>
 
           <div className="flex-grow flex flex-col justify-center">
