@@ -9,10 +9,11 @@ import Image from "next/image";
 interface GradientCardProps {
     title: string;
     description: string;
-    imageUrl: string;
+    imageUrl?: string | null;
+    icon?: React.ReactNode;
 }
 
-export const GradientCard: React.FC<GradientCardProps> = ({ title, description, imageUrl }) => {
+export const GradientCard: React.FC<GradientCardProps> = ({ title, description, imageUrl, icon }) => {
    return (
     <div className={cn(
         "group relative p-6 rounded-2xl overflow-hidden h-full",
@@ -31,14 +32,18 @@ export const GradientCard: React.FC<GradientCardProps> = ({ title, description, 
             transition={{ duration: 0.5, ease: "easeOut" }}
             viewport={{ once: true }}
         >
-          <div className="mb-4 flex h-48 w-full items-center justify-center rounded-lg border border-primary/20 bg-black">
-            <Image
-                src={imageUrl}
-                alt={title}
-                width={150}
-                height={150}
-                className="object-contain"
-            />
+          <div className="mb-4 flex h-48 w-full items-center justify-center rounded-lg border border-primary/20 bg-black overflow-hidden">
+            {imageUrl ? (
+                <Image
+                    src={imageUrl}
+                    alt={title}
+                    width={300}
+                    height={300}
+                    className="object-cover w-full h-full"
+                />
+            ) : (
+                icon
+            )}
           </div>
 
           <div className="flex-grow flex flex-col justify-center">

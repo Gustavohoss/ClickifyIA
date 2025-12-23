@@ -3,27 +3,32 @@
 
 import { BGPattern } from "@/components/ui/bg-pattern";
 import { GradientCard } from "@/components/ui/gradient-card";
+import { Bot, Code, Palette } from "lucide-react";
 
 const steps = [
     {
       title: "Responda as Perguntas",
       description: "Explique seu projeto, público e propósito. Nossa IA compreenderá e planejará a estrutura ideal.",
       imageUrl: "https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ky3dv4ytx1qde1ipc2mjg1rt?v=1766472190769",
+      icon: null
     },
     {
         title: "Visualize e Personalize",
         description: "Personalize cores, fontes e design de forma simples para refletir a identidade da sua marca.",
-        imageUrl: "https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ky3dv4ytx1qde1ipc2mjg1rt?v=1766472190769",
+        imageUrl: null,
+        icon: Palette
     },
     {
         title: "Gere com 1 clique",
         description: "Em instantes, seu sistema completo será gerado — interface, servidor e painel de controle inclusos.",
-        imageUrl: "https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ky3dv4ytx1qde1ipc2mjg1rt?v=1766472190769",
+        imageUrl: null,
+        icon: Code
     },
     {
         title: "Publique e Lucre",
         description: "Publique online, conecte seu domínio e comece a lucrar com seu novo produto digital.",
-        imageUrl: "https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ky3dv4ytx1qde1ipc2mjg1rt?v=1766472190769",
+        imageUrl: null,
+        icon: Bot
     },
   ];
 
@@ -48,6 +53,7 @@ const HowItWorks = () => {
                                 title={step.title}
                                 description={step.description}
                                 imageUrl={step.imageUrl}
+                                icon={step.icon ? <step.icon className="w-6 h-6 text-white" /> : undefined}
                             />
                         </div>
                     ))}
