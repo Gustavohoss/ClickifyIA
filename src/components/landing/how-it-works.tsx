@@ -15,8 +15,8 @@ const steps = [
     {
         title: "Visualize e Personalize",
         description: "Personalize cores, fontes e design de forma simples para refletir a identidade da sua marca.",
-        imageUrl: null,
-        icon: Palette
+        imageUrl: "https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/q34p8f98mukm62cd9owthydb?v=1766472851949",
+        icon: null
     },
     {
         title: "Gere com 1 clique",
