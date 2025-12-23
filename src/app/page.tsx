@@ -173,7 +173,7 @@ export default function Home() {
                     <ul className="mt-8 space-y-4">
                         {["Criar funis com limite de 1 funil por categoria", "Criar 1 área de membros", "Criar landing pages, quizzes e fluxos estilo Typebot", "Conectar 1 gateway de pagamento", "Afiliação limitada a apenas 1 produto", "Suporte básico"].map((feature, index) => (
                         <li key={index} className="flex items-start gap-3">
-                            <Image src="https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ngqxix0w0j29xfjugomz1zux?v=1766386475991" alt="Checkmark" width={24} height={24} className="h-6 w-6 flex-shrink-0" />
+                            <Image src="https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ngqxix0w0j29xfjugomz1zux?v=1766473357190" alt="Checkmark" width={24} height={24} className="h-6 w-6 flex-shrink-0" />
                             <span className="font-medium text-left">{feature}</span>
                         </li>
                         ))}
@@ -212,7 +212,7 @@ export default function Home() {
                     <ul className="mt-8 space-y-4">
                         {["Criar até 5 funis por categoria", "Criar áreas de membros ilimitadas", "Conectar gateways de pagamento ilimitados", "Afiliação a produtos ilimitada", "Suporte prioritário", "Todas as atualizações incluídas"].map((feature, index) => (
                         <li key={index} className="flex items-start gap-3">
-                            <Image src="https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ngqxix0w0j29xfjugomz1zux?v=1766386475991" alt="Checkmark" width={24} height={24} className="h-6 w-6 flex-shrink-0" />
+                            <Image src="https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ngqxix0w0j29xfjugomz1zux?v=1766473357190" alt="Checkmark" width={24} height={24} className="h-6 w-6 flex-shrink-0" />
                             <span className="font-medium text-left">{feature}</span>
                         </li>
                         ))}
