@@ -2,7 +2,6 @@
 'use client';
 
 import { BGPattern } from "@/components/ui/bg-pattern";
-import { Spotlight } from "@/components/ui/spotlight";
 import { GradientCard } from "@/components/ui/gradient-card";
 import { Bot, Code, Edit, Rocket } from "lucide-react";
 
@@ -46,10 +45,6 @@ const HowItWorks = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {steps.map((step, index) => (
                         <div key={index} className="flex-1 max-w-sm mx-auto w-full">
-                             <Spotlight
-                                className="-top-40 left-0 md:left-30 md:-top-10"
-                                fill={'#a855f7'}
-                            />
                            <GradientCard 
                                 title={step.title}
                                 description={step.description}

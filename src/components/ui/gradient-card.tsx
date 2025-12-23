@@ -3,13 +3,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Spotlight } from "./spotlight";
 
 interface GradientCardProps {
     title: string;
     description: string;
     icon: React.ReactNode;
 }
-
 
 export const GradientCard: React.FC<GradientCardProps> = ({ title, description, icon }) => {
    return (
@@ -19,6 +19,10 @@ export const GradientCard: React.FC<GradientCardProps> = ({ title, description, 
         "transition-all duration-300 ease-in-out",
         "hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/20"
     )}>
+        <Spotlight
+            className="-top-40 -left-20 md:left-0 md:-top-10"
+            fill={'#a855f7'}
+        />
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <motion.div
             className="relative text-center h-full z-10 flex flex-col"
