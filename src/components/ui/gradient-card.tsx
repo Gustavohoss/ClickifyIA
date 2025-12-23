@@ -32,17 +32,19 @@ export const GradientCard: React.FC<GradientCardProps> = ({ title, description, 
             transition={{ duration: 0.5, ease: "easeOut" }}
             viewport={{ once: true }}
         >
-          <div className="mb-4 flex h-48 w-full items-center justify-center rounded-lg border border-primary/20 bg-black overflow-hidden">
+          <div className="mb-4 flex w-full items-center justify-center rounded-lg border border-primary/20 bg-black overflow-hidden">
             {imageUrl ? (
                 <Image
                     src={imageUrl}
                     alt={title}
                     width={300}
                     height={300}
-                    className="object-cover w-full h-full"
+                    className="w-full h-auto"
                 />
             ) : (
-                icon
+                <div className="flex items-center justify-center h-48">
+                    {icon}
+                </div>
             )}
           </div>
 
