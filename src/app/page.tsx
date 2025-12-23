@@ -99,6 +99,15 @@ export default function Home() {
             Conheça a CLICKIFY e crie negócios digitais completos com IA em minutos.
           </p>
         </div>
+
+        <div className="flex flex-col items-center gap-4 mt-8">
+            <Button asChild size="lg" className="w-64 h-14 text-lg bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-full">
+            <Link href="#pricing">Assinar agora</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="w-64 h-14 text-lg bg-transparent border-primary text-primary hover:bg-primary/10 rounded-full">
+            <Link href="#pricing">Ver Planos</Link>
+            </Button>
+        </div>
         
         <div className="relative z-20 mt-12 flex flex-col items-center gap-8 w-full max-w-6xl px-4 md:px-8">
             {/* PAINEL RECREATED HERE */}
@@ -193,14 +202,6 @@ export default function Home() {
             </div>
 
             <InfiniteMovingLogos />
-            <div className="flex flex-col items-center gap-4 mt-4">
-              <Button asChild size="lg" className="w-64 h-14 text-lg bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-full">
-                <Link href="#pricing">Assinar agora</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="w-64 h-14 text-lg bg-transparent border-primary text-primary hover:bg-primary/10 rounded-full">
-                <Link href="#pricing">Ver Planos</Link>
-              </Button>
-            </div>
         </div>
 
       </div>
