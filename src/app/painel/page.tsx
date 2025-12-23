@@ -17,6 +17,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
+import { Spotlight } from '@/components/ui/spotlight';
 
 function Header() {
   const { auth } = useFirebase();
@@ -142,13 +143,15 @@ function PainelContent() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
               <Link href="/scraper" passHref>
-                <motion.div
-                  className="group relative backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-zinc-800 shadow-2xl p-8 cursor-pointer overflow-hidden hover:border-purple-500/50 transition-colors duration-300"
-                  whileHover={{ y: -5 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
+                <div
+                  className="group relative p-6 rounded-2xl overflow-hidden h-full bg-background/50 border border-primary/20 transition-all duration-300 ease-in-out hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/20 cursor-pointer"
                 >
+                  <Spotlight
+                      className="-top-20 -left-20 md:left-0 md:-top-10"
+                      fill={'#a855f7'}
+                  />
                   <div className="relative z-10">
-                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 group-hover:text-purple-300 transition-colors">
+                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
                       CLICKIFY Scraper
                     </h2>
                     <p className="text-white/40 mt-2">
@@ -159,17 +162,19 @@ function PainelContent() {
                     Acessar Ferramenta
                     <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                   </div>
-                  <Search className="absolute -right-8 -bottom-8 h-32 w-32 text-white/5 group-hover:text-purple-500/10 transition-colors duration-500"/>
-                </motion.div>
+                  <Search className="absolute -right-8 -bottom-8 h-32 w-32 text-white/5 group-hover:text-primary/10 transition-colors duration-500"/>
+                </div>
               </Link>
               <Link href="/leads" passHref>
-                <motion.div
-                  className="group relative backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-zinc-800 shadow-2xl p-8 cursor-pointer overflow-hidden hover:border-orange-500/50 transition-colors duration-300"
-                  whileHover={{ y: -5 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
+                 <div
+                  className="group relative p-6 rounded-2xl overflow-hidden h-full bg-background/50 border border-primary/20 transition-all duration-300 ease-in-out hover:border-orange-500/40 hover:shadow-2xl hover:shadow-orange-500/20 cursor-pointer"
                 >
+                  <Spotlight
+                      className="-top-20 -left-20 md:left-0 md:-top-10"
+                      fill={'#f97316'}
+                  />
                   <div className="relative z-10">
-                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 group-hover:text-orange-300 transition-colors">
+                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
                       Gestão de Leads
                     </h2>
                     <p className="text-white/40 mt-2">
@@ -181,16 +186,18 @@ function PainelContent() {
                     <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                   </div>
                   <FileText className="absolute -right-8 -bottom-8 h-32 w-32 text-white/5 group-hover:text-orange-500/10 transition-colors duration-500"/>
-                </motion.div>
+                </div>
               </Link>
                <Link href="/contrato" passHref>
-                <motion.div
-                  className="group relative backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-zinc-800 shadow-2xl p-8 cursor-pointer overflow-hidden hover:border-blue-500/50 transition-colors duration-300"
-                  whileHover={{ y: -5 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
+                <div
+                  className="group relative p-6 rounded-2xl overflow-hidden h-full bg-background/50 border border-primary/20 transition-all duration-300 ease-in-out hover:border-blue-500/40 hover:shadow-2xl hover:shadow-blue-500/20 cursor-pointer"
                 >
+                   <Spotlight
+                      className="-top-20 -left-20 md:left-0 md:-top-10"
+                      fill={'#3b82f6'}
+                  />
                   <div className="relative z-10">
-                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 group-hover:text-blue-300 transition-colors">
+                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
                       Gerar Contrato
                     </h2>
                     <p className="text-white/40 mt-2">
@@ -202,16 +209,18 @@ function PainelContent() {
                     <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                   </div>
                   <FileText className="absolute -right-8 -bottom-8 h-32 w-32 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500"/>
-                </motion.div>
+                </div>
               </Link>
                <Link href="/abordagem" passHref>
-                <motion.div
-                  className="group relative backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-zinc-800 shadow-2xl p-8 cursor-pointer overflow-hidden hover:border-yellow-500/50 transition-colors duration-300"
-                  whileHover={{ y: -5 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
+                <div
+                   className="group relative p-6 rounded-2xl overflow-hidden h-full bg-background/50 border border-primary/20 transition-all duration-300 ease-in-out hover:border-yellow-500/40 hover:shadow-2xl hover:shadow-yellow-500/20 cursor-pointer"
                 >
+                   <Spotlight
+                      className="-top-20 -left-20 md:left-0 md:-top-10"
+                      fill={'#eab308'}
+                  />
                   <div className="relative z-10">
-                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 group-hover:text-yellow-300 transition-colors">
+                    <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
                       Abordagem de Empresas
                     </h2>
                     <p className="text-white/40 mt-2">
@@ -223,18 +232,20 @@ function PainelContent() {
                     <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                   </div>
                   <Building2 className="absolute -right-8 -bottom-8 h-32 w-32 text-white/5 group-hover:text-yellow-500/10 transition-colors duration-500"/>
-                </motion.div>
+                </div>
               </Link>
             </div>
              <div className="grid grid-cols-1 gap-6">
                  <Link href="/prompt-builder" passHref>
-                    <motion.div
-                    className="group relative backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-zinc-800 shadow-2xl p-8 cursor-pointer overflow-hidden hover:border-indigo-500/50 transition-colors duration-300"
-                    whileHover={{ y: -5 }}
-                    transition={{ type: 'spring', stiffness: 300 }}
+                    <div
+                      className="group relative p-6 rounded-2xl overflow-hidden h-full bg-background/50 border border-primary/20 transition-all duration-300 ease-in-out hover:border-indigo-500/40 hover:shadow-2xl hover:shadow-indigo-500/20 cursor-pointer"
                     >
+                       <Spotlight
+                          className="-top-20 -left-20 md:left-0 md:-top-10"
+                          fill={'#6366f1'}
+                      />
                     <div className="relative z-10">
-                        <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70 group-hover:text-indigo-300 transition-colors">
+                        <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
                         Cria SAAS
                         </h2>
                         <p className="text-white/40 mt-2">
@@ -246,7 +257,7 @@ function PainelContent() {
                         <ArrowRight className="ml-2 h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                     </div>
                     <Sparkles className="absolute -right-8 -bottom-8 h-32 w-32 text-white/5 group-hover:text-indigo-500/10 transition-colors duration-500"/>
-                    </motion.div>
+                    </div>
                 </Link>
             </div>
           </motion.div>
