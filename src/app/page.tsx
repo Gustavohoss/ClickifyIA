@@ -166,15 +166,15 @@ export default function Home() {
         <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-8 mt-20">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                 {/* Plano Mensal */}
-                <div className={cn('relative rounded-2xl p-8 text-white bg-gray-900/50 border border-white/10 text-left')}>
-                    <h3 className="text-2xl font-bold">Plano Mensal</h3>
+                <div className="group relative overflow-hidden rounded-2xl border border-primary/20 bg-background/50 p-6 shadow-xl shadow-primary/10 transition-all duration-300 hover:border-primary/40 hover:shadow-primary/20 text-left">
+                    <h3 className="text-2xl font-bold text-white">Plano Mensal</h3>
                     <p className="text-gray-400 mt-1">Ideal para começar.</p>
                     
-                    <p className="text-4xl font-bold mt-6">
+                    <p className="text-4xl font-bold mt-6 text-white">
                         R$197,00<span className="text-lg font-normal text-gray-400">/mês</span>
                     </p>
 
-                    <ul className="mt-8 space-y-4">
+                    <ul className="mt-8 space-y-4 text-white">
                         {["Gerador de SaaS Premium Ilimitado", "Gerador de página de vendas", "Prospecte clientes Ilimitado", "Suporte exclusivo (Whatsapp)"].map((feature, index) => (
                         <li key={index} className="flex items-start gap-3">
                             <Image src="https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ngqxix0w0j29xfjugomz1zux?v=1766473357190" alt="Checkmark" width={24} height={24} className="h-6 w-6 flex-shrink-0" />
@@ -193,21 +193,21 @@ export default function Home() {
                 </div>
                 
                 {/* Plano Trimestral */}
-                <div className={cn('relative rounded-2xl p-8 text-white bg-gray-900/50 border-2 border-primary/80 text-left shadow-2xl shadow-primary/20')}>
+                <div className="group relative overflow-hidden rounded-2xl border-2 border-primary/80 bg-background/50 p-6 shadow-2xl shadow-primary/20 text-left">
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1 text-sm font-semibold text-primary-foreground">
                         MAIS POPULAR
                     </div>
-                    <h3 className="text-2xl font-bold">Plano Trimestral</h3>
+                    <h3 className="text-2xl font-bold text-white">Plano Trimestral</h3>
                     <p className="text-gray-400 mt-1">Economize 50%</p>
                     
                     <div className="mt-6">
                       <p className="text-sm text-gray-500 line-through">de R$597 por</p>
-                      <p className="text-4xl font-bold">
+                      <p className="text-4xl font-bold text-white">
                           R$297,00<span className="text-lg font-normal text-gray-400">/3 meses</span>
                       </p>
                     </div>
 
-                    <ul className="mt-8 space-y-4">
+                    <ul className="mt-8 space-y-4 text-white">
                         {["Tudo do plano mensal", "Calls semanais ao vivo", "Serviços de Freelancer"].map((feature, index) => (
                         <li key={index} className="flex items-start gap-3">
                             <Image src="https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ngqxix0w0j29xfjugomz1zux?v=1766473357190" alt="Checkmark" width={24} height={24} className="h-6 w-6 flex-shrink-0" />
@@ -232,18 +232,18 @@ export default function Home() {
                 </div>
                 
                 {/* Plano Anual */}
-                 <div className={cn('relative rounded-2xl p-8 text-white bg-gray-900/50 border border-white/10 text-left')}>
-                    <h3 className="text-2xl font-bold">Plano Anual</h3>
+                 <div className="group relative overflow-hidden rounded-2xl border border-primary/20 bg-background/50 p-6 shadow-xl shadow-primary/10 transition-all duration-300 hover:border-primary/40 hover:shadow-primary/20 text-left">
+                    <h3 className="text-2xl font-bold text-white">Plano Anual</h3>
                     <p className="text-gray-400 mt-1">Maior economia!</p>
                     
                     <div className="mt-6">
                       <p className="text-sm text-gray-500 line-through">de R$2.364 por</p>
-                      <p className="text-4xl font-bold">
+                      <p className="text-4xl font-bold text-white">
                           R$997,00<span className="text-lg font-normal text-gray-400">/ano</span>
                       </p>
                     </div>
 
-                    <ul className="mt-8 space-y-4">
+                    <ul className="mt-8 space-y-4 text-white">
                         {["Tudo do plano trimestral", "Acesso prioritário a novidades", "Área de membros exclusiva"].map((feature, index) => (
                         <li key={index} className="flex items-start gap-3">
                             <Image src="https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ngqxix0w0j29xfjugomz1zux?v=1766473357190" alt="Checkmark" width={24} height={24} className="h-6 w-6 flex-shrink-0" />
