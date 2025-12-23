@@ -3,6 +3,7 @@
 
 import { BGPattern } from "@/components/ui/bg-pattern";
 import { GradientCard } from "@/components/ui/gradient-card";
+import { Spotlight } from "@/components/ui/spotlight";
 import { Briefcase, Code, Pencil, UploadCloud } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -59,11 +60,15 @@ const HowItWorks = () => {
                             <div key={index} className="relative md:grid md:grid-cols-2 md:items-center md:gap-x-8">
                                
                                 {/* Card */}
-                                <div className={`relative ${step.align === 'right' ? 'md:col-start-2' : 'md:col-start-1'}`}>
+                                <div className={`group relative ${step.align === 'right' ? 'md:col-start-2' : 'md:col-start-1'}`}>
                                      {/* Number Circle for Mobile */}
                                      <div className={cn("w-10 h-10 rounded-full flex items-center justify-center text-primary-foreground font-bold md:hidden absolute -top-4 left-4 z-10", "gradient-step-icon")}>
                                         {step.number}
                                     </div>
+                                    <Spotlight
+                                        className="-top-40 left-0 md:left-30 md:-top-10"
+                                        fill={'#a855f7'}
+                                    />
                                     <GradientCard 
                                         title={step.title}
                                         description={step.description}
