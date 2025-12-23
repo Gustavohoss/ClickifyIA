@@ -161,81 +161,108 @@ export default function Home() {
             <h1 className="md:text-5xl text-3xl lg:text-6xl text-white font-body">
               <span className="text-primary">Escolha o plano ideal para você.</span> Comece seu negócio com a liberdade de <span className="text-primary">crescer ainda mais.</span>
             </h1>
+            <p className="mt-4 text-lg text-neutral-400">Planos flexíveis para todas as necessidades</p>
         </div>
-        <div className="relative z-10 mx-auto max-w-5xl px-4 md:px-8 mt-20">
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                <div className={cn('relative rounded-2xl p-8 text-white bg-gray-900/50 border border-white/10')}>
-                    <div className="space-y-2 text-center">
-                        <h3 className="text-2xl font-bold">Plano Mensal</h3>
-                        <p className="text-gray-400">Para pequenas empresas</p>
-                    </div>
+        <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-8 mt-20">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                {/* Plano Mensal */}
+                <div className={cn('relative rounded-2xl p-8 text-white bg-gray-900/50 border border-white/10 text-left')}>
+                    <h3 className="text-2xl font-bold">Plano Mensal</h3>
+                    <p className="text-gray-400 mt-1">Ideal para começar.</p>
+                    
+                    <p className="text-4xl font-bold mt-6">
+                        R$197,00<span className="text-lg font-normal text-gray-400">/mês</span>
+                    </p>
 
                     <ul className="mt-8 space-y-4">
-                        {["Criar funis com limite de 1 funil por categoria", "Criar 1 área de membros", "Criar landing pages, quizzes e fluxos estilo Typebot", "Conectar 1 gateway de pagamento", "Afiliação limitada a apenas 1 produto", "Suporte básico"].map((feature, index) => (
+                        {["Gerador de SaaS Premium Ilimitado", "Gerador de página de vendas", "Prospecte clientes Ilimitado", "Suporte exclusivo (Whatsapp)"].map((feature, index) => (
                         <li key={index} className="flex items-start gap-3">
                             <Image src="https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ngqxix0w0j29xfjugomz1zux?v=1766473357190" alt="Checkmark" width={24} height={24} className="h-6 w-6 flex-shrink-0" />
-                            <span className="font-medium text-left">{feature}</span>
+                            <span className="font-medium">{feature}</span>
                         </li>
                         ))}
                     </ul>
-                    
-                    <div className="mt-10 text-center">
-                        <p className="text-5xl font-bold">
-                        R$ 149,90
-                        <span className="text-lg font-normal text-gray-400">/mês</span>
-                        </p>
-                        <div className="mt-4 flex items-center justify-center gap-4">
-                            <Image src="https://s3.typebot.io/public/workspaces/cm8gbxl5b000ba3ncy4y16grd/typebots/cmi0sldz2000djl043bd6dtvj/blocks/a68fdlm0uvhla5lseapdlldx?v=1763597469798" alt="Pix" width={48} height={36} />
-                            <Image src="https://s3.typebot.io/public/workspaces/cm8gbxl5b000ba3ncy4y16grd/typebots/cmi0sldz2000djl043bd6dtvj/blocks/dy0jgeiy3p0ow3jv7girqid2?v=1763597472369" alt="Mastercard" width={48} height={36} />
-                            <Image src="https://s3.typebot.io/public/workspaces/cm8gbxl5b000ba3ncy4y16grd/typebots/cmi0sldz2000djl043bd6dtvj/blocks/ecqfs0lq4nosjbnybwwl63lz?v=1763597481076" alt="Visa" width={48} height={36} />
-                        </div>
-                    </div>
                     
                     <Button 
                         size="lg" 
-                        variant="glow" 
-                        className="mt-8 w-full font-bold"
+                        className="mt-10 w-full font-bold bg-white/5 border border-white/10 hover:bg-white/10"
                         onClick={() => window.location.href='https://pay.cakto.com.br/xy27qg8'}
                     >
-                        Escolher este plano
+                        Assinar Mensal
                     </Button>
                 </div>
-                <div className={cn('relative rounded-2xl p-8 text-white bg-gray-900/50 border border-primary/50')}>
+                
+                {/* Plano Trimestral */}
+                <div className={cn('relative rounded-2xl p-8 text-white bg-gray-900/50 border-2 border-primary/80 text-left shadow-2xl shadow-primary/20')}>
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1 text-sm font-semibold text-primary-foreground">
-                        Mais Popular
+                        MAIS POPULAR
                     </div>
-                    <div className="space-y-2 text-center">
-                        <h3 className="text-2xl font-bold">Plano Ilimitado</h3>
-                        <p className="text-gray-400">Para crescer sem limites</p>
+                    <h3 className="text-2xl font-bold">Plano Trimestral</h3>
+                    <p className="text-gray-400 mt-1">Economize 50%</p>
+                    
+                    <div className="mt-6">
+                      <p className="text-sm text-gray-500 line-through">de R$597 por</p>
+                      <p className="text-4xl font-bold">
+                          R$297,00<span className="text-lg font-normal text-gray-400">/3 meses</span>
+                      </p>
                     </div>
 
                     <ul className="mt-8 space-y-4">
-                        {["Criar até 5 funis por categoria", "Criar áreas de membros ilimitadas", "Conectar gateways de pagamento ilimitados", "Afiliação a produtos ilimitada", "Suporte prioritário", "Todas as atualizações incluídas"].map((feature, index) => (
+                        {["Tudo do plano mensal", "Calls semanais ao vivo", "Serviços de Freelancer"].map((feature, index) => (
                         <li key={index} className="flex items-start gap-3">
                             <Image src="https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ngqxix0w0j29xfjugomz1zux?v=1766473357190" alt="Checkmark" width={24} height={24} className="h-6 w-6 flex-shrink-0" />
-                            <span className="font-medium text-left">{feature}</span>
+                            <span className="font-medium">{feature}</span>
                         </li>
                         ))}
+                        <li className="flex items-center gap-2">
+                           <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 text-primary px-3 py-1 text-sm font-medium">
+                               50% de desconto
+                           </div>
+                        </li>
                     </ul>
-
-                    <div className="mt-10 text-center">
-                        <p className="text-5xl font-bold">
-                        R$ 249,90
-                        </p>
-                        <div className="mt-4 flex items-center justify-center gap-4">
-                            <Image src="https://s3.typebot.io/public/workspaces/cm8gbxl5b000ba3ncy4y16grd/typebots/cmi0sldz2000djl043bd6dtvj/blocks/a68fdlm0uvhla5lseapdlldx?v=1763597469798" alt="Pix" width={48} height={36} />
-                            <Image src="https://s3.typebot.io/public/workspaces/cm8gbxl5b000ba3ncy4y16grd/typebots/cmi0sldz2000djl043bd6dtvj/blocks/dy0jgeiy3p0ow3jv7girqid2?v=1763597472369" alt="Mastercard" width={48} height={36} />
-                            <Image src="https://s3.typebot.io/public/workspaces/cm8gbxl5b000ba3ncy4y16grd/typebots/cmi0sldz2000djl043bd6dtvj/blocks/ecqfs0lq4nosjbnybwwl63lz?v=1763597481076" alt="Visa" width={48} height={36} />
-                        </div>
-                    </div>
                     
                     <Button
                         size="lg" 
                         variant="glow" 
-                        className="mt-8 w-full font-bold"
+                        className="mt-10 w-full font-bold"
                         onClick={() => window.location.href='https://pay.cakto.com.br/37k4xrc_658280'}
                     >
-                        Escolher este plano
+                        Assinar Trimestral
+                    </Button>
+                </div>
+                
+                {/* Plano Anual */}
+                 <div className={cn('relative rounded-2xl p-8 text-white bg-gray-900/50 border border-white/10 text-left')}>
+                    <h3 className="text-2xl font-bold">Plano Anual</h3>
+                    <p className="text-gray-400 mt-1">Maior economia!</p>
+                    
+                    <div className="mt-6">
+                      <p className="text-sm text-gray-500 line-through">de R$2.364 por</p>
+                      <p className="text-4xl font-bold">
+                          R$997,00<span className="text-lg font-normal text-gray-400">/ano</span>
+                      </p>
+                    </div>
+
+                    <ul className="mt-8 space-y-4">
+                        {["Tudo do plano trimestral", "Acesso prioritário a novidades", "Área de membros exclusiva"].map((feature, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                            <Image src="https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ngqxix0w0j29xfjugomz1zux?v=1766473357190" alt="Checkmark" width={24} height={24} className="h-6 w-6 flex-shrink-0" />
+                            <span className="font-medium">{feature}</span>
+                        </li>
+                        ))}
+                         <li className="flex items-center gap-2">
+                           <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 text-primary px-3 py-1 text-sm font-medium">
+                               58% de desconto
+                           </div>
+                        </li>
+                    </ul>
+                    
+                    <Button 
+                        size="lg" 
+                        className="mt-10 w-full font-bold bg-white/5 border border-white/10 hover:bg-white/10"
+                        onClick={() => window.location.href='https://pay.cakto.com.br/xy27qg8'}
+                    >
+                        Assinar Anual
                     </Button>
                 </div>
             </div>
