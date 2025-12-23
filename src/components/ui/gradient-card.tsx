@@ -39,7 +39,7 @@ export const GradientCard: React.FC<GradientCardProps> = ({ title, description, 
                     alt={title}
                     width={300}
                     height={300}
-                    className="object-cover w-full h-full"
+                    className="object-contain w-full h-full"
                 />
             ) : (
                 icon
