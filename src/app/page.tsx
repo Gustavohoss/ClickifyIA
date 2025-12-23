@@ -171,7 +171,7 @@ export default function Home() {
                     <p className="text-gray-400 mt-1">Ideal para começar.</p>
                     
                     <p className="text-4xl font-bold mt-6 text-white">
-                        R$197,00<span className="text-lg font-normal text-gray-400">/mês</span>
+                        R$149,00<span className="text-lg font-normal text-gray-400">/mês</span>
                     </p>
 
                     <ul className="mt-8 space-y-4 text-white">
@@ -201,9 +201,9 @@ export default function Home() {
                     <p className="text-gray-400 mt-1">Economize 50%</p>
                     
                     <div className="mt-6">
-                      <p className="text-sm text-gray-500 line-through">de R$597 por</p>
+                      <p className="text-sm text-gray-500 line-through">de R$549 por</p>
                       <p className="text-4xl font-bold text-white">
-                          R$297,00<span className="text-lg font-normal text-gray-400">/3 meses</span>
+                          R$249,00<span className="text-lg font-normal text-gray-400">/3 meses</span>
                       </p>
                     </div>
 
@@ -237,9 +237,9 @@ export default function Home() {
                     <p className="text-gray-400 mt-1">Maior economia!</p>
                     
                     <div className="mt-6">
-                      <p className="text-sm text-gray-500 line-through">de R$2.364 por</p>
+                      <p className="text-sm text-gray-500 line-through">de R$2.349 por</p>
                       <p className="text-4xl font-bold text-white">
-                          R$997,00<span className="text-lg font-normal text-gray-400">/ano</span>
+                          R$949,00<span className="text-lg font-normal text-gray-400">/ano</span>
                       </p>
                     </div>
 
