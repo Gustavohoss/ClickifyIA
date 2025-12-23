@@ -14,14 +14,14 @@ interface GradientCardProps {
 export const GradientCard: React.FC<GradientCardProps> = ({ title, description, icon }) => {
    return (
     <div className={cn(
-        "group relative p-6 rounded-2xl overflow-hidden",
+        "group relative p-6 rounded-2xl overflow-hidden h-full",
         "bg-background/50 border border-primary/20",
         "transition-all duration-300 ease-in-out",
         "hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/20"
     )}>
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
         <motion.div
-            className="relative text-center h-full z-10"
+            className="relative text-center h-full z-10 flex flex-col"
             initial={{ y: 10, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
@@ -33,7 +33,7 @@ export const GradientCard: React.FC<GradientCardProps> = ({ title, description, 
             </div>
           </div>
 
-          <div className="mb-auto">
+          <div className="flex-grow flex flex-col justify-center">
             <h3
               className="text-lg font-semibold text-white"
             >

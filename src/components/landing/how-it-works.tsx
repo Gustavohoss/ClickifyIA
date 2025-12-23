@@ -3,29 +3,29 @@
 
 import { BGPattern } from "@/components/ui/bg-pattern";
 import { Spotlight } from "@/components/ui/spotlight";
-import { PhoneCard } from "@/components/ui/phone-card";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { GradientCard } from "@/components/ui/gradient-card";
+import { Bot, Code, Edit, Rocket } from "lucide-react";
 
 const steps = [
     {
       title: "Responda as Perguntas",
       description: "Explique seu projeto, público e propósito. Nossa IA compreenderá e planejará a estrutura ideal.",
-      image: PlaceHolderImages.find(p => p.id === 'how-it-works-1'),
+      icon: <Bot className="w-6 h-6 text-white" />,
     },
     {
         title: "Visualize e Personalize",
         description: "Personalize cores, fontes e design de forma simples para refletir a identidade da sua marca.",
-        image: PlaceHolderImages.find(p => p.id === 'how-it-works-2'),
+        icon: <Edit className="w-6 h-6 text-white" />,
     },
     {
         title: "Gere com 1 clique",
         description: "Em instantes, seu sistema completo será gerado — interface, servidor e painel de controle inclusos.",
-        image: PlaceHolderImages.find(p => p.id === 'how-it-works-3'),
+        icon: <Code className="w-6 h-6 text-white" />,
     },
     {
         title: "Publique e Lucre",
         description: "Publique online, conecte seu domínio e comece a lucrar com seu novo produto digital.",
-        image: PlaceHolderImages.find(p => p.id === 'how-it-works-4'),
+        icon: <Rocket className="w-6 h-6 text-white" />,
     },
   ];
 
@@ -43,17 +43,17 @@ const HowItWorks = () => {
                     </h2>
                 </div>
 
-                <div className="flex flex-col md:flex-row items-start justify-center gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {steps.map((step, index) => (
-                        <div key={index} className="flex-1 max-w-sm mx-auto">
-                            <Spotlight
+                        <div key={index} className="flex-1 max-w-sm mx-auto w-full">
+                             <Spotlight
                                 className="-top-40 left-0 md:left-30 md:-top-10"
                                 fill={'#a855f7'}
                             />
-                            <PhoneCard 
+                           <GradientCard 
                                 title={step.title}
                                 description={step.description}
-                                imageUrl={step.image?.imageUrl}
+                                icon={step.icon}
                             />
                         </div>
                     ))}
