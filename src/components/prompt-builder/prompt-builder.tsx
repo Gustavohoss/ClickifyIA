@@ -302,74 +302,124 @@ export default function PromptBuilder() {
   
   const generatePrompt = () => {
     startTransition(() => {
-        const {
-            siteName,
-            description,
-            targetAudience,
-            funcionalidades,
-            tipo,
-            customTipo,
-            visualStyle,
-            tipografia,
-            primaryColor,
-            secondaryColor,
-            backgroundColor,
-            textColor,
-            additionalFeatures,
-            inspiration,
-            specialRequirements
-        } = formData;
-
-        const projectType = tipo === 'Outros' ? customTipo : tipo;
-
-        const featuresList = funcionalidades.split('\n').map(line => `✅ ${line.trim()}`).join('\n');
-        
-        const additionalFeaturesList = additionalFeatures.map(featureTitle => {
-          const feature = additionalFeaturesOptions.find(f => f.title === featureTitle);
-          return feature ? `✅ ${feature.title}: ${feature.description}` : '';
-        }).join('\n');
+        const P = formData.tipo === 'Outros' ? formData.customTipo : formData.tipo;
+        const B = formData.funcionalidades.split('\n').map(line => `- ${line.trim()}`).join('\n');
+        const m = formData.isInstitutional === 'institucional';
 
         const finalPrompt = `
-🎯 Mission Statement
-Quero construir um projeto chamado "${siteName}".
-O objetivo é: ${description}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🏷️ Project Name
-${siteName}
+📋 PROJETO: ${formData.siteName}
+📌 TIPO: ${P}
+🌐 IDIOMA: ${formData.idioma}
+🔧 PLATAFORMA DE DESENVOLVIMENTO: ${formData.plataforma}
 
-👥 Target Audience
-${targetAudience}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🧩 Core Features & Pages
-${featuresList}
+📝 VISÃO GERAL DO PROJETO
+Desenvolva ${P.toLowerCase()} completo e profissional chamado "${formData.siteName}". Este projeto deve ser construído seguindo as melhores práticas de desenvolvimento moderno, com foco em performance, escalabilidade e experiência do usuário excepcional.
 
-🧠 Tech Stack
-Frontend: Next.js (App Router) + TypeScript + React + shadcn/ui + Tailwind CSS
-Backend & Storage: Firebase (Firestore, Auth)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-🎨 Design Guidelines
-→ Emotional Thesis
-"${visualStyle}"
+📄 DESCRIÇÃO DETALHADA
+${formData.description || "Criar uma aplicação moderna e funcional que atenda às necessidades do usuário final."}
 
-→ Typography
-Headings & Body: ${tipografia}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-→ Color System
-Primary: ${primaryColor}
-Accent: ${secondaryColor}
-Background: ${backgroundColor}
-Text: ${textColor}
+👥 PÚBLICO-ALVO E PERSONAS
+${formData.targetAudience || "Usuários que buscam uma solução digital intuitiva e eficiente."}
 
-🤖 Additional Requirements
-${additionalFeaturesList}
+Considere criar personas detalhadas para:
+- Usuário principal (perfil demográfico, necessidades, dores)
+- Usuário secundário (casos de uso alternativos)
+- Administrador do sistema (se aplicável)
 
-🔗 Inspirations
-${inspiration || 'Nenhuma informada.'}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📝 Special Requirements
-${specialRequirements || 'Nenhum informado.'}
-        `;
-        
+⚡ FUNCIONALIDADES PRINCIPAIS
+${B || "Sistema responsivo com funcionalidades essenciais"}
+
+Implemente cada funcionalidade com:
+- Validação de dados robusta
+- Tratamento de erros elegante
+- Feedback visual para o usuário
+- Estados de loading adequados
+- Animações suaves e profissionais
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎨 DESIGN SYSTEM E IDENTIDADE VISUAL
+
+TIPO DE PROJETO: ${m ? "Site Institucional/Landing Page" : "Aplicativo SaaS/Sistema"}
+
+ESTILO VISUAL: ${formData.visualStyle || "Moderno e Profissional"}
+
+PALETA DE CORES:
+├─ 🟢 Cor Primária: ${formData.primaryColor} (botões, CTAs, destaques)
+├─ ⚫ Cor Secundária: ${formData.secondaryColor} (elementos de apoio)
+├─ 🖤 Cor de Fundo: ${formData.backgroundColor} (background principal)
+└─ ⚪ Cor do Texto: ${formData.textColor} (tipografia principal)
+
+TIPOGRAFIA: ${formData.tipografia || "Fonte moderna e legível"}
+
+DIRETRIZES DE DESIGN:
+- Utilize um Design System consistente com componentes reutilizáveis
+- Aplique hierarquia visual clara com espaçamento adequado
+- Implemente micro-interações e transições suaves
+- Garanta contraste adequado para acessibilidade (WCAG 2.1)
+- Use ícones consistentes (Lucide React ou similar)
+- Aplique sombras e gradientes sutis para profundidade
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📱 RESPONSIVIDADE
+- Mobile First: otimize para dispositivos móveis primeiro
+- Breakpoints: 320px, 768px, 1024px, 1280px, 1536px
+- Touch-friendly: áreas de toque mínimas de 44x44px
+- Navegação adaptativa para diferentes tamanhos de tela
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔧 REQUISITOS TÉCNICOS
+- React + TypeScript para tipagem segura
+- Tailwind CSS para estilização
+- Componentes funcionais com hooks modernos
+- Gerenciamento de estado eficiente
+- Código limpo, modular e bem documentado
+- SEO otimizado com meta tags apropriadas
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⭐ REQUISITOS ESPECIAIS E PERSONALIZAÇÕES
+${formData.specialRequirements || "Nenhum requisito especial adicional."}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 INSPIRAÇÃO E REFERÊNCIAS
+${formData.inspiration || "Busque inspiração em designs modernos e tendências atuais de UI/UX."}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ CHECKLIST DE QUALIDADE
+□ Interface intuitiva e fácil de usar
+□ Performance otimizada (Lighthouse score > 90)
+□ Código limpo e manutenível
+□ Testes de usabilidade considerados
+□ Acessibilidade implementada
+□ Loading states e empty states definidos
+□ Mensagens de erro claras e amigáveis
+□ Animações suaves sem impactar performance
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 RESULTADO ESPERADO
+Entregue ${P.toLowerCase()} completo, profissional e pronto para produção. O projeto deve impressionar visualmente, funcionar perfeitamente em todos os dispositivos e proporcionar uma experiência de usuário excepcional.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Gerado pela CLICKIFY IA - Sua plataforma de criação de SaaS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+`;
+
         setGeneratedPrompt(finalPrompt.trim());
         setCurrentStep(steps.length - 1);
     });
