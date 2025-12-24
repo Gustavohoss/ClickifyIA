@@ -302,50 +302,72 @@ export default function PromptBuilder() {
   
   const generatePrompt = () => {
     startTransition(() => {
-        const featureDetails = formData.additionalFeatures.map(featureTitle => {
-            const feature = additionalFeaturesOptions.find(f => f.title === featureTitle);
-            return feature ? `- **${feature.title}**: ${feature.description}` : '';
+        const {
+            siteName,
+            description,
+            targetAudience,
+            funcionalidades,
+            tipo,
+            customTipo,
+            visualStyle,
+            tipografia,
+            primaryColor,
+            secondaryColor,
+            backgroundColor,
+            textColor,
+            additionalFeatures,
+            inspiration,
+            specialRequirements
+        } = formData;
+
+        const projectType = tipo === 'Outros' ? customTipo : tipo;
+
+        const featuresList = funcionalidades.split('\n').map(line => `✅ ${line.trim()}`).join('\n');
+        
+        const additionalFeaturesList = additionalFeatures.map(featureTitle => {
+          const feature = additionalFeaturesOptions.find(f => f.title === featureTitle);
+          return feature ? `✅ ${feature.title}: ${feature.description}` : '';
         }).join('\n');
 
-        const projectType = formData.tipo === 'Outros' ? formData.customTipo : formData.tipo;
-
         const finalPrompt = `
-### **BRIEFING DE PROJETO: ${formData.siteName}**
+🎯 Mission Statement
+Quero construir um projeto chamado "${siteName}".
+O objetivo é: ${description}
 
----
+🏷️ Project Name
+${siteName}
 
-#### **1. VISÃO GERAL**
-- **Nome do Projeto:** ${formData.siteName}
-- **Tipo:** ${projectType} (Foco em ${formData.isInstitutional})
-- **Idioma Principal:** ${formData.idioma}
-- **Plataforma:** ${formData.plataforma}
-- **Descrição:** ${formData.description}
+👥 Target Audience
+${targetAudience}
 
----
+🧩 Core Features & Pages
+${featuresList}
 
-#### **2. PÚBLICO E FUNCIONALIDADES**
-- **Público-Alvo:** ${formData.targetAudience}
-- **Funcionalidades Principais:**
-${formData.funcionalidades.split('\n').map(line => `  - ${line}`).join('\n')}
+🧠 Tech Stack
+Frontend: Next.js (App Router) + TypeScript + React + shadcn/ui + Tailwind CSS
+Backend & Storage: Firebase (Firestore, Auth)
 
----
+🎨 Design Guidelines
+→ Emotional Thesis
+"${visualStyle}"
 
-#### **3. DESIGN E IDENTIDADE VISUAL**
-- **Estilo Visual:** ${formData.visualStyle}
-- **Paleta de Cores:**
-  - Primária: \`${formData.primaryColor}\`
-  - Secundária: \`${formData.secondaryColor}\`
-  - Fundo: \`${formData.backgroundColor}\`
-  - Texto: \`${formData.textColor}\`
-- **Tipografia:** ${formData.tipografia}
+→ Typography
+Headings & Body: ${tipografia}
 
----
+→ Color System
+Primary: ${primaryColor}
+Accent: ${secondaryColor}
+Background: ${backgroundColor}
+Text: ${textColor}
 
-#### **4. REQUISITOS ADICIONAIS**
-- **Funcionalidades Adicionais Selecionadas:**
-${featureDetails}
-- **Inspirações e Referências:** ${formData.inspiration || 'Nenhuma informada.'}
-- **Requisitos Especiais:** ${formData.specialRequirements || 'Nenhum informado.'}
+🤖 Additional Requirements
+${additionalFeaturesList}
+
+🔗 Inspirations
+${inspiration || 'Nenhuma informada.'}
+
+📝 Special Requirements
+${specialRequirements || 'Nenhum informado.'}
         `;
         
         setGeneratedPrompt(finalPrompt.trim());
@@ -389,15 +411,15 @@ ${featureDetails}
                 <motion.div 
                     initial={{ opacity: 0, y: -10 }} 
                     animate={{ opacity: 1, y: 0 }}
-                    className="space-y-2 md:col-span-2"
+                    className="space-y-2"
                 >
-                    <Label htmlFor="customTipo" className="text-white/80">Especifique o tipo de projeto</Label>
+                    <Label htmlFor="customTipo" className="text-white/80">Especifique o tipo</Label>
                     <Input 
                         id="customTipo" 
                         name="customTipo" 
                         value={formData.customTipo} 
                         onChange={handleChange} 
-                        placeholder="Ex: Plataforma de Cursos, Rede Social" 
+                        placeholder="Ex: Plataforma de Cursos" 
                         className="bg-white/5 border-white/10 text-white" 
                     />
                 </motion.div>
