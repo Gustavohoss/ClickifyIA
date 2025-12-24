@@ -38,7 +38,6 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { GradientButton } from '@/components/ui/gradient-button';
 import { cn } from '@/lib/utils';
-import { generatePrompt as generateFinalPrompt, GeneratePromptInput } from '@/ai/flows/generate-prompt-flow';
 
 const steps = [
   { id: '01', name: 'Informações Básicas', icon: FileText },
@@ -300,26 +299,56 @@ export default function PromptBuilder() {
   };
   
   const generatePrompt = () => {
-    startTransition(async () => {
-      try {
+    startTransition(() => {
         const featureDetails = formData.additionalFeatures.map(featureTitle => {
             const feature = additionalFeaturesOptions.find(f => f.title === featureTitle);
             return feature ? `- **${feature.title}**: ${feature.description}` : '';
         }).join('\n');
 
-        const input: GeneratePromptInput = {
-            ...formData,
-            additionalFeatures: featureDetails,
-        };
-        const result = await generateFinalPrompt(input);
-        setGeneratedPrompt(result.prompt);
+        const finalPrompt = `
+### **BRIEFING DE PROJETO: ${formData.siteName}**
+
+---
+
+#### **1. VISÃO GERAL**
+- **Nome do Projeto:** ${formData.siteName}
+- **Tipo:** ${formData.tipo} (Foco em ${formData.isInstitutional})
+- **Idioma Principal:** ${formData.idioma}
+- **Plataforma:** ${formData.plataforma}
+- **Descrição:** ${formData.description}
+
+---
+
+#### **2. PÚBLICO E FUNCIONALIDADES**
+- **Público-Alvo:** ${formData.targetAudience}
+- **Funcionalidades Principais:**
+${formData.funcionalidades.split('\n').map(line => `  - ${line}`).join('\n')}
+
+---
+
+#### **3. DESIGN E IDENTIDADE VISUAL**
+- **Estilo Visual:** ${formData.visualStyle}
+- **Paleta de Cores:**
+  - Primária: \`${formData.primaryColor}\`
+  - Secundária: \`${formData.secondaryColor}\`
+  - Fundo: \`${formData.backgroundColor}\`
+  - Texto: \`${formData.textColor}\`
+- **Tipografia:** ${formData.tipografia}
+
+---
+
+#### **4. REQUISITOS ADICIONAIS**
+- **Funcionalidades Adicionais Selecionadas:**
+${featureDetails}
+- **Inspirações e Referências:** ${formData.inspiration || 'Nenhuma informada.'}
+- **Requisitos Especiais:** ${formData.specialRequirements || 'Nenhum informado.'}
+        `;
+        
+        setGeneratedPrompt(finalPrompt.trim());
         setCurrentStep(steps.length - 1);
-      } catch(e) {
-          console.error("Failed to generate prompt:", e);
-          // Optionally, show an error to the user
-      }
     });
-  };
+};
+
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(generatedPrompt);
