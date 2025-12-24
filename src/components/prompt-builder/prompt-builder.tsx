@@ -303,31 +303,41 @@ export default function PromptBuilder() {
   const generatePrompt = () => {
     startTransition(() => {
         const P = formData.tipo === 'Outros' ? formData.customTipo : formData.tipo;
-        const B = formData.funcionalidades.split('\n').map(line => `- ${line.trim()}`).join('\n');
+        
+        const funcionalidadesManuais = formData.funcionalidades.split('\n').filter(line => line.trim() !== '').map(line => `- ${line.trim()}`);
+        
+        const funcionalidadesAdicionais = formData.additionalFeatures.map(featureTitle => {
+            const feature = additionalFeaturesOptions.find(f => f.title === featureTitle);
+            return `- ${feature?.title}: ${feature?.description}`;
+        });
+
+        const B = [...funcionalidadesManuais, ...funcionalidadesAdicionais].join('\n');
+        
         const m = formData.isInstitutional === 'institucional';
+        const h = formData;
 
         const finalPrompt = `
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📋 PROJETO: ${formData.siteName}
+📋 PROJETO: ${h.siteName}
 📌 TIPO: ${P}
-🌐 IDIOMA: ${formData.idioma}
-🔧 PLATAFORMA DE DESENVOLVIMENTO: ${formData.plataforma}
+🌐 IDIOMA: ${h.idioma}
+🔧 PLATAFORMA DE DESENVOLVIMENTO: ${h.plataforma}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📝 VISÃO GERAL DO PROJETO
-Desenvolva ${P.toLowerCase()} completo e profissional chamado "${formData.siteName}". Este projeto deve ser construído seguindo as melhores práticas de desenvolvimento moderno, com foco em performance, escalabilidade e experiência do usuário excepcional.
+Desenvolva ${P.toLowerCase()} completo e profissional chamado "${h.siteName}". Este projeto deve ser construído seguindo as melhores práticas de desenvolvimento moderno, com foco em performance, escalabilidade e experiência do usuário excepcional.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📄 DESCRIÇÃO DETALHADA
-${formData.description || "Criar uma aplicação moderna e funcional que atenda às necessidades do usuário final."}
+${h.description || "Criar uma aplicação moderna e funcional que atenda às necessidades do usuário final."}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 👥 PÚBLICO-ALVO E PERSONAS
-${formData.targetAudience || "Usuários que buscam uma solução digital intuitiva e eficiente."}
+${h.targetAudience || "Usuários que buscam uma solução digital intuitiva e eficiente."}
 
 Considere criar personas detalhadas para:
 - Usuário principal (perfil demográfico, necessidades, dores)
@@ -352,15 +362,15 @@ Implemente cada funcionalidade com:
 
 TIPO DE PROJETO: ${m ? "Site Institucional/Landing Page" : "Aplicativo SaaS/Sistema"}
 
-ESTILO VISUAL: ${formData.visualStyle || "Moderno e Profissional"}
+ESTILO VISUAL: ${h.visualStyle || "Moderno e Profissional"}
 
 PALETA DE CORES:
-├─ 🟢 Cor Primária: ${formData.primaryColor} (botões, CTAs, destaques)
-├─ ⚫ Cor Secundária: ${formData.secondaryColor} (elementos de apoio)
-├─ 🖤 Cor de Fundo: ${formData.backgroundColor} (background principal)
-└─ ⚪ Cor do Texto: ${formData.textColor} (tipografia principal)
+├─ 🟢 Cor Primária: ${h.primaryColor} (botões, CTAs, destaques)
+├─ ⚫ Cor Secundária: ${h.secondaryColor} (elementos de apoio)
+├─ 🖤 Cor de Fundo: ${h.backgroundColor} (background principal)
+└─ ⚪ Cor do Texto: ${h.textColor} (tipografia principal)
 
-TIPOGRAFIA: ${formData.tipografia || "Fonte moderna e legível"}
+TIPOGRAFIA: ${h.tipografia || "Fonte moderna e legível"}
 
 DIRETRIZES DE DESIGN:
 - Utilize um Design System consistente com componentes reutilizáveis
@@ -391,12 +401,12 @@ DIRETRIZES DE DESIGN:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ⭐ REQUISITOS ESPECIAIS E PERSONALIZAÇÕES
-${formData.specialRequirements || "Nenhum requisito especial adicional."}
+${h.specialRequirements || "Nenhum requisito especial adicional."}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 💡 INSPIRAÇÃO E REFERÊNCIAS
-${formData.inspiration || "Busque inspiração em designs modernos e tendências atuais de UI/UX."}
+${h.inspiration || "Busque inspiração em designs modernos e tendências atuais de UI/UX."}
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
