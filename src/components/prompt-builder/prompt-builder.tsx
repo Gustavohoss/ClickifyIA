@@ -38,7 +38,6 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import Link from 'next/link';
 import { GradientButton } from '@/components/ui/gradient-button';
 import { cn } from '@/lib/utils';
-import { generateIdea, GenerateIdeaInput, generatePrompt as generateFinalPrompt, GeneratePromptInput } from '@/ai/flows/generate-idea-flow';
 
 const steps = [
   { id: '01', name: 'Informações Básicas', icon: FileText },
@@ -226,64 +225,49 @@ const fontOptions = [
 
 type LoadingState = 'idle' | 'loading' | 'success';
 
-const FieldWithAI = ({
-  label,
-  children,
-  field,
-  formData,
-  onSuggestion,
-}: {
-  label: string;
-  children: React.ReactNode;
-  field: keyof FormData;
-  formData: FormData;
-  onSuggestion: (field: keyof FormData, value: string) => void;
-}) => {
-  const [loading, setLoading] = useState(false);
+const generateFinalPrompt = (data: FormData): string => {
+  const selectedFeaturesDetails = additionalFeaturesOptions
+    .filter(feature => data.additionalFeatures.includes(feature.title))
+    .map(feature => `- **${feature.title}**: ${feature.description}`);
 
-  const handleGenerateIdea = async () => {
-    setLoading(true);
-    try {
-      const result = await generateIdea({
-        field: field,
-        context: {
-          siteName: formData.siteName,
-          description: formData.description,
-        },
-      });
-      onSuggestion(field, result);
-    } catch (e) {
-      console.error(e);
-      // Handle error (e.g., show a toast)
-    } finally {
-      setLoading(false);
-    }
-  };
+  return `
+### **BRIEFING DE PROJETO: ${data.siteName}**
 
-  return (
-    <div className="relative space-y-2">
-      <div className="flex justify-between items-center">
-        <Label htmlFor={field} className="text-white/80">
-          {label}
-        </Label>
-        <Button
-          onClick={handleGenerateIdea}
-          size="sm"
-          variant="ghost"
-          className="text-purple-400 hover:text-purple-300 text-xs"
-          disabled={loading}
-        >
-          {loading ? (
-            <RefreshCw className="w-3 h-3 mr-1.5 animate-spin" />
-          ) : (
-            <Sparkles className="w-3 h-3 mr-1.5" />
-          )}
-          {loading ? 'Gerando...' : 'Sugerir com IA'}
-        </Button>
-      </div>
-      {children}
-    </div>
-  );
+---
+
+#### **1. VISÃO GERAL**
+- **Nome do Projeto:** ${data.siteName}
+- **Tipo:** ${data.tipo} (${data.isInstitutional === 'institucional' ? 'Foco Institucional/Divulgação' : 'Foco em Aplicação/Sistema'})
+- **Idioma Principal:** ${data.idioma}
+- **Plataforma:** ${data.plataforma}
+- **Descrição:** ${data.description}
+
+---
+
+#### **2. PÚBLICO E FUNCIONALIDADES**
+- **Público-Alvo:** ${data.targetAudience}
+- **Funcionalidades Principais:**
+  ${data.funcionalidades.split('\n').map(f => `  - ${f}`).join('\n')}
+
+---
+
+#### **3. DESIGN E IDENTIDADE VISUAL**
+- **Estilo Visual:** ${data.visualStyle}
+- **Paleta de Cores:**
+  - Primária: \`${data.primaryColor}\`
+  - Secundária: \`${data.secondaryColor}\`
+  - Fundo: \`${data.backgroundColor}\`
+  - Texto: \`${data.textColor}\`
+- **Tipografia:** ${data.tipografia}
+
+---
+
+#### **4. REQUISITOS ADICIONAIS**
+- **Funcionalidades Adicionais Selecionadas:**
+${selectedFeaturesDetails.join('\n')}
+- **Inspirações e Referências:** ${data.inspiration || 'Nenhuma informada.'}
+- **Requisitos Especiais:** ${data.specialRequirements || 'Nenhum informado.'}
+  `.trim();
 };
 
 export default function PromptBuilder() {
@@ -322,10 +306,6 @@ export default function PromptBuilder() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSuggestion = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-  
   const handleFeatureToggle = (featureTitle: string) => {
     setFormData(prev => {
         const currentFeatures = prev.additionalFeatures;
@@ -365,15 +345,8 @@ export default function PromptBuilder() {
   
   const generatePrompt = async () => {
     setLoadingPrompt('loading');
-    const selectedFeaturesDetails = additionalFeaturesOptions
-      .filter(feature => formData.additionalFeatures.includes(feature.title))
-      .map(feature => ({
-        title: feature.title,
-        description: feature.description
-      }));
-    
     try {
-        const result = await generateFinalPrompt({ ...formData, additionalFeatures: selectedFeaturesDetails });
+        const result = generateFinalPrompt(formData);
         setGeneratedPrompt(result);
         setLoadingPrompt('success');
         setCurrentStep(steps.length - 1);
@@ -395,9 +368,10 @@ export default function PromptBuilder() {
       case 0:
         return (
           <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="space-y-6">
-             <FieldWithAI label="Nome do Projeto/Site" field="siteName" formData={formData} onSuggestion={handleSuggestion}>
-              <Input id="siteName" name="siteName" value={formData.siteName} onChange={handleChange} placeholder="Ex: Clickify, Barbearia do Zé" className="bg-white/5 border-white/10 text-white" />
-            </FieldWithAI>
+             <div className="space-y-2">
+                <Label htmlFor="siteName" className="text-white/80">Nome do Projeto/Site</Label>
+                <Input id="siteName" name="siteName" value={formData.siteName} onChange={handleChange} placeholder="Ex: Clickify, Barbearia do Zé" className="bg-white/5 border-white/10 text-white" />
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label className="text-white/80">Tipo de Projeto</Label>
@@ -454,26 +428,28 @@ export default function PromptBuilder() {
                 </div>
               </RadioGroup>
             </div>
-            <FieldWithAI label="Descrição Geral do Projeto" field="description" formData={formData} onSuggestion={handleSuggestion}>
+            <div className="space-y-2">
+              <Label htmlFor="description" className="text-white/80">Descrição Geral do Projeto</Label>
               <Textarea id="description" name="description" value={formData.description} onChange={handleChange} placeholder="Descreva em poucas palavras o que o projeto faz e qual problema ele resolve." className="bg-white/5 border-white/10 text-white min-h-[120px]" />
-            </FieldWithAI>
+            </div>
           </motion.div>
         );
       case 1:
         return (
           <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="space-y-6">
-            <FieldWithAI label="Estilo Visual" field="visualStyle" formData={formData} onSuggestion={handleSuggestion}>
-              <Select name="visualStyle" value={formData.visualStyle} onValueChange={(value) => handleSelectChange('visualStyle', value)}>
-                <SelectTrigger className="bg-white/5 border-white/10 text-white"><SelectValue /></SelectTrigger>
-                <SelectContent className="bg-zinc-900 text-white border-zinc-800">
-                  <SelectItem value="Moderno e Profissional">Moderno e Profissional</SelectItem>
-                  <SelectItem value="Minimalista e Limpo">Minimalista e Limpo</SelectItem>
-                  <SelectItem value="Divertido e Colorido">Divertido e Colorido</SelectItem>
-                  <SelectItem value="Elegante e Sofisticado">Elegante e Sofisticado</SelectItem>
-                  <SelectItem value="Robusto e Industrial">Robusto e Industrial</SelectItem>
-                </SelectContent>
-              </Select>
-            </FieldWithAI>
+            <div className="space-y-2">
+                <Label className="text-white/80">Estilo Visual</Label>
+                <Select name="visualStyle" value={formData.visualStyle} onValueChange={(value) => handleSelectChange('visualStyle', value)}>
+                    <SelectTrigger className="bg-white/5 border-white/10 text-white"><SelectValue /></SelectTrigger>
+                    <SelectContent className="bg-zinc-900 text-white border-zinc-800">
+                    <SelectItem value="Moderno e Profissional">Moderno e Profissional</SelectItem>
+                    <SelectItem value="Minimalista e Limpo">Minimalista e Limpo</SelectItem>
+                    <SelectItem value="Divertido e Colorido">Divertido e Colorido</SelectItem>
+                    <SelectItem value="Elegante e Sofisticado">Elegante e Sofisticado</SelectItem>
+                    <SelectItem value="Robusto e Industrial">Robusto e Industrial</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
 
             <div className="space-y-2">
                 <Label className="text-white/80">Paletas de Cores Pré-definidas</Label>
@@ -546,12 +522,14 @@ export default function PromptBuilder() {
       case 2:
         return (
           <motion.div initial={{ opacity: 0, x: -50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="space-y-6">
-            <FieldWithAI label="Público-Alvo" field="targetAudience" formData={formData} onSuggestion={handleSuggestion}>
-              <Textarea id="targetAudience" name="targetAudience" value={formData.targetAudience} onChange={handleChange} placeholder="Descreva para quem é este projeto. Ex: Pequenas empresas, estudantes, entusiastas de tecnologia, etc." className="bg-white/5 border-white/10 text-white min-h-[120px]" />
-            </FieldWithAI>
-            <FieldWithAI label="Funcionalidades Principais" field="funcionalidades" formData={formData} onSuggestion={handleSuggestion}>
-              <Textarea id="funcionalidades" name="funcionalidades" value={formData.funcionalidades} onChange={handleChange} placeholder="Liste as funcionalidades essenciais. Ex: Login de usuário, Dashboard com gráficos, Upload de arquivos, etc. (uma por linha)" className="bg-white/5 border-white/10 text-white min-h-[150px]" />
-            </FieldWithAI>
+            <div className="space-y-2">
+                <Label htmlFor="targetAudience" className="text-white/80">Público-Alvo</Label>
+                <Textarea id="targetAudience" name="targetAudience" value={formData.targetAudience} onChange={handleChange} placeholder="Descreva para quem é este projeto. Ex: Pequenas empresas, estudantes, entusiastas de tecnologia, etc." className="bg-white/5 border-white/10 text-white min-h-[120px]" />
+            </div>
+            <div className="space-y-2">
+                <Label htmlFor="funcionalidades" className="text-white/80">Funcionalidades Principais</Label>
+                <Textarea id="funcionalidades" name="funcionalidades" value={formData.funcionalidades} onChange={handleChange} placeholder="Liste as funcionalidades essenciais. Ex: Login de usuário, Dashboard com gráficos, Upload de arquivos, etc. (uma por linha)" className="bg-white/5 border-white/10 text-white min-h-[150px]" />
+            </div>
           </motion.div>
         );
       case 3:
