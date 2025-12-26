@@ -11,9 +11,10 @@ interface GradientCardProps {
     description: string;
     imageUrl?: string | null;
     icon?: React.ReactNode;
+    customComponent?: React.ReactNode;
 }
 
-export const GradientCard: React.FC<GradientCardProps> = ({ title, description, imageUrl, icon }) => {
+export const GradientCard: React.FC<GradientCardProps> = ({ title, description, imageUrl, icon, customComponent }) => {
    return (
     <div className={cn(
         "group relative p-6 rounded-2xl overflow-hidden h-full",
@@ -32,8 +33,8 @@ export const GradientCard: React.FC<GradientCardProps> = ({ title, description, 
             transition={{ duration: 0.5, ease: "easeOut" }}
             viewport={{ once: true }}
         >
-          <div className="mb-4 flex w-full items-center justify-center rounded-lg border border-primary/20 bg-black overflow-hidden">
-            {imageUrl ? (
+          <div className="mb-4 flex w-full items-center justify-center rounded-lg border border-primary/20 bg-black overflow-hidden h-48">
+            {customComponent ? customComponent : imageUrl ? (
                 <Image
                     src={imageUrl}
                     alt={title}
@@ -42,7 +43,7 @@ export const GradientCard: React.FC<GradientCardProps> = ({ title, description, 
                     className="w-full h-auto"
                 />
             ) : (
-                <div className="flex items-center justify-center h-48">
+                <div className="flex items-center justify-center h-full">
                     {icon}
                 </div>
             )}

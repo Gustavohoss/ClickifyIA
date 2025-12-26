@@ -4,6 +4,7 @@
 import { BGPattern } from "@/components/ui/bg-pattern";
 import { GradientCard } from "@/components/ui/gradient-card";
 import { Bot, Code, Palette } from "lucide-react";
+import FallingNotificationsSmall from "./falling-notifications-small";
 
 const steps = [
     {
@@ -28,7 +29,8 @@ const steps = [
         title: "Publique e Lucre",
         description: "Publique online, conecte seu domínio e comece a lucrar com seu novo produto digital.",
         imageUrl: null,
-        icon: Bot
+        icon: null,
+        customComponent: <FallingNotificationsSmall />
     },
   ];
 
@@ -54,6 +56,7 @@ const HowItWorks = () => {
                                 description={step.description}
                                 imageUrl={step.imageUrl}
                                 icon={step.icon ? <step.icon className="w-6 h-6 text-white" /> : undefined}
+                                customComponent={step.customComponent}
                             />
                         </div>
                     ))}
