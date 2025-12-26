@@ -267,13 +267,18 @@ export default function Home() {
                         ))}
                     </ul>
                     
-                    <Button 
-                        size="lg" 
-                        className="mt-10 w-full font-bold bg-white/5 border border-white/10 hover:bg-white/10"
-                        onClick={() => window.location.href='https://pay.cakto.com.br/xy27qg8'}
-                    >
-                        Assinar Mensal
-                    </Button>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        e.nativeEvent.stopImmediatePropagation();
+                        window.open("https://pay.cakto.com.br/xy27qg8", "_blank");
+                       }}
+                      className="mt-10 w-full rounded-md px-6 py-3 text-lg font-bold bg-white/5 border border-white/10 hover:bg-white/10 transition"
+                    > 
+                      Assinar Mensal
+                    </button>
                 </div>
                 
                 {/* Plano Trimestral */}
@@ -305,14 +310,18 @@ export default function Home() {
                         </li>
                     </ul>
                     
-                    <Button
-                        size="lg" 
-                        variant="glow" 
-                        className="mt-10 w-full font-bold"
-                        onClick={() => window.location.href='https://pay.cakto.com.br/37k4xrc_658280'}
-                    >
-                        Assinar Trimestral
-                    </Button>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        e.nativeEvent.stopImmediatePropagation();
+                        window.open("https://pay.cakto.com.br/aq9vzjg", "_blank");
+                       }}
+                      className="mt-10 w-full rounded-md px-6 py-3 text-lg font-bold bg-white/5 border border-white/10 hover:bg-white/10 transition"
+                    > 
+                      Assinar Trimestral
+                    </button>
                 </div>
                 
                 {/* Plano Anual */}
@@ -341,13 +350,18 @@ export default function Home() {
                         </li>
                     </ul>
                     
-                    <Button 
-                        size="lg" 
-                        className="mt-10 w-full font-bold bg-white/5 border border-white/10 hover:bg-white/10"
-                        onClick={() => window.location.href='https://pay.cakto.com.br/xy27qg8'}
-                    >
-                        Assinar Anual
-                    </Button>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        e.nativeEvent.stopImmediatePropagation();
+                        window.open("https://pay.cakto.com.br/xo7ggsc", "_blank");
+                       }}
+                      className="mt-10 w-full rounded-md px-6 py-3 text-lg font-bold bg-white/5 border border-white/10 hover:bg-white/10 transition"
+                    > 
+                      Assinar Anual
+                    </button>
                 </div>
             </div>
         </div>

@@ -243,12 +243,12 @@ export default function EquipePage() {
       <section id="pricing" className="relative overflow-hidden bg-background text-foreground pt-10 pb-20 text-center scroll-mt-20">
         <div className="relative z-10 mx-auto max-w-5xl px-4 md:px-8">
             <h1 className="md:text-5xl text-3xl lg:text-6xl text-white font-body">
-              <span className="text-primary">Escolha o plano ideal para você.</span> Comece seu negócio com a liberdade de <span className="text-primary">crescer ainda mais.</span>
+                Você foi <span className="text-primary">convidado!</span> Aproveite esta oferta exclusiva.
             </h1>
-            <p className="mt-4 text-lg text-neutral-400">Planos flexíveis para todas as necessidades</p>
+            <p className="mt-4 text-lg text-neutral-400">Planos especiais para membros da equipe.</p>
         </div>
-        <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-8 mt-20">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 md:px-8 mt-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start justify-center">
                 {/* Plano Mensal */}
                 <div className="group relative overflow-hidden rounded-2xl border border-primary/10 bg-background/50 p-6 shadow-xl shadow-primary/10 transition-all duration-300 hover:border-primary/40 hover:shadow-primary/20 text-left">
                     <h3 className="text-2xl font-bold text-white">Plano Mensal</h3>
@@ -267,68 +267,33 @@ export default function EquipePage() {
                         ))}
                     </ul>
                     
-                    <Button 
-                        size="lg" 
-                        className="mt-10 w-full font-bold bg-white/5 border border-white/10 hover:bg-white/10"
-                        onClick={() => window.location.href='https://pay.cakto.com.br/xy27qg8'}
-                    >
-                        Assinar Mensal
-                    </Button>
+                    <a
+                      href="https://pay.cakto.com.br/xy27qg8"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-10 block w-full rounded-md px-6 py-3 text-lg text-center font-bold bg-white/5 border border-white/10 hover:bg-white/10 transition"
+                    > 
+                      Assinar Mensal
+                    </a>
                 </div>
-                
-                {/* Plano Trimestral */}
-                <div className="group relative rounded-2xl border-2 border-primary/80 bg-background/50 p-6 shadow-2xl shadow-primary/20 text-left">
+               
+                {/* Plano Vitalício */}
+                 <div className="group relative rounded-2xl border-2 border-primary/80 bg-background/50 p-6 shadow-2xl shadow-primary/20 text-left">
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-primary px-4 py-1 text-sm font-semibold text-primary-foreground">
-                        MAIS POPULAR
+                        MELHOR OPÇÃO
                     </div>
-                    <h3 className="text-2xl font-bold text-white">Plano Trimestral</h3>
-                    <p className="text-gray-400 mt-1">Economize 50%</p>
+                    <h3 className="text-2xl font-bold text-white">Plano Vitalício</h3>
+                    <p className="text-gray-400 mt-1">Acesso para sempre!</p>
                     
                     <div className="mt-6">
-                      <p className="text-sm text-gray-500 line-through">de R$549 por</p>
+                      <p className="text-sm text-gray-500 line-through">de R$949 por</p>
                       <p className="text-4xl font-bold text-white">
-                          R$249,00<span className="text-lg font-normal text-gray-400">/3 meses</span>
+                          R$249,00<span className="text-lg font-normal text-gray-400">/pagamento único</span>
                       </p>
                     </div>
 
                     <ul className="mt-8 space-y-4 text-white">
-                        {["Tudo do plano mensal", "Calls semanais ao vivo", "Serviços de Freelancer"].map((feature, index) => (
-                        <li key={index} className="flex items-start gap-3">
-                            <Image src="https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ngqxix0w0j29xfjugomz1zux?v=1766473357190" alt="Checkmark" width={24} height={24} className="h-6 w-6 flex-shrink-0" />
-                            <span className="font-medium">{feature}</span>
-                        </li>
-                        ))}
-                        <li className="flex items-center gap-2">
-                           <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 text-primary px-3 py-1 text-sm font-medium">
-                               50% de desconto
-                           </div>
-                        </li>
-                    </ul>
-                    
-                    <Button
-                        size="lg" 
-                        variant="glow" 
-                        className="mt-10 w-full font-bold"
-                        onClick={() => window.location.href='https://pay.cakto.com.br/aq9vzjg'}
-                    >
-                        Assinar Trimestral
-                    </Button>
-                </div>
-                
-                {/* Plano Anual */}
-                 <div className="group relative overflow-hidden rounded-2xl border border-primary/10 bg-background/50 p-6 shadow-xl shadow-primary/10 transition-all duration-300 hover:border-primary/40 hover:shadow-primary/20 text-left">
-                    <h3 className="text-2xl font-bold text-white">Plano Anual</h3>
-                    <p className="text-gray-400 mt-1">Maior economia!</p>
-                    
-                    <div className="mt-6">
-                      <p className="text-sm text-gray-500 line-through">de R$2.349 por</p>
-                      <p className="text-4xl font-bold text-white">
-                          R$949,00<span className="text-lg font-normal text-gray-400">/ano</span>
-                      </p>
-                    </div>
-
-                    <ul className="mt-8 space-y-4 text-white">
-                        {["Tudo do plano trimestral", "Acesso prioritário a novidades", "Área de membros exclusiva"].map((feature, index) => (
+                        {["Tudo do plano mensal", "Acesso prioritário a novidades", "Área de membros exclusiva", "Suporte premium"].map((feature, index) => (
                         <li key={index} className="flex items-start gap-3">
                             <Image src="https://s3.typebot.io/public/workspaces/cmj62bxvv000fju04wwudfwgk/typebots/cmjclddjn000kl204sjzbusjb/blocks/ngqxix0w0j29xfjugomz1zux?v=1766473357190" alt="Checkmark" width={24} height={24} className="h-6 w-6 flex-shrink-0" />
                             <span className="font-medium">{feature}</span>
@@ -336,18 +301,19 @@ export default function EquipePage() {
                         ))}
                          <li className="flex items-center gap-2">
                            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 text-primary px-3 py-1 text-sm font-medium">
-                               58% de desconto
+                               Oferta Exclusiva de Convite
                            </div>
                         </li>
                     </ul>
                     
-                    <Button 
-                        size="lg" 
-                        className="mt-10 w-full font-bold bg-white/5 border border-white/10 hover:bg-white/10"
-                        onClick={() => window.location.href='https://pay.cakto.com.br/xo7ggsc'}
-                    >
-                        Assinar Anual
-                    </Button>
+                     <a
+                      href="https://pay.cakto.com.br/37k4xrc_658280"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-10 block w-full rounded-md px-6 py-3 text-lg text-center font-bold bg-primary text-primary-foreground hover:bg-primary/90 transition-all"
+                    > 
+                      Assinar vitalício
+                    </a>
                 </div>
             </div>
         </div>
@@ -356,3 +322,5 @@ export default function EquipePage() {
     </main>
   );
 }
+
+    
