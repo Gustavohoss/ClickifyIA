@@ -114,7 +114,7 @@ export default function LoginPage() {
       // Existing user, just log them in. Their plan is already set.
 
       router.push('/painel');
-    } catch (err: any) => {
+    } catch (err: any) {
       setError(getFriendlyErrorMessage(err.code));
     } finally {
       setLoading(false);
