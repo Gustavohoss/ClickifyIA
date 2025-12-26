@@ -108,7 +108,7 @@ export default function Home() {
         
         <div className="relative z-20 mt-12 flex flex-col items-center gap-8 w-full max-w-6xl px-4 md:px-8">
             {/* PAINEL RECREATED HERE */}
-            <div className="w-full mx-auto relative z-10 bg-black/80 border border-purple-500/10 rounded-2xl p-6 shadow-2xl shadow-purple-500/10 backdrop-blur-sm">
+            <div className="w-full mx-auto relative z-10 bg-black/80 border border-purple-500/20 rounded-2xl p-6 shadow-2xl shadow-purple-500/20 backdrop-blur-sm">
                 <div
                     className="relative z-10 space-y-12"
                 >
@@ -356,3 +356,4 @@ export default function Home() {
     </main>
   );
 }
+
