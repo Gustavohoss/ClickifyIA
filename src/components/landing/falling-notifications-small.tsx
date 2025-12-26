@@ -57,7 +57,8 @@ const FallingNotificationsSmall = () => {
   }
 
   return (
-    <div className="w-full h-full flex flex-col justify-end items-center space-y-3 pb-4">
+    <div className="relative w-full h-full flex flex-col justify-end items-center space-y-3 pb-4 overflow-hidden">
+      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-primary/30 to-transparent blur-2xl animate-pulse" />
       <AnimatePresence initial={false}>
         {notifications.map((notification, index) => (
           <motion.div
@@ -67,7 +68,7 @@ const FallingNotificationsSmall = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.2 } }}
             transition={{ type: 'spring', stiffness: 260, damping: 25 }}
-            className="w-full max-w-[200px]"
+            className="w-full max-w-[200px] z-10"
           >
             <div
               className="relative bg-black/40 p-2 border border-white/20 backdrop-blur-md shadow-md rounded-lg"
