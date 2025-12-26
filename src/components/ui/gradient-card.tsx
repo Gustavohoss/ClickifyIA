@@ -23,7 +23,7 @@ export const GradientCard: React.FC<GradientCardProps> = ({ title, description, 
     )}>
         <Spotlight
             className="-top-20 -left-20 md:left-0 md:-top-10"
-            fill={'#a855f7'}
+            fill="hsl(var(--primary))"
         />
         <motion.div
             className="relative text-center h-full z-10 flex flex-col"
