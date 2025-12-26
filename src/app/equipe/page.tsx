@@ -309,7 +309,7 @@ export default function EquipePage() {
                         size="lg" 
                         variant="glow" 
                         className="mt-10 w-full font-bold"
-                        onClick={() => window.location.href='https://pay.cakto.com.br/37k4xrc_658280'}
+                        onClick={() => window.location.href='https://pay.cakto.com.br/aq9vzjg'}
                     >
                         Assinar Trimestral
                     </Button>
@@ -356,5 +356,3 @@ export default function EquipePage() {
     </main>
   );
 }
-
-
