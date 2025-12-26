@@ -108,7 +108,7 @@ export default function Home() {
         
         <div className="relative z-20 mt-12 flex flex-col items-center gap-8 w-full max-w-6xl px-4 md:px-8">
             {/* PAINEL RECREATED HERE */}
-            <div className="w-full mx-auto relative z-10 bg-black/80 border border-purple-500/20 rounded-2xl p-6 shadow-2xl shadow-purple-500/10 backdrop-blur-sm">
+            <div className="w-full mx-auto relative z-10 bg-black/80 border border-purple-500/10 rounded-2xl p-6 shadow-2xl shadow-purple-500/10 backdrop-blur-sm">
                 <div
                     className="relative z-10 space-y-12"
                 >
@@ -128,7 +128,7 @@ export default function Home() {
                     </div>
                     
                     <div 
-                    className="group relative p-3 rounded-xl overflow-hidden bg-background/50 border border-primary/20 transition-all duration-300 ease-in-out hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/20 cursor-pointer"
+                    className="group relative p-3 rounded-xl overflow-hidden bg-background/50 border border-primary/10 transition-all duration-300 ease-in-out hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/20 cursor-pointer"
                     >
                     <Spotlight
                         className="-top-10 -left-10 md:left-0 md:-top-10"
@@ -154,7 +154,7 @@ export default function Home() {
 
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-                        <div className="lg:col-span-1 group relative p-6 rounded-xl overflow-hidden h-full bg-background/50 border border-primary/20 transition-all duration-300 ease-in-out hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/20 cursor-default">
+                        <div className="lg:col-span-1 group relative p-6 rounded-xl overflow-hidden h-full bg-background/50 border border-primary/10 transition-all duration-300 ease-in-out hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/20 cursor-default">
                             <Spotlight className="-top-10 -left-10" fill={'#a855f7'}/>
                             <div className="relative z-10">
                                 <h2 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">Scraper</h2>
@@ -162,7 +162,7 @@ export default function Home() {
                             </div>
                             <Search className="absolute -right-4 -bottom-4 h-20 w-20 text-white/5 group-hover:text-primary/10 transition-colors duration-500"/>
                         </div>
-                        <div className="lg:col-span-1 group relative p-6 rounded-xl overflow-hidden h-full bg-background/50 border border-primary/20 transition-all duration-300 ease-in-out hover:border-orange-500/40 hover:shadow-xl hover:shadow-orange-500/10 cursor-default">
+                        <div className="lg:col-span-1 group relative p-6 rounded-xl overflow-hidden h-full bg-background/50 border border-primary/10 transition-all duration-300 ease-in-out hover:border-orange-500/40 hover:shadow-xl hover:shadow-orange-500/10 cursor-default">
                             <Spotlight className="-top-10 -left-10" fill={'#f97316'}/>
                             <div className="relative z-10">
                                 <h2 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">Leads</h2>
@@ -170,7 +170,7 @@ export default function Home() {
                             </div>
                             <FileText className="absolute -right-4 -bottom-4 h-20 w-20 text-white/5 group-hover:text-orange-500/10 transition-colors duration-500"/>
                         </div>
-                        <div className="lg:col-span-1 group relative p-6 rounded-xl overflow-hidden h-full bg-background/50 border border-primary/20 transition-all duration-300 ease-in-out hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-500/10 cursor-default">
+                        <div className="lg:col-span-1 group relative p-6 rounded-xl overflow-hidden h-full bg-background/50 border border-primary/10 transition-all duration-300 ease-in-out hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-500/10 cursor-default">
                             <Spotlight className="-top-10 -left-10" fill={'#3b82f6'}/>
                             <div className="relative z-10">
                                 <h2 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">Contratos</h2>
@@ -178,7 +178,7 @@ export default function Home() {
                             </div>
                             <FileText className="absolute -right-4 -bottom-4 h-20 w-20 text-white/5 group-hover:text-blue-500/10 transition-colors duration-500"/>
                         </div>
-                        <div className="lg:col-span-1 group relative p-6 rounded-xl overflow-hidden h-full bg-background/50 border border-primary/20 transition-all duration-300 ease-in-out hover:border-yellow-500/40 hover:shadow-xl hover:shadow-yellow-500/10 cursor-default">
+                        <div className="lg:col-span-1 group relative p-6 rounded-xl overflow-hidden h-full bg-background/50 border border-primary/10 transition-all duration-300 ease-in-out hover:border-yellow-500/40 hover:shadow-xl hover:shadow-yellow-500/10 cursor-default">
                             <Spotlight className="-top-10 -left-10" fill={'#eab308'}/>
                             <div className="relative z-10">
                                 <h2 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">Abordagem</h2>
@@ -186,7 +186,7 @@ export default function Home() {
                             </div>
                             <Building2 className="absolute -right-4 -bottom-4 h-20 w-20 text-white/5 group-hover:text-yellow-500/10 transition-colors duration-500"/>
                         </div>
-                        <div className="lg:col-span-1 group relative p-6 rounded-xl overflow-hidden h-full bg-background/50 border border-primary/20 transition-all duration-300 ease-in-out hover:border-indigo-500/40 hover:shadow-xl hover:shadow-indigo-500/10 cursor-default">
+                        <div className="lg:col-span-1 group relative p-6 rounded-xl overflow-hidden h-full bg-background/50 border border-primary/10 transition-all duration-300 ease-in-out hover:border-indigo-500/40 hover:shadow-xl hover:shadow-indigo-500/10 cursor-default">
                             <Spotlight className="-top-10 -left-10" fill={'#6366f1'}/>
                             <div className="relative z-10">
                                 <h2 className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">Criar SaaS</h2>
@@ -250,7 +250,7 @@ export default function Home() {
         <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-8 mt-20">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                 {/* Plano Mensal */}
-                <div className="group relative overflow-hidden rounded-2xl border border-primary/20 bg-background/50 p-6 shadow-xl shadow-primary/10 transition-all duration-300 hover:border-primary/40 hover:shadow-primary/20 text-left">
+                <div className="group relative overflow-hidden rounded-2xl border border-primary/10 bg-background/50 p-6 shadow-xl shadow-primary/10 transition-all duration-300 hover:border-primary/40 hover:shadow-primary/20 text-left">
                     <h3 className="text-2xl font-bold text-white">Plano Mensal</h3>
                     <p className="text-gray-400 mt-1">Ideal para começar.</p>
                     
@@ -316,7 +316,7 @@ export default function Home() {
                 </div>
                 
                 {/* Plano Anual */}
-                 <div className="group relative overflow-hidden rounded-2xl border border-primary/20 bg-background/50 p-6 shadow-xl shadow-primary/10 transition-all duration-300 hover:border-primary/40 hover:shadow-primary/20 text-left">
+                 <div className="group relative overflow-hidden rounded-2xl border border-primary/10 bg-background/50 p-6 shadow-xl shadow-primary/10 transition-all duration-300 hover:border-primary/40 hover:shadow-primary/20 text-left">
                     <h3 className="text-2xl font-bold text-white">Plano Anual</h3>
                     <p className="text-gray-400 mt-1">Maior economia!</p>
                     

@@ -85,7 +85,7 @@ export default function WhyChooseUs() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="group relative overflow-hidden rounded-2xl border border-primary/20 bg-background/50 p-6 shadow-2xl shadow-primary/10 transition-all duration-300 hover:border-primary/40 hover:shadow-primary/20"
+              className="group relative overflow-hidden rounded-2xl border border-primary/10 bg-background/50 p-6 shadow-2xl shadow-primary/10 transition-all duration-300 hover:border-primary/40 hover:shadow-primary/20"
             >
                 <Spotlight
                     className="-top-40 left-0 md:left-30 md:-top-10"
@@ -93,7 +93,7 @@ export default function WhyChooseUs() {
                 />
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="relative text-center">
-                <div className="mb-4 flex h-48 w-full items-center justify-center rounded-lg border border-primary/20 bg-black">
+                <div className="mb-4 flex h-48 w-full items-center justify-center rounded-lg border border-primary/10 bg-black">
                     {feature.content}
                 </div>
                 <h3 className="text-lg font-semibold text-white">{feature.title}</h3>
