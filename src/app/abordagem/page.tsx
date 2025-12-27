@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowLeft, Copy, Check, Handshake, Store, UtensilsCrossed, Megaphone, Scale, Calculator, Building, Sparkles as SparklesIcon } from 'lucide-react';
+import { ArrowLeft, Copy, Check, Handshake, Store, UtensilsCrossed, Megaphone, Scale, Calculator, Building, Sparkles as SparklesIcon, Dumbbell, Code, Camera, Scissors } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
@@ -56,6 +56,26 @@ const approachTemplates = [
         icon: <SparklesIcon className="w-5 h-5 text-pink-400" />,
         message: `Oi, [Nome do Contato], tudo bem? Me chamo [Seu Nome].\n\nVi o trabalho incrível que vocês fazem na [Nome da Clínica] e admiro muito a qualidade dos procedimentos.\n\nNós temos uma solução que ajuda clínicas de estética a [Problema que Resolve, ex: gerenciar agendamentos, fidelizar clientes], aumentando o [Benefício, ex: faturamento, taxa de retorno].\n\nSeria um prazer apresentar a ferramenta em uma chamada rápida. Você teria um horário nesta semana?`
     },
+    {
+        category: 'Academia / Fitness',
+        icon: <Dumbbell className="w-5 h-5 text-red-500" />,
+        message: `Olá, [Nome do Contato]! Sou [Seu Nome] e vi que a [Nome da Academia] está com tudo!\n\nTenho uma plataforma que ajuda academias a [Problema, ex: reter alunos, gerenciar aulas], o que melhora a [Benefício, ex: experiência do membro, ocupação das aulas].\n\nCom nossa ferramenta, vocês conseguem [Sua Solução em uma frase].\n\nGostaria de mostrar como podemos ajudar a [Nome da Academia] a lotar as turmas. Tem 15 minutos disponíveis?`
+    },
+    {
+        category: 'Desenvolvedor(a) Freelancer',
+        icon: <Code className="w-5 h-5 text-green-400" />,
+        message: `Fala, [Nome do Contato]! Beleza? Sou [Seu Nome], também sou dev.\n\nVi seu perfil no [Plataforma, ex: LinkedIn] e gostei muito dos seus projetos. Tenho uma ferramenta que pode te ajudar a [Problema que Resolve, ex: organizar tarefas, gerenciar clientes].\n\nEla basicamente [Sua Solução em uma frase], liberando mais tempo pra você focar no código.\n\nTopa fazer uma call rápida de 10 min pra eu te mostrar? Sem compromisso.`
+    },
+    {
+        category: 'Fotógrafo(a)',
+        icon: <Camera className="w-5 h-5 text-gray-300" />,
+        message: `Olá, [Nome do Contato], tudo bem? Meu nome é [Seu Nome].\n\nSeu trabalho fotográfico é incrível, parabéns! Acompanho seu portfólio e a qualidade é sensacional.\n\nNós desenvolvemos uma plataforma que ajuda fotógrafos a [Problema que Resolve, ex: organizar galerias, vender fotos online], o que resulta em [Benefício, ex: mais vendas, melhor experiência para o cliente].\n\nQue tal 15 minutinhos para eu te mostrar como funciona? Acredito que pode otimizar muito seu fluxo.`
+    },
+    {
+        category: 'Salão de Beleza',
+        icon: <Scissors className="w-5 h-5 text-purple-400" />,
+        message: `Oi, [Nome do Contato]! Sou [Seu Nome] e adoro o que vocês fazem no [Nome do Salão].\n\nTrabalho com uma solução que ajuda salões a [Problema, ex: diminuir faltas, lotar a agenda], aumentando o [Benefício, ex: faturamento mensal].\n\nÉ um sistema de [Sua Solução em uma frase] que encanta as clientes.\n\nSeria ótimo te apresentar a ideia em 15 minutos. Podemos marcar um horário?`
+    }
 ];
 
 const CopyButton = ({ textToCopy }: { textToCopy: string }) => {
