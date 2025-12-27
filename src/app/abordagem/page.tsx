@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowLeft, Copy, Check, Handshake, Store, UtensilsCrossed } from 'lucide-react';
+import { ArrowLeft, Copy, Check, Handshake, Store, UtensilsCrossed, Megaphone, Scale, Calculator, Building, Sparkles as SparklesIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
@@ -30,6 +30,31 @@ const approachTemplates = [
         category: 'Restaurante',
         icon: <UtensilsCrossed className="w-5 h-5 text-red-400" />,
         message: `Prezado(a) [Nome do Contato],\n\nMeu nome é [Seu Nome] e sou especialista em [Sua Área]. Acompanho o [Nome do Restaurante] e a qualidade de vocês é fantástica.\n\nTrabalho com uma solução que resolve o [Principal Problema que Resolve] para restaurantes, gerando [Benefício Principal]. Em resumo, nós [Sua Solução em uma frase].\n\nO que nos torna únicos é [Seu Principal Diferencial].\n\nMeu objetivo é agendar uma conversa de 15 minutos para explorar como podemos gerar mais resultados para o [Nome do Restaurante].\n\nQual o melhor dia e horário para você?`
+    },
+    {
+        category: 'Agência de Marketing',
+        icon: <Megaphone className="w-5 h-5 text-indigo-400" />,
+        message: `Olá, [Nome do Contato], tudo bem? Sou [Seu Nome], especialista em [Sua Especialidade].\n\nAnalisando a presença online da [Nome da Agência], vi que vocês fazem um ótimo trabalho em [Área de Destaque da Agência].\n\nTenho uma ferramenta que ajuda agências a [Problema que Resolve], otimizando o [Processo Otimizado] e entregando [Benefício para o Cliente Final].\n\nSeria ótimo ter 15 minutos para mostrar como podemos agregar valor aos seus projetos. O que me diz?`
+    },
+    {
+        category: 'Advocacia',
+        icon: <Scale className="w-5 h-5 text-gray-400" />,
+        message: `Dr(a). [Nome do Contato], boa tarde. Meu nome é [Seu Nome].\n\nEncontrei o escritório [Nome da Advocacia] e notei a especialização de vocês em [Área do Direito].\n\nDesenvolvemos uma solução que auxilia escritórios a [Problema que Resolve], garantindo mais [Benefício Principal, ex: segurança jurídica, eficiência].\n\nNossa plataforma [Sua Solução em uma frase]. Teria um breve momento na sua agenda para uma demonstração de como podemos otimizar o dia a dia do seu escritório?`
+    },
+    {
+        category: 'Contabilidade',
+        icon: <Calculator className="w-5 h-5 text-cyan-400" />,
+        message: `Prezado(a) [Nome do Contato],\n\nSou [Seu Nome], e trabalho com soluções para escritórios de contabilidade.\n\nSei que a rotina na [Nome da Contabilidade] é corrida, e viemos para ajudar. Nossa ferramenta automatiza o [Processo que Automatiza], reduzindo o tempo gasto em tarefas manuais e minimizando erros.\n\nO resultado é [Benefício Principal]. Gostaria de apresentar nossa solução em 15 minutos. Qual o melhor momento para você?`
+    },
+    {
+        category: 'Imobiliária',
+        icon: <Building className="w-5 h-5 text-orange-400" />,
+        message: `Olá, [Nome do Contato], como vai? Meu nome é [Seu Nome].\n\nSou especialista em tecnologia para o setor imobiliário e fiquei impressionado com os imóveis da [Nome da Imobiliária].\n\nNossa plataforma ajuda imobiliárias a [Principal Problema que Resolve], o que resulta em [Benefício, ex: mais leads qualificados, fechamentos mais rápidos].\n\nPodemos conversar por 15 minutos para que eu possa mostrar como podemos impulsionar as vendas da [Nome da Imobiliária]?`
+    },
+    {
+        category: 'Clínica de Estética',
+        icon: <SparklesIcon className="w-5 h-5 text-pink-400" />,
+        message: `Oi, [Nome do Contato], tudo bem? Me chamo [Seu Nome].\n\nVi o trabalho incrível que vocês fazem na [Nome da Clínica] e admiro muito a qualidade dos procedimentos.\n\nNós temos uma solução que ajuda clínicas de estética a [Problema que Resolve, ex: gerenciar agendamentos, fidelizar clientes], aumentando o [Benefício, ex: faturamento, taxa de retorno].\n\nSeria um prazer apresentar a ferramenta em uma chamada rápida. Você teria um horário nesta semana?`
     },
 ];
 
@@ -128,4 +153,3 @@ export default function AbordagemPage() {
         </main>
     );
 }
-
