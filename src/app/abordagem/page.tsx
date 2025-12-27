@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowLeft, Copy, Check, Handshake, Store, UtensilsCrossed, Megaphone, Scale, Calculator, Building, Sparkles as SparklesIcon, Dumbbell, Code, Camera, Scissors, Search, Dog, Coffee, Landmark, Briefcase, Palette, Car, Shield, Languages, Pencil, Calendar, HeartPulse, BrainCircuit, Smartphone, Flower, DiscAlbum, DraftingCompass, Plane, ShoppingCart, Award, Mic, Wrench, ChefHat, Glasses, BookOpen, PartyPopper, Lotus, Construction, Stethoscope, AudioLines, Bot, Sprout, SprayCan, HandHelping, Printer, Music, Footprints, ShieldCheck, Beer, WashingMachine, Truck, Users, Gamepad2 } from 'lucide-react';
+import { ArrowLeft, Copy, Check, Handshake, Store, UtensilsCrossed, Megaphone, Scale, Calculator, Building, Sparkles as SparklesIcon, Dumbbell, Code, Camera, Scissors, Search, Dog, Coffee, Landmark, Briefcase, Palette, Car, Shield, Languages, Pencil, Calendar, HeartPulse, BrainCircuit, Smartphone, Flower, DiscAlbum, DraftingCompass, Plane, ShoppingCart, Award, Mic, Wrench, ChefHat, Glasses, BookOpen, PartyPopper, Sprout, Construction, Stethoscope, AudioLines, Bot, SprayCan, HandHelping, Printer, Music, Footprints, ShieldCheck, Beer, WashingMachine, Truck, Users, Gamepad2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
@@ -150,7 +150,7 @@ const approachTemplates = [
     {
         category: 'DJ',
         icon: <DiscAlbum className="w-5 h-5 text-violet-500" />,
-        message: `Fala, [Nome do DJ]! Beleza? Sou [Seu Nome].\n\nOuvi seu último set no [Plataforma, ex: SoundCloud] e a seleção estava muito fina!\n\nEu desenvolvi uma ferramenta que ajuda DJs a [Problema que Resolve, ex: criar uma página profissional para divulgar suas datas, sets e informações de contato], tudo de forma simples e estilosa.\n\nQuer fazer uma call de 10 minutos para eu te mostrar? Pode te ajudar a conseguir mais gigs.`
+        message: `Fala, [Nome do DJ]! Beleza? Sou [Seu Nome].\n\nOuvi seu último set no [Plataforma, ex: SoundCloud] e a seleção estava muito fina!\n\nEu desenvolvi uma ferramenta que ajuda DJs a [Problema que Resolve, ex: criar uma página profissional para divulgar suas datas, sets e informações de contato], tudo de forma simples e estilosa.\n\nTopa fazer uma call de 10 minutos para eu te mostrar? Pode te ajudar a conseguir mais gigs.`
     },
     {
         category: 'Arquiteto(a)',
@@ -204,7 +204,7 @@ const approachTemplates = [
     },
     {
         category: 'Estúdio de Yoga/Pilates',
-        icon: <Lotus className="w-5 h-5 text-teal-300" />,
+        icon: <Sprout className="w-5 h-5 text-teal-300" />,
         message: `Oi, [Nome do Contato], tudo bem? Meu nome é [Seu Nome].\n\nAdmiro a paz e o bem-estar que a [Nome do Estúdio] proporciona.\n\nNós temos um app que ajuda estúdios a [Problema que Resolve, ex: gerenciar as aulas, as mensalidades e oferecer conteúdo online para os alunos]. O objetivo é [Benefício, ex: aumentar a retenção e criar uma nova fonte de receita].\n\nGostaria de te apresentar. Podemos agendar?`
     },
     {
