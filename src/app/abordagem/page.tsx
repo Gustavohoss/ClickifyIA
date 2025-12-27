@@ -1,70 +1,68 @@
+
 'use client';
-import { useForm, FormProvider, Controller } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowLeft, Check, Sparkles } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { ArrowLeft, Copy, Check, Handshake, Store, UtensilsCrossed } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
-import { GradientButton } from '@/components/ui/gradient-button';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
-const formSchema = z.object({
-  yourName: z.string().min(1, 'Campo obrigatório'),
-  targetCompanyName: z.string().min(1, 'Campo obrigatório'),
-  contactName: z.string().min(1, 'Campo obrigatório'),
-  companyWhatsApp: z.string().optional(),
-  problem: z.string().min(1, 'Campo obrigatório'),
-  solution: z.string().min(1, 'Campo obrigatório'),
-  differential: z.string().min(1, 'Campo obrigatório'),
-  objective: z.string().min(1, 'Campo obrigatório'),
-  tone: z.enum(['Formal', 'Casual', 'Direto e Objetivo']),
-});
 
-type FormData = z.infer<typeof formSchema>;
+const approachTemplates = [
+    {
+        category: 'Barbearia',
+        icon: <Handshake className="w-5 h-5 text-yellow-400" />,
+        message: `Olá, [Nome do Contato]! Meu nome é [Seu Nome].\n\nNotei a [Nome da Barbearia] e fiquei impressionado com o estilo de vocês. Tenho uma solução que ajuda barbearias a [Principal Problema que Resolve], resultando em [Benefício Principal].\n\nÉ algo como [Sua Solução em uma frase]. Nosso diferencial é [Seu Principal Diferencial].\n\nGostaria de agendar uma chamada rápida de 15 minutos para mostrar como podemos ajudar a [Nome da Barbearia] a crescer. O que acha?`
+    },
+    {
+        category: 'Loja de Roupas',
+        icon: <Store className="w-5 h-5 text-blue-400" />,
+        message: `Oi, [Nome do Contato], tudo bem? Sou [Seu Nome].\n\nAdmiro muito o trabalho da [Nome da Loja]! Vi que vocês focam em [Estilo da Loja] e acredito que minha solução pode ser muito útil.\n\nNós ajudamos lojas como a sua a [Principal Problema que Resolve], o que leva a [Benefício Principal]. Fazemos isso através de [Sua Solução em uma frase].\n\nNosso principal diferencial é [Seu Principal Diferencial], e o objetivo é simples: [Seu Objetivo].\n\nSerá que teríamos 15 minutos na próxima semana para eu te apresentar a ideia?`
+    },
+    {
+        category: 'Restaurante',
+        icon: <UtensilsCrossed className="w-5 h-5 text-red-400" />,
+        message: `Prezado(a) [Nome do Contato],\n\nMeu nome é [Seu Nome] e sou especialista em [Sua Área]. Acompanho o [Nome do Restaurante] e a qualidade de vocês é fantástica.\n\nTrabalho com uma solução que resolve o [Principal Problema que Resolve] para restaurantes, gerando [Benefício Principal]. Em resumo, nós [Sua Solução em uma frase].\n\nO que nos torna únicos é [Seu Principal Diferencial].\n\nMeu objetivo é agendar uma conversa de 15 minutos para explorar como podemos gerar mais resultados para o [Nome do Restaurante].\n\nQual o melhor dia e horário para você?`
+    },
+];
 
-const FormLabel = ({ fieldName, label, isFilled }: { fieldName: keyof FormData, label: string, isFilled: boolean }) => (
-    <div className="flex items-center gap-1.5">
-        <Label htmlFor={fieldName} className="text-sm text-zinc-400">{label}</Label>
-        {isFilled && (
-            <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="flex items-center gap-1 text-green-400">
-                <Check className="w-3 h-3" />
-                <span className="text-xs font-light">(Respondido)</span>
-            </motion.div>
-        )}
-    </div>
-);
+const CopyButton = ({ textToCopy }: { textToCopy: string }) => {
+    const [copied, setCopied] = useState(false);
+    const { toast } = useToast();
 
+    const handleCopy = () => {
+        navigator.clipboard.writeText(textToCopy);
+        setCopied(true);
+        toast({
+            title: "Texto Copiado!",
+            description: "O modelo de abordagem foi copiado para sua área de transferência.",
+        });
+        setTimeout(() => setCopied(false), 2500);
+    };
+
+    return (
+        <Button
+            onClick={handleCopy}
+            size="sm"
+            className={cn(
+                "bg-purple-600 hover:bg-purple-700 text-white transition-all duration-300",
+                copied && "bg-green-600 hover:bg-green-700"
+            )}
+        >
+            {copied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
+            {copied ? 'Copiado!' : 'Copiar Texto'}
+        </Button>
+    );
+}
 
 export default function AbordagemPage() {
-    const methods = useForm<FormData>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            yourName: '',
-            targetCompanyName: '',
-            contactName: '',
-            companyWhatsApp: '',
-            problem: '',
-            solution: '',
-            differential: '',
-            objective: '',
-            tone: 'Formal',
-        },
-        mode: 'all'
-    });
-
-    const { control, watch, formState: { errors, touchedFields } } = methods;
-
-    const onSubmit = (data: FormData) => {
-        console.log(data);
-        // Aqui você chamaria a IA para gerar a abordagem
-    };
-    
-    const watchedFields = watch();
 
     return (
         <main className="p-4 md:p-10 min-h-screen bg-black text-white relative overflow-hidden">
@@ -93,93 +91,41 @@ export default function AbordagemPage() {
                 >
                     <div className="text-center mb-12">
                         <h1 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">
-                            Gerador de Abordagem
+                            Modelos de Abordagem
                         </h1>
-                        <p className="mt-2 text-zinc-400">Preencha os campos para criar uma mensagem de prospecção personalizada.</p>
+                        <p className="mt-2 text-zinc-400">Scripts prontos para você copiar e adaptar em sua prospecção.</p>
                     </div>
 
-                    <FormProvider {...methods}>
-                        <form onSubmit={methods.handleSubmit(onSubmit)} className="space-y-6">
-                            <motion.div 
-                                className="p-8 space-y-8 bg-zinc-900/40 border border-zinc-800/80 backdrop-blur-sm rounded-lg"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.2 }}
-                            >
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                        <FormLabel fieldName="yourName" label="Seu Nome ou Nome da Empresa/Projeto" isFilled={!!watchedFields.yourName && touchedFields.yourName} />
-                                        <Input {...methods.register('yourName')} id="yourName" className="bg-zinc-800 border-zinc-700 focus:border-green-500 focus:ring-green-500/50" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <FormLabel fieldName="targetCompanyName" label="Nome da Empresa Alvo" isFilled={!!watchedFields.targetCompanyName && touchedFields.targetCompanyName} />
-                                        <Input {...methods.register('targetCompanyName')} id="targetCompanyName" className="bg-zinc-800 border-zinc-700 focus:border-green-500 focus:ring-green-500/50" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <FormLabel fieldName="contactName" label="Nome do Contato (se souber)" isFilled={!!watchedFields.contactName && touchedFields.contactName} />
-                                        <Input {...methods.register('contactName')} id="contactName" className="bg-zinc-800 border-zinc-700 focus:border-green-500 focus:ring-green-500/50" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <Label htmlFor="companyWhatsApp" className="text-sm text-zinc-400">WhatsApp da Empresa (opcional)</Label>
-                                        <Input {...methods.register('companyWhatsApp')} id="companyWhatsApp" placeholder="Ex: 5511999999999" className="bg-zinc-800 border-zinc-700 focus:border-green-500 focus:ring-green-500/50" />
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                     <FormLabel fieldName="problem" label="Principal Problema que seu produto resolve para eles" isFilled={!!watchedFields.problem && touchedFields.problem} />
-                                    <Textarea {...methods.register('problem')} id="problem" className="bg-zinc-800 border-zinc-700 min-h-[80px] focus:border-green-500 focus:ring-green-500/50" />
-                                </div>
-                                <div className="space-y-2">
-                                    <FormLabel fieldName="solution" label="Sua Solução (em uma frase)" isFilled={!!watchedFields.solution && touchedFields.solution} />
-                                    <Textarea {...methods.register('solution')} id="solution" className={cn("bg-zinc-800 border-zinc-700 min-h-[80px] focus:border-green-500 focus:ring-green-500/50", {'border-green-500 ring-2 ring-green-500/50': !!watchedFields.solution})} />
-                                </div>
-                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div className="space-y-2">
-                                         <FormLabel fieldName="differential" label="Seu Principal Diferencial" isFilled={!!watchedFields.differential && touchedFields.differential} />
-                                        <Input {...methods.register('differential')} id="differential" placeholder="Ex: mais intuitivo que os concorrentes" className="bg-zinc-800 border-zinc-700 focus:border-green-500 focus:ring-green-500/50" />
-                                    </div>
-                                     <div className="space-y-2">
-                                         <FormLabel fieldName="objective" label="Qual o objetivo da mensagem?" isFilled={!!watchedFields.objective && touchedFields.objective} />
-                                        <Input {...methods.register('objective')} id="objective" placeholder="Ex: agendar uma chamada de 15 minutos" className="bg-zinc-800 border-zinc-700 focus:border-green-500 focus:ring-green-500/50" />
-                                    </div>
-                                </div>
-                                <div className="space-y-3">
-                                    <FormLabel fieldName="tone" label="Tom da Mensagem" isFilled={!!watchedFields.tone && touchedFields.tone} />
-                                    <Controller
-                                        name="tone"
-                                        control={control}
-                                        render={({ field }) => (
-                                            <RadioGroup
-                                                onValueChange={field.onChange}
-                                                value={field.value}
-                                                className="flex space-x-4"
-                                            >
-                                                <div className="flex items-center space-x-2">
-                                                    <RadioGroupItem value="Formal" id="formal" className="text-green-400 border-zinc-600" />
-                                                    <Label htmlFor="formal" className="text-zinc-300">Formal</Label>
-                                                </div>
-                                                <div className="flex items-center space-x-2">
-                                                    <RadioGroupItem value="Casual" id="casual" className="text-green-400 border-zinc-600" />
-                                                    <Label htmlFor="casual" className="text-zinc-300">Casual</Label>
-                                                </div>
-                                                <div className="flex items-center space-x-2">
-                                                    <RadioGroupItem value="Direto e Objetivo" id="direto" className="text-green-400 border-zinc-600" />
-                                                    <Label htmlFor="direto" className="text-zinc-300">Direto e Objetivo</Label>
-                                                </div>
-                                            </RadioGroup>
-                                        )}
-                                    />
-                                </div>
-                                <div className="flex justify-end pt-4">
-                                     <GradientButton type="submit" className="gradient-button-green">
-                                        <Sparkles className="w-4 h-4" />
-                                        <span className="ml-2">Gerar Abordagem</span>
-                                    </GradientButton>
-                                </div>
-                            </motion.div>
-                        </form>
-                    </FormProvider>
+                     <motion.div 
+                        className="p-6 space-y-4 bg-zinc-900/40 border border-zinc-800/80 backdrop-blur-sm rounded-lg"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.2 }}
+                    >
+                         <Accordion type="single" collapsible className="w-full">
+                            {approachTemplates.map((template, index) => (
+                                 <AccordionItem key={index} value={`item-${index}`} className={cn("border-zinc-800", index === approachTemplates.length - 1 && 'border-b-0')}>
+                                    <AccordionTrigger className="hover:no-underline text-lg font-semibold text-zinc-200 hover:text-white transition-colors py-5">
+                                        <div className="flex items-center gap-3">
+                                            {template.icon}
+                                            <span>{template.category}</span>
+                                        </div>
+                                    </AccordionTrigger>
+                                    <AccordionContent className="pt-2">
+                                        <div className="bg-zinc-900/50 p-4 rounded-md border border-zinc-700/50">
+                                            <p className="whitespace-pre-wrap text-zinc-300 leading-relaxed font-mono text-sm">{template.message}</p>
+                                            <div className="mt-4 flex justify-end">
+                                               <CopyButton textToCopy={template.message} />
+                                            </div>
+                                        </div>
+                                    </AccordionContent>
+                                </AccordionItem>
+                            ))}
+                        </Accordion>
+                    </motion.div>
                 </motion.div>
             </div>
         </main>
     );
 }
+
