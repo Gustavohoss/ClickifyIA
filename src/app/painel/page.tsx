@@ -234,7 +234,7 @@ function PainelContent() {
                   />
                   <div className="relative z-10">
                     <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">
-                      CLICKIFY Scraper
+                      Capitar Lead
                     </h2>
                     <p className="text-white/40 mt-2">
                       Uma ferramenta de varredura para encontrar informações de estabelecimentos.
@@ -356,4 +356,3 @@ export default function PainelPage() {
         </AuthGuard>
     );
 }
-
