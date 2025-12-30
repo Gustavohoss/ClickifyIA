@@ -93,12 +93,6 @@ export function LocationMap({
                <h3 className="text-white font-bold text-lg tracking-tight truncate pr-10">{location}</h3>
             </div>
             
-            <motion.div
-              className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-foreground/5 backdrop-blur-sm flex-shrink-0"
-            >
-              <div className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-              <span className="text-[10px] font-medium text-muted-foreground tracking-wide uppercase">Lead</span>
-            </motion.div>
           </div>
 
            <AnimatePresence>
