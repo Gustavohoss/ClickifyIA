@@ -38,7 +38,9 @@ export default function ScraperPage() {
   const [error, setError] = useState<string | null>(null);
   const [searched, setSearched] = useState(false);
   const [filtrarComTelefone, setFiltrarComTelefone] = useState(false);
+  const [filtrarSemTelefone, setFiltrarSemTelefone] = useState(false);
   const [filtrarComSite, setFiltrarComSite] = useState(false);
+  const [filtrarSemSite, setFiltrarSemSite] = useState(false);
   const [saving, setSaving] = useState<string | null>(null);
   const [saved, setSaved] = useState<string[]>([]);
   const { toast } = useToast();
@@ -119,11 +121,24 @@ export default function ScraperPage() {
 
   const resultadosFiltrados = useMemo(() => {
     return resultados.filter(item => {
-      const temTelefone = !filtrarComTelefone || (filtrarComTelefone && item.telefone);
-      const temSite = !filtrarComSite || (filtrarComSite && item.site);
-      return temTelefone && temSite;
+      let passaFiltro = true;
+
+      if (filtrarComTelefone) {
+        passaFiltro = passaFiltro && !!item.telefone;
+      }
+      if (filtrarSemTelefone) {
+        passaFiltro = passaFiltro && !item.telefone;
+      }
+      if (filtrarComSite) {
+        passaFiltro = passaFiltro && !!item.site;
+      }
+      if (filtrarSemSite) {
+        passaFiltro = passaFiltro && !item.site;
+      }
+      
+      return passaFiltro;
     });
-  }, [resultados, filtrarComTelefone, filtrarComSite]);
+  }, [resultados, filtrarComTelefone, filtrarSemTelefone, filtrarComSite, filtrarSemSite]);
 
   return (
     <main className="p-4 md:p-10 min-h-screen bg-black text-white relative overflow-hidden">
@@ -190,14 +205,22 @@ export default function ScraperPage() {
               </div>
 
               {searched && resultados.length > 0 && (
-                <div className="pt-2 flex items-center space-x-6 text-sm text-zinc-400">
+                <div className="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-zinc-400">
                     <div className="flex items-center space-x-2">
-                        <Checkbox id="filtro-telefone" checked={filtrarComTelefone} onCheckedChange={(checked) => setFiltrarComTelefone(Boolean(checked))} className="border-zinc-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"/>
-                        <Label htmlFor="filtro-telefone" className="cursor-pointer">Com Telefone</Label>
+                        <Checkbox id="filtro-com-telefone" checked={filtrarComTelefone} onCheckedChange={(checked) => setFiltrarComTelefone(Boolean(checked))} className="border-zinc-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"/>
+                        <Label htmlFor="filtro-com-telefone" className="cursor-pointer">Com Telefone</Label>
                     </div>
                     <div className="flex items-center space-x-2">
-                        <Checkbox id="filtro-site" checked={filtrarComSite} onCheckedChange={(checked) => setFiltrarComSite(Boolean(checked))} className="border-zinc-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500" />
-                        <Label htmlFor="filtro-site" className="cursor-pointer">Com Site</Label>
+                        <Checkbox id="filtro-sem-telefone" checked={filtrarSemTelefone} onCheckedChange={(checked) => setFiltrarSemTelefone(Boolean(checked))} className="border-zinc-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"/>
+                        <Label htmlFor="filtro-sem-telefone" className="cursor-pointer">Sem Telefone</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <Checkbox id="filtro-com-site" checked={filtrarComSite} onCheckedChange={(checked) => setFiltrarComSite(Boolean(checked))} className="border-zinc-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500" />
+                        <Label htmlFor="filtro-com-site" className="cursor-pointer">Com Site</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <Checkbox id="filtro-sem-site" checked={filtrarSemSite} onCheckedChange={(checked) => setFiltrarSemSite(Boolean(checked))} className="border-zinc-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500" />
+                        <Label htmlFor="filtro-sem-site" className="cursor-pointer">Sem Site</Label>
                     </div>
                 </div>
               )}
