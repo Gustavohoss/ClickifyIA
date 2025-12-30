@@ -13,13 +13,13 @@ import {
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { GradientButton } from '@/components/ui/gradient-button';
 import { useFirebase, useUser } from '@/firebase';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
 import { LocationMap } from '@/components/ui/expand-map';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 
 type Resultado = {
@@ -37,10 +37,8 @@ export default function ScraperPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searched, setSearched] = useState(false);
-  const [filtrarComTelefone, setFiltrarComTelefone] = useState(false);
-  const [filtrarSemTelefone, setFiltrarSemTelefone] = useState(false);
-  const [filtrarComSite, setFiltrarComSite] = useState(false);
-  const [filtrarSemSite, setFiltrarSemSite] = useState(false);
+  const [phoneFilter, setPhoneFilter] = useState('todos'); // 'todos', 'com', 'sem'
+  const [siteFilter, setSiteFilter] = useState('todos');   // 'todos', 'com', 'sem'
   const [saving, setSaving] = useState<string | null>(null);
   const [saved, setSaved] = useState<string[]>([]);
   const { toast } = useToast();
@@ -121,24 +119,22 @@ export default function ScraperPage() {
 
   const resultadosFiltrados = useMemo(() => {
     return resultados.filter(item => {
-      let passaFiltro = true;
+      const hasPhone = !!item.telefone;
+      const hasSite = !!item.site;
 
-      if (filtrarComTelefone) {
-        passaFiltro = passaFiltro && !!item.telefone;
-      }
-      if (filtrarSemTelefone) {
-        passaFiltro = passaFiltro && !item.telefone;
-      }
-      if (filtrarComSite) {
-        passaFiltro = passaFiltro && !!item.site;
-      }
-      if (filtrarSemSite) {
-        passaFiltro = passaFiltro && !item.site;
-      }
-      
-      return passaFiltro;
+      const phoneMatch =
+        phoneFilter === 'todos' ||
+        (phoneFilter === 'com' && hasPhone) ||
+        (phoneFilter === 'sem' && !hasPhone);
+
+      const siteMatch =
+        siteFilter === 'todos' ||
+        (siteFilter === 'com' && hasSite) ||
+        (siteFilter === 'sem' && !hasSite);
+
+      return phoneMatch && siteMatch;
     });
-  }, [resultados, filtrarComTelefone, filtrarSemTelefone, filtrarComSite, filtrarSemSite]);
+  }, [resultados, phoneFilter, siteFilter]);
 
   return (
     <main className="p-4 md:p-10 min-h-screen bg-black text-white relative overflow-hidden">
@@ -205,23 +201,41 @@ export default function ScraperPage() {
               </div>
 
               {searched && resultados.length > 0 && (
-                <div className="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-zinc-400">
-                    <div className="flex items-center space-x-2">
-                        <Checkbox id="filtro-com-telefone" checked={filtrarComTelefone} onCheckedChange={(checked) => setFiltrarComTelefone(Boolean(checked))} className="border-zinc-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"/>
-                        <Label htmlFor="filtro-com-telefone" className="cursor-pointer">Com Telefone</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <Checkbox id="filtro-sem-telefone" checked={filtrarSemTelefone} onCheckedChange={(checked) => setFiltrarSemTelefone(Boolean(checked))} className="border-zinc-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500"/>
-                        <Label htmlFor="filtro-sem-telefone" className="cursor-pointer">Sem Telefone</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <Checkbox id="filtro-com-site" checked={filtrarComSite} onCheckedChange={(checked) => setFiltrarComSite(Boolean(checked))} className="border-zinc-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500" />
-                        <Label htmlFor="filtro-com-site" className="cursor-pointer">Com Site</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                        <Checkbox id="filtro-sem-site" checked={filtrarSemSite} onCheckedChange={(checked) => setFiltrarSemSite(Boolean(checked))} className="border-zinc-600 data-[state=checked]:bg-purple-500 data-[state=checked]:border-purple-500" />
-                        <Label htmlFor="filtro-sem-site" className="cursor-pointer">Sem Site</Label>
-                    </div>
+                <div className="pt-4 space-y-4">
+                  <div className="flex flex-col md:flex-row md:items-center md:gap-x-6 gap-y-2 text-sm text-zinc-300">
+                    <Label className="font-semibold text-zinc-400">Telefone:</Label>
+                    <RadioGroup value={phoneFilter} onValueChange={setPhoneFilter} className="flex items-center space-x-4">
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="todos" id="tel-todos" />
+                        <Label htmlFor="tel-todos">Todos</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="com" id="tel-com" />
+                        <Label htmlFor="tel-com">Com Telefone</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="sem" id="tel-sem" />
+                        <Label htmlFor="tel-sem">Sem Telefone</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                  <div className="flex flex-col md:flex-row md:items-center md:gap-x-6 gap-y-2 text-sm text-zinc-300">
+                    <Label className="font-semibold text-zinc-400">Site:</Label>
+                    <RadioGroup value={siteFilter} onValueChange={setSiteFilter} className="flex items-center space-x-4">
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="todos" id="site-todos" />
+                        <Label htmlFor="site-todos">Todos</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="com" id="site-com" />
+                        <Label htmlFor="site-com">Com Site</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="sem" id="site-sem" />
+                        <Label htmlFor="site-sem">Sem Site</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
                 </div>
               )}
             </div>
