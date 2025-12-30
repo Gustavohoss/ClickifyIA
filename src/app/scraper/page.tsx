@@ -2,14 +2,9 @@
 
 import { useState, useMemo } from 'react';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Loader2,
   AlertCircle,
-  Phone,
-  Globe,
-  Clock,
-  MapPin,
   ExternalLink,
   Send,
   Save,
@@ -24,6 +19,8 @@ import { GradientButton } from '@/components/ui/gradient-button';
 import { useFirebase, useUser } from '@/firebase';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
+import { LocationMap } from '@/components/ui/expand-map';
+
 
 type Resultado = {
   nome: string;
@@ -242,54 +239,21 @@ export default function ScraperPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {resultadosFiltrados.map((item, index) => (
-                <Card
+                <LocationMap
                     key={index}
-                    className="bg-zinc-900/40 border-zinc-800/80 backdrop-blur-sm text-zinc-100 overflow-hidden hover:border-purple-500 hover:shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all duration-500 group relative flex flex-col"
-                >
-                    <div className="absolute inset-x-0 h-px top-0 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                    <CardHeader className="pb-3 border-b border-zinc-800/50 relative">
-                        <CardTitle className="text-lg font-bold text-white tracking-tight truncate">{item.nome}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="pt-4 flex-grow">
-                        <div className="space-y-3 text-sm">
-                            {item.endereco && (
-                            <div className="flex items-start text-zinc-400">
-                                <MapPin className="mr-3 h-4 w-4 shrink-0 mt-0.5 text-purple-500/70" />
-                                <p className="line-clamp-2">{item.endereco}</p>
-                            </div>
-                            )}
-                            {item.horario && (
-                            <div className="flex items-start text-zinc-400">
-                                <Clock className="mr-3 h-4 w-4 shrink-0 mt-0.5 text-purple-500/70" />
-                                <p>{item.horario}</p>
-                            </div>
-                            )}
-                            {item.site && (
-                            <div className="flex items-start group/link">
-                                <Globe className="mr-3 h-4 w-4 shrink-0 mt-0.5 text-purple-400" />
-                                <a
-                                href={item.site}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-purple-400 hover:text-purple-300 transition-colors duration-300 break-all flex items-center gap-1 hover:drop-shadow-[0_0_8px_rgba(192,132,252,0.8)]"
-                                >
-                                <span className="truncate">{new URL(item.site).hostname.replace('www.', '')}</span>
-                                <ExternalLink className="h-3 w-3 opacity-50 group-hover/link:opacity-100 transition-opacity" />
-                                </a>
-                            </div>
-                            )}
-                            {item.telefone && (
-                            <div className="flex items-start text-zinc-400">
-                                <Phone className="mr-3 h-4 w-4 shrink-0 mt-0.5 text-purple-500/70" />
-                                <p className="font-mono">{item.telefone}</p>
-                            </div>
-                            )}
-                        </div>
-                    </CardContent>
-                    <div className="p-4 border-t border-zinc-800/50">
+                    location={item.nome}
+                    details={{
+                        endereco: item.endereco,
+                        horario: item.horario,
+                        site: item.site,
+                        telefone: item.telefone,
+                    }}
+                    actionButton={
                         <GradientButton
-                            onClick={() => handleSaveLead(item)}
+                            onClick={(e) => {
+                                e.stopPropagation(); // Prevent card click
+                                handleSaveLead(item);
+                            }}
                             disabled={saving === item.nome || saved.includes(item.nome)}
                             className={cn("w-full gradient-button-green", {"opacity-50 cursor-not-allowed": saved.includes(item.nome)})}
                         >
@@ -298,8 +262,8 @@ export default function ScraperPage() {
                                 {saving === item.nome ? 'Salvando...' : saved.includes(item.nome) ? 'Salvo!' : 'Salvar Lead'}
                             </span>
                         </GradientButton>
-                    </div>
-                </Card>
+                    }
+                />
                 ))}
             </div>
         </div>
@@ -308,5 +272,3 @@ export default function ScraperPage() {
     </main>
   );
 }
-
-    
