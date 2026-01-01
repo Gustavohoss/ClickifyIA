@@ -1,4 +1,4 @@
-
+//JOÃO PEDRO JAQUES
 'use client';
 
 import { GradientButton } from "@/components/ui/gradient-button"; 
@@ -273,7 +273,7 @@ export default function EquipePage() {
                       e.preventDefault();
                       e.stopPropagation();
                       e.nativeEvent.stopImmediatePropagation();
-                      window.open("https://pay.cakto.com.br/xy27qg8", "_blank");
+                      window.open("https://pay.cakto.com.br/xy27qg8?affiliate=U4qxpf3s", "_blank");
                     }}
                     className="mt-10 w-full rounded-md px-6 py-3 text-lg font-bold bg-white/5 border border-white/10 hover:bg-white/10 transition"
                   >
@@ -316,7 +316,7 @@ export default function EquipePage() {
                       e.preventDefault();
                       e.stopPropagation();
                       e.nativeEvent.stopImmediatePropagation();
-                      window.open("https://pay.cakto.com.br/37k4xrc_658280", "_blank");
+                      window.open("https://pay.cakto.com.br/37k4xrc_658280?affiliate=U4qxpf3s", "_blank");
                     }}
                     className="mt-10 w-full rounded-md px-6 py-3 text-lg font-bold bg-white/5 border border-white/10 hover:bg-white/10 transition"
                   >

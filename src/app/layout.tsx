@@ -4,8 +4,8 @@ import { FirebaseClientProvider } from '@/firebase';
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: 'Noir Canvas',
-  description: 'An empty canvas.',
+  title: 'Clickify',
+  description: 'Crie sites com IA em minutos.'
 };
 
 export default function RootLayout({
