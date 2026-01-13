@@ -1,6 +1,7 @@
 'use client';
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useFirebase, useUser, useCollection, useMemoFirebase } from '@/firebase';
 import { collection, doc, updateDoc, serverTimestamp, Timestamp, addDoc, deleteDoc } from 'firebase/firestore';
@@ -112,6 +113,7 @@ function LeadsContent() {
     const { user } = useUser();
     const { firestore } = useFirebase();
     const { toast } = useToast();
+    const router = useRouter();
     const [searchQuery, setSearchQuery] = useState('');
     const [statusFilter, setStatusFilter] = useState('Todos');
     const [selectedLeads, setSelectedLeads] = useState<string[]>([]);
@@ -287,11 +289,25 @@ function LeadsContent() {
                         </h1>
                         <div className="flex items-center gap-4">
                             <Button variant="outline" onClick={handleExportCSV} className="bg-transparent border-zinc-700 hover:bg-zinc-800"><FileDown className="mr-2 h-4 w-4"/>Exportar CSV</Button>
-                            <Sheet open={isNewLeadSheetOpen} onOpenChange={setIsNewLeadSheetOpen}>
-                                <SheetTrigger asChild>
+                            
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
                                     <Button className="bg-purple-600 hover:bg-purple-700"><PlusCircle className="mr-2 h-4 w-4"/> Novo Lead</Button>
-                                </SheetTrigger>
-                                <SheetContent className="bg-black border-zinc-800 text-white w-full sm:max-w-md overflow-y-auto">
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent className="bg-black/80 backdrop-blur-lg border-zinc-800 text-white" align="end">
+                                    <DropdownMenuItem onSelect={() => router.push('/scraper')} className="cursor-pointer focus:bg-zinc-800 focus:text-white">
+                                        <Search className="mr-2 h-4 w-4" />
+                                        <span>Achar com o Scraper</span>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem onSelect={() => setIsNewLeadSheetOpen(true)} className="cursor-pointer focus:bg-zinc-800 focus:text-white">
+                                        <PlusCircle className="mr-2 h-4 w-4" />
+                                        <span>Adicionar Manualmente</span>
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+
+                            <Sheet open={isNewLeadSheetOpen} onOpenChange={setIsNewLeadSheetOpen}>
+                                <SheetContent className="bg-black border-zinc-800 text-white w-full sm:max-w-md overflow-y-auto z-[101]">
                                     <SheetHeader>
                                         <SheetTitle>Criar Novo Lead</SheetTitle>
                                         <SheetDescription>Preencha as informações abaixo para adicionar um novo lead.</SheetDescription>
@@ -460,9 +476,11 @@ function LeadsContent() {
                                                     placeholder="Anotações sobre o lead..."
                                                     className="bg-zinc-900 border-zinc-700 min-h-[200px]"
                                                 />
-                                                 <SheetClose asChild>
-                                                    <Button className="mt-4 w-full">Fechar</Button>
-                                                </SheetClose>
+                                                 <SheetFooter>
+                                                    <SheetClose asChild>
+                                                        <Button className="mt-4 w-full bg-purple-600 hover:bg-purple-700">Fechar</Button>
+                                                    </SheetClose>
+                                                </SheetFooter>
                                             </SheetContent>
                                         </Sheet>
                                     </TableCell>
@@ -515,8 +533,8 @@ function LeadsContent() {
                                                     </Button>
                                                 </DropdownMenuTrigger>
                                                 <DropdownMenuContent align="end" className="bg-zinc-900 text-white border-zinc-800">
-                                                    <DropdownMenuItem onSelect={() => setEditingLeadId(lead.id)} className="cursor-pointer focus:bg-zinc-800"><Edit className="mr-2 h-4 w-4"/> Editar</DropdownMenuItem>
-                                                    <DropdownMenuItem onSelect={() => handleArchiveLead(lead.id)} className="cursor-pointer focus:bg-zinc-800"><Archive className="mr-2 h-4 w-4"/> Arquivar</DropdownMenuItem>
+                                                    <DropdownMenuItem onSelect={() => setEditingLeadId(lead.id)} className="cursor-pointer focus:bg-zinc-800 focus:text-white"><Edit className="mr-2 h-4 w-4"/> Editar</DropdownMenuItem>
+                                                    <DropdownMenuItem onSelect={() => handleArchiveLead(lead.id)} className="cursor-pointer focus:bg-zinc-800 focus:text-white"><Archive className="mr-2 h-4 w-4"/> Arquivar</DropdownMenuItem>
                                                     <AlertDialogTrigger asChild>
                                                         <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="text-red-400 focus:bg-red-900/50 focus:text-red-300 cursor-pointer"><Trash2 className="mr-2 h-4 w-4"/> Excluir</DropdownMenuItem>
                                                     </AlertDialogTrigger>
@@ -553,3 +571,5 @@ export default function LeadsPage() {
         </AuthGuard>
     )
 }
+
+    
