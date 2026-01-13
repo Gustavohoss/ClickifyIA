@@ -1,11 +1,11 @@
 
 'use client';
 
-import { ArrowRight, FileText, LogOut, Briefcase, Search, Sparkles, Building2, Users, Copy, Check } from 'lucide-react';
+import { ArrowRight, FileText, LogOut, Briefcase, Search, Sparkles, Building2, Users, Copy, Check, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import AuthGuard from '@/components/auth-guard';
-import { useFirebase, useUser } from '@/firebase';
+import { useFirebase, useUser, useCollection, useDoc, useMemoFirebase } from '@/firebase';
 import { useRouter } from 'next/navigation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -27,9 +27,21 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
 import { Spotlight } from '@/components/ui/spotlight';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { collection, doc, Timestamp } from 'firebase/firestore';
+import { startOfDay } from 'date-fns';
+
+type Lead = {
+  id: string;
+  createdAt: Timestamp;
+};
+
+type UserProfile = {
+  plan: string;
+};
+
 
 function InviteDialog() {
     const [copied, setCopied] = useState(false);
@@ -156,6 +168,26 @@ function Header() {
 
 function PainelContent() {
   const { user } = useUser();
+  const { firestore } = useFirebase();
+
+  const userProfileRef = useMemoFirebase(() => {
+    if (!user || !firestore) return null;
+    return doc(firestore, 'users', user.uid);
+  }, [user, firestore]);
+
+  const leadsQuery = useMemoFirebase(() => {
+    if (!user || !firestore) return null;
+    return collection(firestore, `users/${user.uid}/leads`);
+  }, [user, firestore]);
+
+  const { data: userProfile, isLoading: isProfileLoading } = useDoc<UserProfile>(userProfileRef);
+  const { data: leads, isLoading: areLeadsLoading } = useCollection<Lead>(leadsQuery);
+
+  const leadsToday = useMemo(() => {
+    if (!leads) return 0;
+    const todayStart = startOfDay(new Date());
+    return leads.filter(lead => lead.createdAt.toDate() >= todayStart).length;
+  }, [leads]);
 
   return (
     <>
@@ -207,7 +239,11 @@ function PainelContent() {
               <div className="relative z-10 flex items-center justify-around gap-6 text-sm text-zinc-400">
                 <div className="flex items-center gap-2">
                   <span className="text-base">🔥</span>
-                  <span><span className="font-bold text-white">2</span> Leads capturados hoje</span>
+                  {areLeadsLoading ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <span><span className="font-bold text-white">{leadsToday}</span> Leads capturados hoje</span>
+                  )}
                 </div>
                 <div className="h-4 w-px bg-zinc-700"></div>
                 <div className="flex items-center gap-2">
@@ -217,7 +253,11 @@ function PainelContent() {
                 <div className="h-4 w-px bg-zinc-700"></div>
                 <div className="flex items-center gap-2">
                   <span className="text-base">💎</span>
-                  <span>Plano <span className="font-bold text-purple-400">Pro</span> Ativo</span>
+                   {isProfileLoading ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <span>Plano <span className="font-bold text-purple-400">{userProfile?.plan || '...'}</span> Ativo</span>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -356,3 +396,4 @@ export default function PainelPage() {
         </AuthGuard>
     );
 }
+
