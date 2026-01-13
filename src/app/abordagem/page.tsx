@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowLeft, Copy, Check, Handshake, Store, UtensilsCrossed, Megaphone, Scale, Calculator, Building, Sparkles as SparklesIcon, Dumbbell, Code, Camera, Scissors, Search, Dog, Coffee, Landmark, Briefcase, Palette, Car, Shield, Languages, Pencil, Calendar, HeartPulse, BrainCircuit, Smartphone, Flower, DiscAlbum, DraftingCompass, Plane, ShoppingCart, Award, Mic, Wrench, ChefHat, Glasses, BookOpen, PartyPopper, Sprout, Construction, Stethoscope, AudioLines, Bot, SprayCan, HandHelping, Printer, Music, Footprints, ShieldCheck, Beer, WashingMachine, Truck, Users, Gamepad2 } from 'lucide-react';
+import { Copy, Check, Handshake, Store, UtensilsCrossed, Megaphone, Scale, Calculator, Building, Sparkles as SparklesIcon, Dumbbell, Code, Camera, Scissors, Search, Dog, Coffee, Landmark, Briefcase, Palette, Car, Shield, Languages, Pencil, Calendar, HeartPulse, BrainCircuit, Smartphone, Flower, DiscAlbum, DraftingCompass, Plane, ShoppingCart, Award, Mic, Wrench, ChefHat, Glasses, BookOpen, PartyPopper, Sprout, Construction, Stethoscope, AudioLines, Bot, SprayCan, HandHelping, Printer, Music, Footprints, ShieldCheck, Beer, WashingMachine, Truck, Users, Gamepad2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
@@ -333,22 +333,11 @@ export default function AbordagemPage() {
             </div>
 
             <div className="w-full max-w-4xl mx-auto relative z-10 space-y-8">
-                 <div className="absolute top-0 left-0">
-                    <Link href="/painel" passHref>
-                        <Button
-                        variant="ghost"
-                        className="text-white/70 hover:text-white hover:bg-white/10"
-                        >
-                        <ArrowLeft className="w-4 h-4 mr-2" />
-                        Voltar ao Painel
-                        </Button>
-                    </Link>
-                </div>
                  <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, ease: 'easeOut' }}
-                    className="pt-16"
+                    className="pt-8"
                 >
                     <div className="text-center mb-8">
                         <h1 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">

@@ -26,7 +26,6 @@ import {
   Briefcase,
   Calendar,
   CircleDollarSign,
-  ArrowLeft,
   Sparkles,
   FileDown,
   Loader2
@@ -325,17 +324,6 @@ export default function ContratoPage() {
             <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-violet-500/10 rounded-full mix-blend-normal filter blur-[128px] animate-pulse delay-700" />
         </div>
          <div className="w-full max-w-4xl mx-auto relative z-10">
-             <div className="absolute top-0 left-0">
-                <Link href="/painel" passHref>
-                    <Button
-                    variant="ghost"
-                    className="text-white/70 hover:text-white hover:bg-white/10"
-                    >
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    Voltar ao Painel
-                    </Button>
-                </Link>
-            </div>
 
             <div className="text-center my-12 pt-8 space-y-2">
                 <h1 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">

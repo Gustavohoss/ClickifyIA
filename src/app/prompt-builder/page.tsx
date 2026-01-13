@@ -41,19 +41,8 @@ export default function PromptBuilderPage() {
       </div>
 
       <div className="w-full max-w-4xl mx-auto relative z-10">
-         <div className="absolute top-0 left-0">
-          <Link href="/painel" passHref>
-            <Button
-              variant="ghost"
-              className="text-white/70 hover:text-white hover:bg-white/10"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Voltar ao Painel
-            </Button>
-          </Link>
-        </div>
         
-        <div className="pt-24">
+        <div className="pt-8">
             <AnimatePresence mode="wait">
                 <motion.div 
                     key={selection}

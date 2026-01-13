@@ -12,7 +12,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose, SheetFooter, SheetDescription } from '@/components/ui/sheet';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -25,9 +25,11 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { useToast } from '@/hooks/use-toast';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 
 
 import { 
@@ -48,7 +50,7 @@ import {
     Users,
     Activity,
     AlertCircle,
-    ArrowLeft
+    FileDown
 } from 'lucide-react';
 import { formatDistanceToNow, format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -67,6 +69,15 @@ type Lead = {
   ultimaInteracao: Timestamp;
   createdAt: Timestamp;
 };
+
+const leadSchema = z.object({
+    nome: z.string().min(1, { message: 'O nome é obrigatório.' }),
+    telefone: z.string().optional(),
+    site: z.string().url({ message: 'URL do site inválida.' }).optional().or(z.literal('')),
+    endereco: z.string().optional(),
+});
+
+type LeadFormData = z.infer<typeof leadSchema>;
 
 const statusConfig = {
     'Novo': { color: 'bg-blue-500/20 text-blue-300 border-blue-500/30', label: 'Novo' },
@@ -105,6 +116,17 @@ function LeadsContent() {
     const [statusFilter, setStatusFilter] = useState('Todos');
     const [selectedLeads, setSelectedLeads] = useState<string[]>([]);
     const [editingLeadId, setEditingLeadId] = useState<string | null>(null);
+    const [isNewLeadSheetOpen, setIsNewLeadSheetOpen] = useState(false);
+    
+    const form = useForm<LeadFormData>({
+        resolver: zodResolver(leadSchema),
+        defaultValues: {
+            nome: '',
+            telefone: '',
+            site: '',
+            endereco: '',
+        }
+    });
 
     const leadsQuery = useMemoFirebase(() => {
         if (!user || !firestore) return null;
@@ -179,6 +201,66 @@ function LeadsContent() {
             toast({ variant: 'destructive', title: "Erro ao Excluir", description: "Não foi possível remover o lead." });
         }
     }
+    
+    const handleCreateNewLead = async (data: LeadFormData) => {
+        if (!user || !firestore) return;
+
+        try {
+            await addDoc(collection(firestore, `users/${user.uid}/leads`), {
+                ...data,
+                ownerId: user.uid,
+                notes: '',
+                status: 'Novo',
+                valorContrato: 0,
+                ultimaInteracao: serverTimestamp(),
+                createdAt: serverTimestamp(),
+            });
+            toast({ title: 'Lead Criado!', description: `${data.nome} foi adicionado com sucesso.` });
+            setIsNewLeadSheetOpen(false);
+            form.reset();
+        } catch (error) {
+            toast({ variant: 'destructive', title: 'Erro ao Criar Lead', description: 'Não foi possível criar o lead. Tente novamente.' });
+        }
+    };
+    
+    const handleExportCSV = () => {
+        if (!filteredLeads || filteredLeads.length === 0) {
+            toast({ variant: 'destructive', title: 'Nenhum lead para exportar', description: 'Filtre ou adicione leads antes de exportar.' });
+            return;
+        }
+
+        const headers = ['Nome', 'Status', 'Telefone', 'Site', 'Endereço', 'ValorContrato', 'UltimaInteracao', 'CriadoEm', 'Anotacoes'];
+        const csvRows = [headers.join(',')];
+
+        filteredLeads.forEach(lead => {
+            const row = [
+                `"${lead.nome.replace(/"/g, '""')}"`,
+                lead.status,
+                lead.telefone || '',
+                lead.site || '',
+                `"${lead.endereco?.replace(/"/g, '""') || ''}"`,
+                lead.valorContrato,
+                lead.ultimaInteracao ? format(lead.ultimaInteracao.toDate(), 'yyyy-MM-dd HH:mm:ss') : '',
+                lead.createdAt ? format(lead.createdAt.toDate(), 'yyyy-MM-dd HH:mm:ss') : '',
+                `"${lead.notes?.replace(/"/g, '""') || ''}"`
+            ];
+            csvRows.push(row.join(','));
+        });
+
+        const csvString = csvRows.join('\n');
+        const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'leads.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        toast({ title: 'Exportação Iniciada', description: 'O download do seu arquivo CSV começará em breve.' });
+    };
 
 
     const formatCurrency = (value: number) => {
@@ -193,30 +275,54 @@ function LeadsContent() {
             </div>
 
             <div className="w-full max-w-7xl mx-auto relative z-10 space-y-8">
-                <div className="absolute top-0 left-0">
-                    <Link href="/painel" passHref>
-                        <Button
-                        variant="ghost"
-                        className="text-white/70 hover:text-white hover:bg-white/10"
-                        >
-                        <ArrowLeft className="w-4 h-4 mr-2" />
-                        Voltar ao Painel
-                        </Button>
-                    </Link>
-                </div>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, ease: 'easeOut' }}
-                    className="pt-16"
+                    className="pt-8"
                 >
                     <div className="flex justify-between items-center mb-8">
                         <h1 className="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white/90 to-white/60">
                             Gestão de Leads
                         </h1>
                         <div className="flex items-center gap-4">
-                            <Button variant="outline" className="bg-transparent border-zinc-700 hover:bg-zinc-800">Exportar CSV</Button>
-                            <Button className="bg-purple-600 hover:bg-purple-700"><PlusCircle className="mr-2 h-4 w-4"/> Novo Lead</Button>
+                            <Button variant="outline" onClick={handleExportCSV} className="bg-transparent border-zinc-700 hover:bg-zinc-800"><FileDown className="mr-2 h-4 w-4"/>Exportar CSV</Button>
+                            <Sheet open={isNewLeadSheetOpen} onOpenChange={setIsNewLeadSheetOpen}>
+                                <SheetTrigger asChild>
+                                    <Button className="bg-purple-600 hover:bg-purple-700"><PlusCircle className="mr-2 h-4 w-4"/> Novo Lead</Button>
+                                </SheetTrigger>
+                                <SheetContent className="bg-black border-zinc-800 text-white w-full sm:max-w-md overflow-y-auto">
+                                    <SheetHeader>
+                                        <SheetTitle>Criar Novo Lead</SheetTitle>
+                                        <SheetDescription>Preencha as informações abaixo para adicionar um novo lead.</SheetDescription>
+                                    </SheetHeader>
+                                    <form onSubmit={form.handleSubmit(handleCreateNewLead)} className="space-y-4 py-6">
+                                        <div className="space-y-2">
+                                            <label htmlFor="nome">Nome da Empresa</label>
+                                            <Input id="nome" {...form.register('nome')} className="bg-zinc-900 border-zinc-700"/>
+                                            {form.formState.errors.nome && <p className="text-red-500 text-xs">{form.formState.errors.nome.message}</p>}
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label htmlFor="telefone">Telefone</label>
+                                            <Input id="telefone" {...form.register('telefone')} className="bg-zinc-900 border-zinc-700"/>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label htmlFor="site">Site</label>
+                                            <Input id="site" {...form.register('site')} className="bg-zinc-900 border-zinc-700"/>
+                                            {form.formState.errors.site && <p className="text-red-500 text-xs">{form.formState.errors.site.message}</p>}
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label htmlFor="endereco">Endereço</label>
+                                            <Input id="endereco" {...form.register('endereco')} className="bg-zinc-900 border-zinc-700"/>
+                                        </div>
+                                        <SheetFooter>
+                                            <Button type="submit" disabled={form.formState.isSubmitting} className="w-full bg-purple-600 hover:bg-purple-700">
+                                                {form.formState.isSubmitting ? <Loader2 className="w-4 h-4 animate-spin"/> : 'Salvar Lead'}
+                                            </Button>
+                                        </SheetFooter>
+                                    </form>
+                                </SheetContent>
+                            </Sheet>
                         </div>
                     </div>
                     
@@ -338,7 +444,7 @@ function LeadsContent() {
                                                     <span className="text-white font-bold group-hover:text-purple-400 transition-colors">{lead.nome}</span>
                                                  </div>
                                             </SheetTrigger>
-                                            <SheetContent className="bg-black border-zinc-800 text-white w-full sm:max-w-md overflow-y-auto">
+                                            <SheetContent className="bg-black border-zinc-800 text-white w-full sm:max-w-md overflow-y-auto z-[101]">
                                                 <SheetHeader>
                                                     <SheetTitle className="text-2xl text-white">{lead.nome}</SheetTitle>
                                                 </SheetHeader>
@@ -416,7 +522,7 @@ function LeadsContent() {
                                                     </AlertDialogTrigger>
                                                 </DropdownMenuContent>
                                             </DropdownMenu>
-                                            <AlertDialogContent className="bg-zinc-900 border-zinc-800 text-white">
+                                            <AlertDialogContent className="bg-zinc-900 border-zinc-800 text-white z-[102]">
                                                 <AlertDialogHeader>
                                                     <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
                                                     <AlertDialogDescription className="text-zinc-400">
@@ -447,5 +553,3 @@ export default function LeadsPage() {
         </AuthGuard>
     )
 }
-
-    
