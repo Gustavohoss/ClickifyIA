@@ -3,7 +3,7 @@ import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useFirebase, useUser, useCollection, useMemoFirebase } from '@/firebase';
-import { collection, doc, updateDoc, serverTimestamp, Timestamp, addDoc } from 'firebase/firestore';
+import { collection, doc, updateDoc, serverTimestamp, Timestamp, addDoc, deleteDoc } from 'firebase/firestore';
 import AuthGuard from '@/components/auth-guard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
@@ -12,10 +12,22 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { useToast } from '@/hooks/use-toast';
 
 
 import { 
@@ -88,9 +100,11 @@ const formatPhoneNumberForWhatsApp = (phone: string | null): string => {
 function LeadsContent() {
     const { user } = useUser();
     const { firestore } = useFirebase();
+    const { toast } = useToast();
     const [searchQuery, setSearchQuery] = useState('');
     const [statusFilter, setStatusFilter] = useState('Todos');
     const [selectedLeads, setSelectedLeads] = useState<string[]>([]);
+    const [editingLeadId, setEditingLeadId] = useState<string | null>(null);
 
     const leadsQuery = useMemoFirebase(() => {
         if (!user || !firestore) return null;
@@ -149,6 +163,22 @@ function LeadsContent() {
             setSelectedLeads(filteredLeads.map(lead => lead.id));
         }
     };
+
+    const handleArchiveLead = (leadId: string) => {
+        handleStatusChange(leadId, 'Perdido');
+        toast({ title: "Lead Arquivado", description: "O lead foi movido para 'Perdido'." });
+    }
+
+    const handleDeleteLead = async (leadId: string) => {
+        if (!user || !firestore) return;
+        const leadDocRef = doc(firestore, `users/${user.uid}/leads/${leadId}`);
+        try {
+            await deleteDoc(leadDocRef);
+            toast({ title: "Lead Excluído", description: "O lead foi removido permanentemente." });
+        } catch (e) {
+            toast({ variant: 'destructive', title: "Erro ao Excluir", description: "Não foi possível remover o lead." });
+        }
+    }
 
 
     const formatCurrency = (value: number) => {
@@ -297,7 +327,7 @@ function LeadsContent() {
                                         />
                                     </TableCell>
                                     <TableCell className="font-medium">
-                                        <Sheet>
+                                        <Sheet open={editingLeadId === lead.id} onOpenChange={(isOpen) => !isOpen && setEditingLeadId(null)}>
                                             <SheetTrigger asChild>
                                                  <div className="flex items-center gap-3 cursor-pointer group">
                                                     <Avatar className="h-8 w-8">
@@ -324,6 +354,9 @@ function LeadsContent() {
                                                     placeholder="Anotações sobre o lead..."
                                                     className="bg-zinc-900 border-zinc-700 min-h-[200px]"
                                                 />
+                                                 <SheetClose asChild>
+                                                    <Button className="mt-4 w-full">Fechar</Button>
+                                                </SheetClose>
                                             </SheetContent>
                                         </Sheet>
                                     </TableCell>
@@ -368,18 +401,34 @@ function LeadsContent() {
                                         {lead.notes || '-'}
                                      </TableCell>
                                     <TableCell className="text-right">
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button variant="ghost" className="h-8 w-8 p-0">
-                                                    <MoreHorizontal className="h-4 w-4"/>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end" className="bg-zinc-900 text-white border-zinc-800">
-                                                <DropdownMenuItem className="focus:bg-zinc-800"><Edit className="mr-2 h-4 w-4"/> Editar</DropdownMenuItem>
-                                                <DropdownMenuItem className="focus:bg-zinc-800"><Archive className="mr-2 h-4 w-4"/> Arquivar</DropdownMenuItem>
-                                                <DropdownMenuItem className="text-red-400 focus:bg-red-900/50 focus:text-red-300"><Trash2 className="mr-2 h-4 w-4"/> Excluir</DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
+                                        <AlertDialog>
+                                            <DropdownMenu>
+                                                <DropdownMenuTrigger asChild>
+                                                    <Button variant="ghost" className="h-8 w-8 p-0">
+                                                        <MoreHorizontal className="h-4 w-4"/>
+                                                    </Button>
+                                                </DropdownMenuTrigger>
+                                                <DropdownMenuContent align="end" className="bg-zinc-900 text-white border-zinc-800">
+                                                    <DropdownMenuItem onSelect={() => setEditingLeadId(lead.id)} className="focus:bg-zinc-800"><Edit className="mr-2 h-4 w-4"/> Editar</DropdownMenuItem>
+                                                    <DropdownMenuItem onSelect={() => handleArchiveLead(lead.id)} className="focus:bg-zinc-800"><Archive className="mr-2 h-4 w-4"/> Arquivar</DropdownMenuItem>
+                                                    <AlertDialogTrigger asChild>
+                                                        <DropdownMenuItem onSelect={(e) => e.preventDefault()} className="text-red-400 focus:bg-red-900/50 focus:text-red-300"><Trash2 className="mr-2 h-4 w-4"/> Excluir</DropdownMenuItem>
+                                                    </AlertDialogTrigger>
+                                                </DropdownMenuContent>
+                                            </DropdownMenu>
+                                            <AlertDialogContent className="bg-zinc-900 border-zinc-800 text-white">
+                                                <AlertDialogHeader>
+                                                    <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
+                                                    <AlertDialogDescription className="text-zinc-400">
+                                                        Esta ação não pode ser desfeita. Isso excluirá permanentemente o lead &quot;{lead.nome}&quot;.
+                                                    </AlertDialogDescription>
+                                                </AlertDialogHeader>
+                                                <AlertDialogFooter>
+                                                    <AlertDialogCancel className="border-zinc-700 hover:bg-zinc-800">Cancelar</AlertDialogCancel>
+                                                    <AlertDialogAction onClick={() => handleDeleteLead(lead.id)} className="bg-red-600 hover:bg-red-700">Excluir</AlertDialogAction>
+                                                </AlertDialogFooter>
+                                            </AlertDialogContent>
+                                        </AlertDialog>
                                     </TableCell>
                                 </TableRow>
                             ))}
